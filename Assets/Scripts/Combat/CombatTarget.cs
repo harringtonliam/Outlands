@@ -16,23 +16,28 @@ namespace RPG.Combat
             return CursorType.Combat;
         }
 
-        public bool HandleRaycast(PlayerController playerController)
+        public RaycastableReturnValue HandleRaycast(PlayerSelector playerSelector)
         {
             if (!IsHostile())
             {
-                return false; ;
+                return RaycastableReturnValue.NoAction;
             }
 
-            Fighting fighting = playerController.transform.GetComponent<Fighting>();
-            if (fighting.CanAttack(gameObject)  && isActive)
+            Fighting fighting = playerSelector.transform.GetComponent<Fighting>();
+            if (fighting.CanAttack(gameObject) && isActive)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    fighting.Attack(gameObject);
-                }
-                return true;
+                return RaycastableReturnValue.AllPlayerCharacters;
             }
-            return false;
+            return RaycastableReturnValue.NoAction;
+        }
+
+        public void HandleActivation(PlayerSelector playerSelector)
+        {
+            Fighting fighting = playerSelector.transform.GetComponent<Fighting>();
+            if (fighting != null)
+            {
+                fighting.Attack(gameObject);
+            }
         }
 
         private bool IsHostile()

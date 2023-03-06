@@ -26,22 +26,23 @@ namespace RPG.InventoryControl
             return CursorType.Pickup;
         }
 
-        public bool HandleRaycast(PlayerController playerController)
+        public RaycastableReturnValue HandleRaycast(PlayerSelector playerController)
         {
-            if (!IsDead()  && !alwaysAvailableToRaycast)
+            if (!IsDead() && !alwaysAvailableToRaycast)
             {
-                return false;
+                return RaycastableReturnValue.NoAction;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            return RaycastableReturnValue.FirstPlayerCharacter;
+        }
+
+        public void HandleActivation(PlayerSelector playerController)
+        {
+            ContainerOpener containerOpener = playerController.transform.GetComponent<ContainerOpener>();
+            if (containerOpener != null)
             {
-                ContainerOpener containerOpener = playerController.transform.GetComponent<ContainerOpener>();
-                if (containerOpener != null)
-                {
-                    containerOpener.StartOpenContainer(gameObject);
-                }
+                containerOpener.StartOpenContainer(gameObject);
             }
-            return true;
         }
 
         public void OpenContainer()

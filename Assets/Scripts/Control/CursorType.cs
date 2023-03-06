@@ -8,7 +8,9 @@ namespace RPG.Control
         UI,
         Pickup,
         Dialog,
-        Use
+        Use,
+        Portal,
+        SelectPlayer
     }
 
 }

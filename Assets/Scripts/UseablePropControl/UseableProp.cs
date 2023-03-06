@@ -66,17 +66,18 @@ namespace RPG.UseablePropControl
             return CursorType.Use;
         }
 
-        public bool HandleRaycast(PlayerController playerController)
+        public RaycastableReturnValue HandleRaycast(PlayerSelector playerSelector)
         {
-            if (Input.GetMouseButtonDown(0))
+            return RaycastableReturnValue.FirstPlayerCharacter;
+        }
+
+        public void HandleActivation(PlayerSelector playerSelector)
+        {
+            UseProp useProp = playerSelector.transform.GetComponent<UseProp>();
+            if (useProp != null)
             {
-                UseProp useProp = playerController.transform.GetComponent<UseProp>();
-                if (useProp != null)
-                {
-                    useProp.StartUseProp(gameObject);
-                }
+                useProp.StartUseProp(gameObject);
             }
-            return true;
         }
 
         public void UseProp()
@@ -123,9 +124,6 @@ namespace RPG.UseablePropControl
 
             gameConsole.AddNewLine(textToWrite.Replace("\n", " "));
         }
-
-
-
 
     }
 }

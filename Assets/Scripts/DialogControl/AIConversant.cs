@@ -49,27 +49,26 @@ namespace RPG.DialogueControl
             return CursorType.Dialog;
         }
 
-     
-        public bool HandleRaycast(PlayerController callingController)
+
+        public RaycastableReturnValue HandleRaycast(PlayerSelector callingController)
         {
             if (dialogue == null)
             {
-                return false;
+                return RaycastableReturnValue.NoAction;
             }
 
-            if(IsHostile())
+            if (IsHostile())
             {
-                return false; ;
+                return RaycastableReturnValue.NoAction;
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
+            return RaycastableReturnValue.FirstPlayerCharacter;
+        }
 
-                PlayerConversant playerConversant = callingController.GetComponent<PlayerConversant>();
-                playerConversant.StartDialogue(this, dialogue);
-   
-            }
-            return true;
+        public void HandleActivation(PlayerSelector callingController)
+        {
+            PlayerConversant playerConversant = callingController.GetComponent<PlayerConversant>();
+            playerConversant.StartDialogue(this, dialogue);
         }
 
         private bool IsHostile()

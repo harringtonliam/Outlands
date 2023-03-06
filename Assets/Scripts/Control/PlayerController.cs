@@ -27,10 +27,12 @@ namespace RPG.Control
 
 
         Mover mover;
+        PlayerSelector playerSelector;
 
         private void Awake()
         {
              mover = GetComponent<Mover>();
+             playerSelector = GetComponent<PlayerSelector>();
         }
 
         // Update is called once per frame
@@ -38,16 +40,13 @@ namespace RPG.Control
         {
             if (InteractWithUI()) return;
 
+            if (!playerSelector.IsSelected) return;
+
             if (GetComponent<Health>().IsDead)
             {
-                SetCursorType(CursorType.None);
+                
                 return;
             }
-
-            if (InteractWithComponent()) return;
-            if (InteractWithMovement()) return;
-
-            SetCursorType(CursorType.None);
         }
 
         public void PlayerDead()
@@ -88,23 +87,6 @@ namespace RPG.Control
             return EventSystem.current.IsPointerOverGameObject();
         }
 
-        private bool InteractWithComponent()
-        {
-            RaycastHit[] hits = RaycastAllSorted();
-            foreach (var hit in hits)
-            {
-                IRaycastable[] raycastables = hit.collider.gameObject.GetComponents<IRaycastable>();
-                foreach (var raycastable in raycastables)
-                {
-                    if (raycastable.HandleRaycast(this))
-                    {
-                        SetCursorType(raycastable.GetCursorType());
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
 
         RaycastHit[] RaycastAllSorted()
         {
