@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 3672149298974045230}
   - component: {fileID: 5939353515277132964}
   - component: {fileID: 2036882326982100731}
+  - component: {fileID: 7956514131103497343}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -248,7 +249,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4355427238564390516}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 213c92c233c770547b4b70ee02762d4f, type: 3}
   m_Name: 
@@ -303,7 +304,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4355427238564390516}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a95b0017af99cad459c4f391cc045d61, type: 3}
   m_Name: 
@@ -311,7 +312,8 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   rightHandTransform: {fileID: 0}
   leftHandTransform: {fileID: 0}
-  defaultWeaponConfig: {fileID: 0}
+  defaultWeaponConfig: {fileID: 11400000, guid: 01027fa9f3c9a3f439e9c7d1ca61f74f,
+    type: 2}
   target: {fileID: 0}
 --- !u!114 &4396348001804703149
 MonoBehaviour:
@@ -370,6 +372,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7956514131103497343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355427238564390516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b38add05cdd5343a8eac69f809b583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterAbilities:
+  - ability: 0
+    abilityValue: 40
+  - ability: 1
+    abilityValue: 40
+  - ability: 2
+    abilityValue: 40
+  - ability: 3
+    abilityValue: 40
+  - ability: 4
+    abilityValue: 40
+  - ability: 5
+    abilityValue: 40
+  - ability: 6
+    abilityValue: 40
+  - ability: 7
+    abilityValue: 40
+  abilityModifiers: {fileID: 0}
 --- !u!1 &6139337237686831868
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +445,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -541,7 +573,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

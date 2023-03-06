@@ -23,6 +23,21 @@ namespace RPG.Stats
             return abilityModifiers.GetModifier(abilityScore);
         }
 
+        public int GetAbilityScore(Ability ability)
+        {
+            int abilityScore = 0;
+
+            foreach (var characterAbility in characterAbilities)
+            {
+                if (characterAbility.Ability == ability)
+                {
+                    abilityScore = characterAbility.AbilityValue;
+                    break;
+                }
+            }
+            return abilityScore;
+        }
+
         public CharacterAbility[] GetCharacterAbilities()
         {
             return characterAbilities;

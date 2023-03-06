@@ -21,7 +21,7 @@ namespace RPG.Combat
             if (fighter.GetTarget() != null)
             {
                 Health health = fighter.GetTarget();
-                GetComponent<Text>().text = health.HealthPoints.ToString() + "/" + health.GetMaxHealthPoints();
+                GetComponent<Text>().text = health.HealthPoints.ToString() + "/" + health.GetMaxStamina();
             }
             else
             {

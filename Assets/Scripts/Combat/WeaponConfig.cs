@@ -17,7 +17,6 @@ namespace RPG.Combat
         [SerializeField] int weaponDamageDiceNumber = 1;
         [SerializeField] int weaponDamageAdditiveBonus = 0;
         [SerializeField] int weaponToHitBonus = 0;
-        [SerializeField] float percentageBonus = 0f;
         [SerializeField] float weaponRange = 2f;
         [SerializeField] bool isRightHanded = true;
         [SerializeField] bool isRangedWeapon = false;
@@ -39,10 +38,6 @@ namespace RPG.Combat
             get { return weaponDamageDiceNumber; }
         }
 
-        public float PercentageBonus
-        {
-            get { return percentageBonus; }
-        }
 
         public float WeaponRange
         {

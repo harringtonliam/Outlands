@@ -65,7 +65,45 @@ PrefabInstance:
     - target: {fileID: 4355427238564390516, guid: eedd23ba60ea2734997be47a6b5657b8,
         type: 3}
       propertyPath: m_Name
-      value: Character
+      value: PlayerCharacterVariant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eedd23ba60ea2734997be47a6b5657b8, type: 3}
+--- !u!1 &3276940032594803481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4355427238564390516, guid: eedd23ba60ea2734997be47a6b5657b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1228236291626311021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1959849276660781718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d9dc93aa0078974aab7ea724e7194f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorMappings:
+  - cursorType: 1
+    texture2D: {fileID: 2800000, guid: 8ea795c067613354898068091ffc7130, type: 3}
+    hotspot: {x: 0, y: 0}
+  - cursorType: 2
+    texture2D: {fileID: 2800000, guid: 8859fce41c5d0a148ad0b7eebfca7fe9, type: 3}
+    hotspot: {x: 0, y: 0}
+  - cursorType: 3
+    texture2D: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
+    hotspot: {x: 0, y: 0}
+  - cursorType: 4
+    texture2D: {fileID: 2800000, guid: 89f40d0702ab04b4eaa85fc24b20959b, type: 3}
+    hotspot: {x: 0, y: 0}
+  - cursorType: 5
+    texture2D: {fileID: 2800000, guid: 96d4bfdb0d6d8c042bf8fccf6524d239, type: 3}
+    hotspot: {x: 0, y: 0}
+  - cursorType: 6
+    texture2D: {fileID: 2800000, guid: fe2443101ded6f544b32f8dc8690c367, type: 3}
+    hotspot: {x: 0, y: 0}
+  raycastRadius: 0.25

@@ -20,7 +20,7 @@ namespace RPG.Attributes
 
             rootCanvas.enabled = true;
 
-            foreground.localScale = new Vector3(healthComponent.HealthPoints / healthComponent.GetMaxHealthPoints(),1,1);
+            foreground.localScale = new Vector3(healthComponent.HealthPoints / healthComponent.GetMaxStamina(),1,1);
 
         }
 
@@ -28,7 +28,7 @@ namespace RPG.Attributes
         {
             if (healthComponent == null) return 1f;
 
-            return healthComponent.HealthPoints / healthComponent.GetMaxHealthPoints();
+            return healthComponent.HealthPoints / healthComponent.GetMaxStamina();
         }
     }
 }

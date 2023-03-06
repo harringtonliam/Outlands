@@ -3,10 +3,12 @@ namespace RPG.Stats
     public enum Ability
     {
         Strength,
+        Stamina,
         Dexterity,
-        Constitution,
-        Intelligence,
-        Wisdom,
-        Charisma
+        ReactionSpeed,
+        Intuition,
+        Logic,
+        Personality,
+        Leadership
     }
 }

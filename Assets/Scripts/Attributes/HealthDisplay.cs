@@ -17,7 +17,7 @@ namespace RPG.Attributes
 
         private void Update()
         {
-            GetComponent<Text>().text =  health.HealthPoints.ToString() + "/" + health.GetMaxHealthPoints();
+            GetComponent<Text>().text =  health.HealthPoints.ToString() + "/" + health.GetMaxStamina();
         }
     }
 

@@ -40,7 +40,8 @@ namespace RPG.UI.Information
         private void RedrawUI()
         {
             float maxHitPoints = baseStats.Progression.GetStat(Stat.Health, baseStats.CharacterClass, baseStats.GetLevel());
-            maxHitPoints = maxHitPoints + characterAbilities.GetAbilityModifier(Ability.Constitution);
+            //TODO:  Replace Constitution
+            //maxHitPoints = maxHitPoints + characterAbilities.GetAbilityModifier(Ability.Constitution);
             maxHitPointsText.text = maxHitPoints.ToString();
             float attackBonus = baseStats.Progression.GetStat(Stat.BaseAttackBonus, baseStats.CharacterClass, baseStats.GetLevel());
             if (attackBonus > 0)

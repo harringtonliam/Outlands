@@ -56,22 +56,22 @@ namespace RPG.UI.InGame
             }
             if (maxHPText != null)
             {
-                maxHPText.text = "/" + health.GetMaxHealthPoints().ToString();
+                maxHPText.text = "/" + health.GetMaxStamina().ToString();
             }
             SetHelthPointTextColor();
         }
 
         private void SetHelthPointTextColor()
         {
-            if (health.HealthPoints < (health.GetMaxHealthPoints() * 0.33f))
+            if (health.HealthPoints < (health.GetMaxStamina() * 0.33f))
             {
                 currentHPText.faceColor = Color.red;
             }
-            else if (health.HealthPoints < (health.GetMaxHealthPoints() * 0.66f))
+            else if (health.HealthPoints < (health.GetMaxStamina() * 0.66f))
             {
                 currentHPText.faceColor = Color.yellow;
             }
-            else if (health.HealthPoints < (health.GetMaxHealthPoints()))
+            else if (health.HealthPoints < (health.GetMaxStamina()))
             {
                 currentHPText.faceColor = Color.green;
             }
@@ -86,13 +86,13 @@ namespace RPG.UI.InGame
             if (health == null) return;
             SetHealthText();
             if (foregroundHeealthBar == null) return;
-            Vector3 newScale = new Vector3(health.HealthPoints / health.GetMaxHealthPoints(), 1, 1);
+            Vector3 newScale = new Vector3(health.HealthPoints / health.GetMaxStamina(), 1, 1);
             foregroundHeealthBar.localScale = newScale;
         }
 
         private float GetHealthFraction()
         {
-            return health.HealthPoints / health.GetMaxHealthPoints();
+            return health.HealthPoints / health.GetMaxStamina();
         }
     }
 

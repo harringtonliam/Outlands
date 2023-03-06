@@ -20,14 +20,14 @@ namespace RPG.Attributes
         string characterName;
 
 
-        float healthPoints = -1f;
+        float currentStamina = -1f;
 
         bool isDead = false;
 
         public bool IsDead { get { return isDead; } }
 
         public float HealthPoints {
-            get { return healthPoints; }
+            get { return currentStamina; }
         }
 
         void Start()
@@ -38,10 +38,9 @@ namespace RPG.Attributes
             {
                 characterName = characterSheet.CharacterName;
             }
-
-            if (healthPoints < 0)
+            if (currentStamina < 0)
             {
-                healthPoints = GetMaxHealthPoints();
+                currentStamina = GetMaxStamina();
             }
             if (healthUpdated != null)
             {
@@ -71,28 +70,19 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return ( healthPoints / GetMaxHealthPoints()) * 100;
+            return ( currentStamina / GetMaxStamina()) * 100;
         }
 
-        public float GetMaxHealthPoints()
+        public float GetMaxStamina()
         {
-            BaseStats baseStats = GetComponent<BaseStats>();
-            float maxHealtHPoints = baseStats.GetStat(Stat.Health);
-            int abilityModifier = 0;
             CharacterAbilities characterAbilities = GetComponent<CharacterAbilities>();
-            if (characterAbilities != null)
-            {
-                abilityModifier = GetComponent<CharacterAbilities>().GetAbilityModifier(Ability.Constitution);
-            }
-             
-            maxHealtHPoints = maxHealtHPoints + (abilityModifier * baseStats.GetLevel());
-            return maxHealtHPoints;
-
+            float maxStamina = characterAbilities.GetAbilityScore(Ability.Stamina);
+            return maxStamina;
         }
 
         public void TakeDamage(float damage, GameObject instigator)
         {
-            healthPoints = Mathf.Max(healthPoints - damage, 0);
+            currentStamina = Mathf.Max(currentStamina - damage, 0);
             if (damage > 0)
             {
                 WriteDamageToConsole(damage);
@@ -102,7 +92,7 @@ namespace RPG.Attributes
                 healthUpdated();
             }
 
-            if (healthPoints <= 0)
+            if (currentStamina <= 0)
             {
                 AwardExperience();
                 Die();
@@ -118,7 +108,7 @@ namespace RPG.Attributes
 
         public void Heal(float healing)
         {
-            healthPoints = Mathf.Min(healthPoints + healing, GetMaxHealthPoints());
+            currentStamina = Mathf.Min(currentStamina + healing, GetMaxStamina());
             if (healthUpdated != null)
             {
                 healthUpdated();
@@ -186,7 +176,7 @@ namespace RPG.Attributes
         private void BaseStats_onLevelUp()
         {
             float newHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
-            healthPoints = newHealthPoints;
+            currentStamina = newHealthPoints;
             if (healthUpdated != null)
             {
                 healthUpdated();
@@ -195,13 +185,13 @@ namespace RPG.Attributes
 
         public object CaptureState()
         {
-            return healthPoints;
+            return currentStamina;
         }
 
         public void RestoreState(object state)
         {
-            healthPoints = (float)state;
-            if (healthPoints <= 0)
+            currentStamina = (float)state;
+            if (currentStamina <= 0)
             {
                 onDie.Invoke();
                 Die();
