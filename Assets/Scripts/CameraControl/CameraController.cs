@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using RPG.Core;
 
 namespace RPG.CameraControl
 {
     public class CameraController : MonoBehaviour
     {
         [SerializeField] float moveSpeed = 10f;
-        [SerializeField] float maxXDistanceFromTargetPlayer = 10f;
-        [SerializeField] float maxYDistanceFromTargetPlayer = 10f;
         [SerializeField] float rotationSpeed = 100f;
-        [SerializeField] float zoomAmount = 1f;
         [SerializeField] float zoomSpeed = 5f;
         [SerializeField] float minFollowYOffset = 2f;
         [SerializeField] float maxFollowYOffset = 15f;
+        [SerializeField] float zoomIncreaseAmount = 1f;
         [SerializeField] CinemachineVirtualCamera virtualCamera;
 
 
@@ -22,7 +21,8 @@ namespace RPG.CameraControl
         private CinemachineTransposer cinemachineTransposer;
 
         Transform playerToFollow;
-
+        float currentXPositionOffset = 0f;
+        float cuurentZPositionOffset = 0f;
 
 
         private void Start()
@@ -51,17 +51,15 @@ namespace RPG.CameraControl
             transform.position = playerToFollow.position;
         }
 
+        private void ResetPositionOffsets()
+        {
+            currentXPositionOffset = 0f;
+            cuurentZPositionOffset = 0f;
+        }
+
         private void HandleZoom()
         {
-            cinemachineTransposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-            if (Input.mouseScrollDelta.y > 0)
-            {
-                targetFollowOffset.y -= zoomAmount;
-            }
-            if (Input.mouseScrollDelta.y < 0)
-            {
-                targetFollowOffset.y += zoomAmount;
-            }
+            targetFollowOffset.y += InputManager.Instance.GetCameraZoomAmount() * zoomIncreaseAmount;
             targetFollowOffset.y = Mathf.Clamp(targetFollowOffset.y, minFollowYOffset, maxFollowYOffset);
             cinemachineTransposer.m_FollowOffset = Vector3.Lerp(cinemachineTransposer.m_FollowOffset, targetFollowOffset, Time.deltaTime * zoomSpeed);
         }
@@ -69,43 +67,19 @@ namespace RPG.CameraControl
         private void HandleRotation()
         {
             Vector3 rotationVector = new Vector3(0, 0, 0);
-            if (Input.GetKey(KeyCode.Q))
-            {
-                rotationVector.y = +1f;
-            }
-            if (Input.GetKey(KeyCode.E))
-            {
-                rotationVector.y = -1f;
-            }
+
+            rotationVector.y = InputManager.Instance.GetCameraRoatateAmount();
 
             transform.eulerAngles += rotationVector * rotationSpeed * Time.deltaTime;
         }
 
         private void HandleMovement()
         {
-            Vector3 inputMoveDirection = new Vector3(0, 0, 0);
-            if (Input.GetKey(KeyCode.W))
-            {
-                inputMoveDirection.z = +1f;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                inputMoveDirection.z = -1f;
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                inputMoveDirection.x = -1f;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                inputMoveDirection.x = +1f;
-            }
+            Vector3 inputMoveDirection = InputManager.Instance.GetCameraMoveVector();
 
-            Vector3 moveVector = transform.forward * inputMoveDirection.z + transform.right * inputMoveDirection.x;
-            //transform.position += moveVector * moveSpeed * Time.deltaTime;
-            if (playerToFollow == null) return;
+            Vector3 moveVector = transform.forward * inputMoveDirection.y + transform.right * inputMoveDirection.x;
 
-            transform.position = playerToFollow.position;
+            transform.position += moveVector * moveSpeed * Time.deltaTime;
         }
     }
 

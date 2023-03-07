@@ -5,6 +5,7 @@ using System;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using RPG.Movement;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -37,7 +38,7 @@ namespace RPG.Control
 
             bool playerSelection = false;
 
-            if (Input.GetMouseButtonDown(0))
+            if (InputManager.Instance.IsMouseButtonDown())
             {
                  playerSelection = InteractWithPlayerSelection(ControlKeyPressed());
             }
@@ -69,7 +70,7 @@ namespace RPG.Control
                     if (raycastable.HandleRaycast(selectedPlayer) != RaycastableReturnValue.NoAction)
                     {
                         SetCursorType(raycastable.GetCursorType());
-                        if (Input.GetMouseButtonDown(0))
+                        if (InputManager.Instance.IsMouseButtonDown())
                         {
                             raycastable.HandleActivation(selectedPlayer);
                         }
@@ -88,7 +89,7 @@ namespace RPG.Control
             {
                 Mover mover = selectedPlayer.GetComponent<Mover>();
                 if (!mover.CanMoveTo(target)) return false;
-                if (Input.GetMouseButton(0))
+                if (InputManager.Instance.IsMouseButtonDown())
                 {
                     mover.StartMovementAction(target, 1f); ;
                 }
@@ -128,7 +129,7 @@ namespace RPG.Control
 
         private static Ray GetMouseRay()
         {
-            return Camera.main.ScreenPointToRay(Input.mousePosition);
+            return Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
         }
 
         private void SetCursorType(CursorType cursorType)
@@ -153,7 +154,7 @@ namespace RPG.Control
 
         private bool InteractWithPlayerSelection(bool controlKeyPressed)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
             if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue))
             {
                 if (raycastHit.transform.TryGetComponent<PlayerSelector>(out PlayerSelector playerSelector))
@@ -183,7 +184,7 @@ namespace RPG.Control
 
         private bool ControlKeyPressed()
         {
-            return Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+            return InputManager.Instance.IsKeyDown(KeyCode.LeftControl) || InputManager.Instance.IsKeyDown(KeyCode.RightControl);
         }
     }
 

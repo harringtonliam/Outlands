@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RPG.Core;
 
 namespace RPG.UI.Menus
 {
@@ -17,7 +18,7 @@ namespace RPG.UI.Menus
 
         private void Update()
         {
-            if(Input.GetKeyDown(toogleKey))
+            if(InputManager.Instance.IsKeyDown(toogleKey))
             {
                 ButtonClicked();
             }

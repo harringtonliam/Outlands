@@ -78,8 +78,7 @@ namespace RPG.Control
 
         public void HandleActivation(PlayerSelector playerSelector)
         {
-            //TODO.  Set follow cammera on this player
-            Debug.Log("Player select handle activation");
+            //TODO: Find a way of not needing find object by type;
             CameraControl.CameraController cameraController = FindObjectOfType<CameraControl.CameraController>();
             cameraController.SetPlayerToFollow(playerSelector.gameObject.transform);
         }

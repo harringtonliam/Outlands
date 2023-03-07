@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.UI.Menus;
+using RPG.Core;
 
 namespace RPG.UI
 {
@@ -26,7 +27,7 @@ namespace RPG.UI
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(toogleKey))
+            if (InputManager.Instance.IsKeyDown(toogleKey))
             {
                 ToggleUI();
             }

@@ -44,7 +44,6 @@ namespace RPG.Control
 
             if (GetComponent<Health>().IsDead)
             {
-                
                 return;
             }
         }
@@ -57,7 +56,6 @@ namespace RPG.Control
                 gameOver.GameOverActions();
             }
         }
-
 
         private void SetCursorType(CursorType cursorType)
         {
@@ -112,8 +110,7 @@ namespace RPG.Control
             {
                 if (!GetComponent<Mover>().CanMoveTo(target)) return false;
 
-
-                if (Input.GetMouseButton(0))
+               if (InputManager.Instance.IsMouseButtonDown())
                 {
                     mover.StartMovementAction(target, 1f); ;
                 }
@@ -142,7 +139,7 @@ namespace RPG.Control
 
         private static Ray GetMouseRay()
         {
-            return Camera.main.ScreenPointToRay(Input.mousePosition);
+            return Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
         }
 
         
