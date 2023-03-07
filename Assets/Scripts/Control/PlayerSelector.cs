@@ -9,6 +9,7 @@ namespace RPG.Control
     {
 
         [SerializeField] Transform selectedVisual;
+        [SerializeField] bool startSelected = false;
 
         private bool isSelected;
 
@@ -41,19 +42,10 @@ namespace RPG.Control
             return selectedPlayers;
         }
 
-
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-
+            SetSelected(startSelected);
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
 
         public void SetSelected(bool selected)
         {
@@ -72,7 +64,6 @@ namespace RPG.Control
 
         public RaycastableReturnValue HandleRaycast(PlayerSelector playerController)
         {
-
             return RaycastableReturnValue.FirstPlayerCharacter;
         }
 

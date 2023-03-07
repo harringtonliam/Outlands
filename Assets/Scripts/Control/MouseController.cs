@@ -91,7 +91,14 @@ namespace RPG.Control
                 if (!mover.CanMoveTo(target)) return false;
                 if (InputManager.Instance.IsMouseButtonDown())
                 {
-                    mover.StartMovementAction(target, 1f); ;
+                    foreach (var player in PlayerSelector.GetAllSelectedPlayers())
+                    {
+                        Mover playerMover = player.GetComponent<Mover>();
+                        if (playerMover != null && playerMover.CanMoveTo(target))
+                        {
+                            playerMover.StartMovementAction(target, 1f);
+                        }
+                    }
                 }
                 SetCursorType(CursorType.Movement);
                 return true;
@@ -184,7 +191,7 @@ namespace RPG.Control
 
         private bool ControlKeyPressed()
         {
-            return InputManager.Instance.IsKeyDown(KeyCode.LeftControl) || InputManager.Instance.IsKeyDown(KeyCode.RightControl);
+            return InputManager.Instance.IsKey(KeyCode.LeftControl) || InputManager.Instance.IsKey(KeyCode.RightControl);
         }
     }
 

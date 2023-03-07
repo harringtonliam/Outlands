@@ -10,6 +10,7 @@ namespace RPG.CameraControl
     {
         [SerializeField] float moveSpeed = 10f;
         [SerializeField] float rotationSpeed = 100f;
+        [SerializeField] float rotationFactor = 50f;
         [SerializeField] float zoomSpeed = 5f;
         [SerializeField] float minFollowYOffset = 2f;
         [SerializeField] float maxFollowYOffset = 15f;
@@ -68,7 +69,7 @@ namespace RPG.CameraControl
         {
             Vector3 rotationVector = new Vector3(0, 0, 0);
 
-            rotationVector.y = InputManager.Instance.GetCameraRoatateAmount();
+            rotationVector.y = InputManager.Instance.GetCameraRoatateAmount() * rotationFactor;
 
             transform.eulerAngles += rotationVector * rotationSpeed * Time.deltaTime;
         }

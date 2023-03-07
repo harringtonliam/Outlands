@@ -1,4 +1,4 @@
-#define USE_NEW_INPUT_SYSTEM 
+//#define USE_NEW_INPUT_SYSTEM 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +41,11 @@ namespace RPG.Core
             return Input.GetKeyDown(keyCode);
         }
 
+        public bool IsKey(KeyCode keyCode)
+        {
+            return Input.GetKey(keyCode);
+        }
+
         public bool IsMouseButtonDown()
         {
 #if USE_NEW_INPUT_SYSTEM
@@ -57,19 +62,19 @@ namespace RPG.Core
 #else
             Vector3 inputMoveDir = new Vector3(0, 0, 0);
 
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.UpArrow))
             {
                 inputMoveDir.y = +1f;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.DownArrow))
             {
                 inputMoveDir.y = -1f;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
                 inputMoveDir.x = -1f;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 inputMoveDir.x = +1f;
             }
@@ -85,15 +90,18 @@ namespace RPG.Core
 #else
             float rotateAmount = 0f;
 
-            if (Input.GetKey(KeyCode.Q))
+            //Debug.Log("get rotate amount" + Input.GetAxis("Mouse X").ToString());
+            if (Input.GetMouseButton(1))
             {
-                rotateAmount = +1f;
+                if (Input.GetAxis("Mouse X") > Mathf.Epsilon || Input.GetAxis("Mouse X") < Mathf.Epsilon)
+                {
+                    rotateAmount = Input.GetAxis("Mouse X");
+                }
+                
             }
-            if (Input.GetKey(KeyCode.E))
-            {
-                rotateAmount = -1f;
-            }
+
             return rotateAmount;
+           
 #endif
         }
 
