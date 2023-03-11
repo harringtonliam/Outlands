@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace RPG.Control
 {
@@ -14,6 +15,8 @@ namespace RPG.Control
         private bool isSelected;
 
         public bool IsSelected { get { return isSelected; } }
+
+        public event Action selectedUpdated;
 
         public static GameObject GetFirstSelectedPlayer()
         {
@@ -53,6 +56,10 @@ namespace RPG.Control
             if (selectedVisual != null)
             {
                 selectedVisual.GetComponent<MeshRenderer>().enabled = selected;
+            }
+            if (selectedUpdated != null)
+            {
+                selectedUpdated();
             }
 
         }

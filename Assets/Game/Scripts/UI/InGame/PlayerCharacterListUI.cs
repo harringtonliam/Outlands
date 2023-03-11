@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Attributes;
+
 
 namespace RPG.UI.InGame
 {
@@ -23,13 +23,13 @@ namespace RPG.UI.InGame
             {
                 Destroy(child.gameObject);
             }
-            PlayerCharacter playerCharacter = FindObjectOfType<PlayerCharacter>();
-            foreach (var character in playerCharacter.PlayerCharacterGameObjects)
+            GameObject[] playerCharacters = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var playerCharacter in playerCharacters)
             {
                 if (playerCharacterUIPrefab != null)
                 {
-                    var playerCharaceterUi = Instantiate(playerCharacterUIPrefab, transform);
-                    playerCharaceterUi.SetUp(character);
+                    var playerCharaceterUI = Instantiate(playerCharacterUIPrefab, transform);
+                    playerCharaceterUI.SetUp(playerCharacter);
                 }
             }
         }

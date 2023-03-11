@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RPG.Attributes;
+using RPG.Control;
 using TMPro;
 
 namespace RPG.UI.InGame
@@ -12,16 +13,29 @@ namespace RPG.UI.InGame
         [SerializeField] RectTransform foregroundHeealthBar = null;
         [SerializeField] TextMeshProUGUI nameText = null;
         [SerializeField] TextMeshProUGUI rankText = null;
-        [SerializeField] TextMeshProUGUI currentHPText = null;
-        [SerializeField] TextMeshProUGUI maxHPText = null;
+        [SerializeField] TextMeshProUGUI currentStaminaText = null;
+        [SerializeField] TextMeshProUGUI maxStaminaText = null;
         [SerializeField] Image portraitImage = null;
+        [SerializeField] Image backgroundImage = null;
+        [SerializeField] Button button = null;
 
         GameObject playerCharacterGameObject = null;
         Health health = null;
-
+        PlayerSelector playerSelector;
 
         string characterName = null;
 
+        private void Start()
+        {
+            if (button == null)
+            {
+                button = GetComponent<Button>();
+            }
+            if (button != null)
+            {
+                button.onClick.AddListener(Button_OnCLick);
+            }
+        }
 
         public void SetUp(GameObject newPlayerCharacterGameObject)
         {
@@ -31,8 +45,11 @@ namespace RPG.UI.InGame
             CharacterSheet characterSheet = playerCharacterGameObject.GetComponent<CharacterSheet>();
             if (characterSheet != null)
             {
-                portraitImage.sprite = characterSheet.Portrait;
-                iconImage.enabled = true;
+                if (characterSheet.Portrait !=null)
+                {
+                    portraitImage.sprite = characterSheet.Portrait;
+                    portraitImage.enabled = true;
+                }
                 characterName = characterSheet.CharacterName;
                 nameText.text = characterName;
                 if (rankText != null)
@@ -41,22 +58,35 @@ namespace RPG.UI.InGame
                 }
             }
 
+            playerSelector = playerCharacterGameObject.GetComponent<PlayerSelector>();
+            if (playerSelector != null)
+            {
+                playerSelector.selectedUpdated += ShowSelectedBackground;
+                ShowSelectedBackground();
+            }
+
             health = playerCharacterGameObject.GetComponent<Health>();
             health.healthUpdated += UpdateHealth;
             UpdateHealth();
 
         }
 
+        public void Button_OnCLick()
+        {
+            Debug.Log("Button clicked : " + nameText.text);
+            SelectPlayer();
+        }
+
         private void SetHealthText()
         {
             if (health == null) return;
-            if (currentHPText != null)
+            if (currentStaminaText != null)
             {
-                currentHPText.text = health.HealthPoints.ToString();
+                currentStaminaText.text = health.HealthPoints.ToString();
             }
-            if (maxHPText != null)
+            if (maxStaminaText != null)
             {
-                maxHPText.text = "/" + health.GetMaxStamina().ToString();
+                maxStaminaText.text = "/" + health.GetMaxStamina().ToString();
             }
             SetHelthPointTextColor();
         }
@@ -65,19 +95,19 @@ namespace RPG.UI.InGame
         {
             if (health.HealthPoints < (health.GetMaxStamina() * 0.33f))
             {
-                currentHPText.faceColor = Color.red;
+                currentStaminaText.faceColor = Color.red;
             }
             else if (health.HealthPoints < (health.GetMaxStamina() * 0.66f))
             {
-                currentHPText.faceColor = Color.yellow;
+                currentStaminaText.faceColor = Color.yellow;
             }
             else if (health.HealthPoints < (health.GetMaxStamina()))
             {
-                currentHPText.faceColor = Color.green;
+                currentStaminaText.faceColor = Color.green;
             }
             else
             {
-                currentHPText.faceColor = Color.white;
+                currentStaminaText.faceColor = Color.white;
             }
         }
 
@@ -88,6 +118,27 @@ namespace RPG.UI.InGame
             if (foregroundHeealthBar == null) return;
             Vector3 newScale = new Vector3(health.HealthPoints / health.GetMaxStamina(), 1, 1);
             foregroundHeealthBar.localScale = newScale;
+        }
+
+        private void SelectPlayer()
+        {
+            if (playerSelector != null)
+            {
+                playerSelector.SetSelected(!playerSelector.IsSelected);
+            }
+        }
+
+        private void ShowSelectedBackground()
+        {
+            backgroundImage.enabled = playerSelector.IsSelected;
+        }
+
+        private void OnDestroy()
+        {
+            if (playerSelector != null)
+            {
+                playerSelector.selectedUpdated -= ShowSelectedBackground;
+            }
         }
 
         private float GetHealthFraction()
