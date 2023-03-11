@@ -166,28 +166,24 @@ namespace RPG.Control
             {
                 if (raycastHit.transform.TryGetComponent<PlayerSelector>(out PlayerSelector playerSelector))
                 {
-                    if (!controlKeyPressed)
-                    {
-                        DeSelectOtherPlayerControllers();
-                    }
                     selectedPlayer = playerSelector;
-                    selectedPlayer.SetSelected(true);
+                    selectedPlayer.SetSelected(true, controlKeyPressed);
                     return true;
-
                 }
             }
 
             return false;
         }
 
-        private void DeSelectOtherPlayerControllers()
-        {
-            GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-            foreach (var player in allPlayers)
-            {
-                player.GetComponent<PlayerSelector>().SetSelected(false);
-            }
-        }
+        //Todo remove his after testing
+        //private void DeSelectOtherPlayerControllers()
+        //{
+        //    GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+        //    foreach (var player in allPlayers)
+        //    {
+        //        player.GetComponent<PlayerSelector>().SetSelected(false);
+        //    }
+        //}
 
         private bool ControlKeyPressed()
         {

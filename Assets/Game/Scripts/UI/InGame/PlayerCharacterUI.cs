@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using RPG.Attributes;
 using RPG.Control;
+using RPG.Core;
 using TMPro;
 
 namespace RPG.UI.InGame
@@ -73,7 +74,6 @@ namespace RPG.UI.InGame
 
         public void Button_OnCLick()
         {
-            Debug.Log("Button clicked : " + nameText.text);
             SelectPlayer();
         }
 
@@ -124,7 +124,11 @@ namespace RPG.UI.InGame
         {
             if (playerSelector != null)
             {
-                playerSelector.SetSelected(!playerSelector.IsSelected);
+                playerSelector.SetSelected(!playerSelector.IsSelected, ControlKeyPressed());
+            }
+            if (playerSelector.IsSelected)
+            {
+                playerSelector.HandleActivation(playerSelector);
             }
         }
 
@@ -144,6 +148,11 @@ namespace RPG.UI.InGame
         private float GetHealthFraction()
         {
             return health.HealthPoints / health.GetMaxStamina();
+        }
+
+        private bool ControlKeyPressed()
+        {
+            return InputManager.Instance.IsKey(KeyCode.LeftControl) || InputManager.Instance.IsKey(KeyCode.RightControl);
         }
     }
 

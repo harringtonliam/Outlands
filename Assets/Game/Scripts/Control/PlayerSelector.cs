@@ -11,8 +11,10 @@ namespace RPG.Control
 
         [SerializeField] Transform selectedVisual;
         [SerializeField] bool startSelected = false;
+        [SerializeField] bool  isVisible;
 
         private bool isSelected;
+ 
 
         public bool IsSelected { get { return isSelected; } }
 
@@ -50,8 +52,28 @@ namespace RPG.Control
             SetSelected(startSelected);
         }
 
+        private void OnBecameVisible()
+        {
+            isVisible = true;
+        }
+
+        private void OnBecameInvisible()
+        {
+            isVisible = false;
+        }
+
         public void SetSelected(bool selected)
         {
+            SetSelected(selected, false);
+        }
+
+        public void SetSelected(bool selected, bool controlKeyPressed)
+        {
+            if(selected && !controlKeyPressed)
+            {
+                DeSelectOtherPlayerControllers();
+            }
+
             isSelected = selected;
             if (selectedVisual != null)
             {
@@ -62,6 +84,15 @@ namespace RPG.Control
                 selectedUpdated();
             }
 
+        }
+
+        private void DeSelectOtherPlayerControllers()
+        {
+            GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in allPlayers)
+            {
+                player.GetComponent<PlayerSelector>().SetSelected(false);
+            }
         }
 
         public CursorType GetCursorType()
