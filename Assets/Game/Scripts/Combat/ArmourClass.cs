@@ -49,18 +49,19 @@ namespace RPG.Combat
                 return calculatedArmourValue;
             }
 
-            foreach (var item in equipment.GetEquippedItems())
-            {
-                Armour armour = item.Value as Armour;
-                if (armour != null)
-                {
-                    calculatedArmourValue += armour.ArmourClassBonus;
-                    if (maxDexBonus > armour.MaxDexBonus)
-                    {
-                        maxDexBonus = armour.MaxDexBonus;
-                    }
-                }
-            }
+            //TODO: convert to starfrontiers armour
+            //foreach (var item in equipment.GetEquippedItems())
+            //{
+            //    Armour armour = item.Value as Armour;
+            //    if (armour != null)
+            //    {
+            //        calculatedArmourValue += armour.ArmourClassBonus;
+            //        if (maxDexBonus > armour.MaxDexBonus)
+            //        {
+            //            maxDexBonus = armour.MaxDexBonus;
+            //        }
+            //    }
+            //}
 
             return calculatedArmourValue;
         }

@@ -9,17 +9,23 @@ namespace RPG.InventoryControl
     [CreateAssetMenu(fileName = "Armour", menuName = "Items/Make New Armour", order = 3)]
     public class Armour : EquipableItem
     {
-        [SerializeField] int armourClassBonus = 0;
-        [SerializeField] int maxDexBonus = 0;
+        [SerializeField] ArmourType armourType;
+        [SerializeField] float percentDamageAbsorbtion = 50f;
+        [SerializeField] int numberOfDamagePointsLeft = 50;
 
-        public int ArmourClassBonus
+        public float PercentDamageAbsorbtion
         {
-            get { return armourClassBonus; }
+            get { return percentDamageAbsorbtion; }
         }
 
-        public int MaxDexBonus
+        public ArmourType ArmourType
         {
-            get { return maxDexBonus; }
+            get { return armourType; }
+        }
+
+        public int NumberOfDamagePointsLeft
+        {
+            get { return numberOfDamagePointsLeft; }
         }
     }
 }

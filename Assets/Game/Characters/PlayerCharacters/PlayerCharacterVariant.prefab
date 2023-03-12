@@ -173,6 +173,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1228236291626311021}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &154766004448010429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91267ad79178fc4459a057914c2f3b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clothingConfigs: []
 --- !u!114 &1959849276660781718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +233,45 @@ MonoBehaviour:
   selectedVisual: {fileID: 1990751387811923262}
   startSelected: 0
   isVisible: 0
+--- !u!114 &5202403594515492424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f423befc910a9704495601a708bf24dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5556353276555363839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c5ad3b3aef6ee4f9a1ba99a3e4a930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpRange: 1
+--- !u!114 &1827086828553784628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e77a4d3e558afb4eb202509950717b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySize: 12
+  inventorySlots: []
 --- !u!4 &4343573665051652465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3264242603453066268, guid: eedd23ba60ea2734997be47a6b5657b8,

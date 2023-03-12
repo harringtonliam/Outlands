@@ -23,6 +23,8 @@ namespace RPG.InventoryControl
         [SerializeField] bool isStackable = false;
         [Tooltip("For stackable items this is the max number of items of this type can be stacked in the same inventory slot.")]
         [SerializeField] int maxNumberInStack = 20;
+        [Tooltip("Item mass in kg")]
+        [SerializeField] float mass = 1f;
 
         public string  ItemID { get { return itemID; } }
         public string DisplayName {  get { return displayName; } }

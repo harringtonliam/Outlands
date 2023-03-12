@@ -76,30 +76,31 @@ namespace RPG.UI.InventoryControl
         private void DisplayArmour(InventoryItem inventoryItem)
         {
             Armour armour = inventoryItem as Armour;
-            if (armour != null)
-            {
-                if (armour.ArmourClassBonus > 0)
-                {
-                    armourClassBonus.text = "+" + armour.ArmourClassBonus.ToString();
-                }
-                else
-                {
-                    armourClassBonus.text = "-" + armour.ArmourClassBonus.ToString();
-                }
-                if (armour.MaxDexBonus > 0)
-                {
-                    maxDexBonus.text = "+" + armour.MaxDexBonus.ToString();
-                }
-                else
-                {
-                    maxDexBonus.text = armour.MaxDexBonus.ToString();
-                }
-                armourDisplayArea.SetActive(true);
-            }
-            else
-            {
-                armourDisplayArea.SetActive(false);
-            }
+            //TODO: convert to Start Frontiers armout
+            //if (armour != null)
+            //{
+            //    if (armour.ArmourClassBonus > 0)
+            //    {
+            //        armourClassBonus.text = "+" + armour.ArmourClassBonus.ToString();
+            //    }
+            //    else
+            //    {
+            //        armourClassBonus.text = "-" + armour.ArmourClassBonus.ToString();
+            //    }
+            //    if (armour.MaxDexBonus > 0)
+            //    {
+            //        maxDexBonus.text = "+" + armour.MaxDexBonus.ToString();
+            //    }
+            //    else
+            //    {
+            //        maxDexBonus.text = armour.MaxDexBonus.ToString();
+            //    }
+            //    armourDisplayArea.SetActive(true);
+            //}
+            //else
+            //{
+            //    armourDisplayArea.SetActive(false);
+            //}
         }
 
         private void DisplayWeaponConfig(InventoryItem inventoryItem)

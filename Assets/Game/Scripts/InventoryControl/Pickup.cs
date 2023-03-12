@@ -12,18 +12,10 @@ namespace RPG.InventoryControl
         [SerializeField] InventoryItem inventoryItem = null;
         [SerializeField] int numberOfItems = 1;
 
-        //Cached references
-        Inventory inventory;
 
         public InventoryItem InventoryItem { get { return inventoryItem; } }
         public int NumberOfItems { get { return numberOfItems; } }
 
-
-        void Awake()
-        {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            inventory = player.GetComponent<Inventory>();
-        }
 
         public void Setup(InventoryItem item, int number)
         {
@@ -36,7 +28,7 @@ namespace RPG.InventoryControl
             this.numberOfItems = number;
         }
 
-        public void PickupItem()
+        public void PickupItem(Inventory inventory)
         {
             bool slotFoundOk = inventory.AddToFirstEmptySlot(inventoryItem, numberOfItems);
             if (slotFoundOk)
@@ -50,21 +42,14 @@ namespace RPG.InventoryControl
             }
         }
 
-        public bool CanBePickedUp()
+        public bool CanBePickedUp(Inventory inventory)
         {
             return inventory.HasSpaceFor(inventoryItem);
         }
 
         public CursorType GetCursorType()
         {
-            if (CanBePickedUp())
-            {
-                return CursorType.Pickup;
-            }
-            else
-            {
-                return CursorType.Pickup;
-            }
+            return CursorType.Pickup;
         }
 
         public RaycastableReturnValue HandleRaycast(PlayerSelector playerSelector)

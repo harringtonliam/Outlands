@@ -36,8 +36,7 @@ namespace RPG.InventoryControl
         private void PickupBehaviour()
         {
             transform.LookAt(target.transform);
-            target.PickupItem();
-
+            target.PickupItem(GetComponent<Inventory>());
         }
 
         public void StartPickupRetrieval(GameObject pickup)
