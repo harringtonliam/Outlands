@@ -21,6 +21,7 @@ namespace RPG.Control
 
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float raycastRadius = 0.25f;
+        [SerializeField] Formation defaultFormation;
 
 
         private PlayerSelector selectedPlayer;
@@ -91,19 +92,32 @@ namespace RPG.Control
                 if (!mover.CanMoveTo(target)) return false;
                 if (InputManager.Instance.IsMouseButtonDown())
                 {
+                    int playerIndex = 0;
                     foreach (var player in PlayerSelector.GetAllSelectedPlayers())
                     {
                         Mover playerMover = player.GetComponent<Mover>();
                         if (playerMover != null && playerMover.CanMoveTo(target))
                         {
-                            playerMover.StartMovementAction(target, 1f);
+                            Vector3 offSetTarget = CalculateFormationTarget(target, playerIndex);
+                            playerMover.StartMovementAction(offSetTarget, 1f);
                         }
+                        playerIndex++;
                     }
                 }
                 SetCursorType(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private Vector3 CalculateFormationTarget(Vector3 target , int playerIndex)
+        {
+            if (defaultFormation != null)
+            {
+                return target + defaultFormation.GetFormationOffsetVector3(playerIndex);
+            }
+
+            return target;
         }
 
         private bool RaycastNavMesh(out Vector3 target)
