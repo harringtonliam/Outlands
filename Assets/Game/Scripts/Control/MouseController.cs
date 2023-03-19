@@ -92,7 +92,7 @@ namespace RPG.Control
             bool hashit = RaycastNavMesh(out target);
             if (hashit)
             {
-                Mover mover = selectedPlayer.GetComponent<Mover>();
+                Mover mover = PlayerSelector.GetFirstSelectedPlayer().GetComponent<Mover>();
                 if (!mover.CanMoveTo(target)) return false;
                 if (InputManager.Instance.IsMouseButtonDown())
                 {

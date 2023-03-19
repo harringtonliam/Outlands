@@ -45,6 +45,15 @@ namespace RPG.Control
             return selectedPlayers;
         }
 
+        public static void SelectAllPlayerCharacters()
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in players)
+            {
+                player.GetComponent<PlayerSelector>().SetSelected(true, true);
+            }
+        }
+
         private void Start()
         {
             SetSelected(startSelected);

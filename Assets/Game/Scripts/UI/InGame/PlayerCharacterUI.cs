@@ -26,6 +26,8 @@ namespace RPG.UI.InGame
 
         string characterName = null;
 
+        public GameObject PlayerCharacterGameObject {  get { return playerCharacterGameObject; } }
+
         private void Start()
         {
             if (button == null)
