@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using RPG.Core;
+using RPG.Control;
 
 namespace RPG.CameraControl
 {
@@ -15,6 +16,7 @@ namespace RPG.CameraControl
         [SerializeField] float minFollowYOffset = 2f;
         [SerializeField] float maxFollowYOffset = 15f;
         [SerializeField] float zoomIncreaseAmount = 1f;
+        [SerializeField] float maxDistanceFromSelectedPlayer = 10f;
         [SerializeField] CinemachineVirtualCamera virtualCamera;
 
 
@@ -22,9 +24,6 @@ namespace RPG.CameraControl
         private CinemachineTransposer cinemachineTransposer;
 
         Transform playerToFollow;
-        float currentXPositionOffset = 0f;
-        float cuurentZPositionOffset = 0f;
-
 
         private void Start()
         {
@@ -52,10 +51,28 @@ namespace RPG.CameraControl
             transform.position = playerToFollow.position;
         }
 
-        private void ResetPositionOffsets()
+        public void MoveCamera(Vector3 moveDirection)
         {
-            currentXPositionOffset = 0f;
-            cuurentZPositionOffset = 0f;
+            float currentDistanceFromSelectedPlayer = Vector3.Distance(PlayerSelector.GetFirstSelectedPlayer().transform.position, transform.position);
+
+            Vector3 moveVector = transform.forward * moveDirection.y + transform.right * moveDirection.x;
+            float newDistanceFromSelectedPlayer = Vector3.Distance(PlayerSelector.GetFirstSelectedPlayer().transform.position, transform.position + moveVector);
+
+            if ((currentDistanceFromSelectedPlayer >= maxDistanceFromSelectedPlayer)  && (newDistanceFromSelectedPlayer > currentDistanceFromSelectedPlayer))
+            {
+                return;
+            }
+
+            transform.position += moveVector * moveSpeed * Time.deltaTime;
+        }
+
+        public bool IsFurtherThanMaxDistanceFromPlayer(Vector3 playerPosition)
+        {
+            if (Vector3.Distance(playerPosition, transform.position) >= maxDistanceFromSelectedPlayer)
+            {
+                return true;
+            }
+            return false;
         }
 
         private void HandleZoom()
@@ -76,11 +93,7 @@ namespace RPG.CameraControl
 
         private void HandleMovement()
         {
-            Vector3 inputMoveDirection = InputManager.Instance.GetCameraMoveVector();
-
-            Vector3 moveVector = transform.forward * inputMoveDirection.y + transform.right * inputMoveDirection.x;
-
-            transform.position += moveVector * moveSpeed * Time.deltaTime;
+            MoveCamera(InputManager.Instance.GetCameraMoveVector());
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.InventoryControl;
 using RPG.UI.Dragging;
+using RPG.Control;
 
 namespace RPG.UI.InventoryControl
 {
@@ -16,16 +17,27 @@ namespace RPG.UI.InventoryControl
 
         private void Awake()
         {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            playerEquipment = player.GetComponent<Equipment>();
-            playerEquipment.equipmentUpdated += RedrawUI;
+
         }
 
         void Start()
         {
+            
+        }
+
+
+        private void OnEnable()
+        {
+            var player = PlayerSelector.GetFirstSelectedPlayer();
+            playerEquipment = player.GetComponent<Equipment>();
+            playerEquipment.equipmentUpdated += RedrawUI;
             RedrawUI();
         }
 
+        private void OnDisable()
+        {
+            playerEquipment.equipmentUpdated -= RedrawUI;
+        }
 
         public void AddItems(InventoryItem item, int number)
         {

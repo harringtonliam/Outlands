@@ -11,10 +11,8 @@ namespace RPG.Control
 
         [SerializeField] Transform selectedVisual;
         [SerializeField] bool startSelected = false;
-        [SerializeField] bool  isVisible;
 
         private bool isSelected;
- 
 
         public bool IsSelected { get { return isSelected; } }
 
@@ -52,15 +50,6 @@ namespace RPG.Control
             SetSelected(startSelected);
         }
 
-        private void OnBecameVisible()
-        {
-            isVisible = true;
-        }
-
-        private void OnBecameInvisible()
-        {
-            isVisible = false;
-        }
 
         public void SetSelected(bool selected)
         {
@@ -109,7 +98,10 @@ namespace RPG.Control
         {
             //TODO: Find a way of not needing find object by type;
             CameraControl.CameraController cameraController = FindObjectOfType<CameraControl.CameraController>();
-            cameraController.SetPlayerToFollow(playerSelector.gameObject.transform);
+            if (cameraController.IsFurtherThanMaxDistanceFromPlayer(playerSelector.gameObject.transform.position))
+            {
+                cameraController.SetPlayerToFollow(playerSelector.gameObject.transform);
+            }
         }
     }
 }

@@ -23,15 +23,19 @@ namespace RPG.UI.InventoryControl
             Redraw();
         }
 
-        private void Awake()
+
+        private void OnEnable()
         {
+
             objectInventory = Inventory.GetPlayerInventory();
             objectInventory.inventoryUpdated += Redraw;
+            Redraw();
         }
 
-        void Start()
+        private void OnDisable()
         {
-            Redraw();
+
+            objectInventory.inventoryUpdated -= Redraw;
         }
 
         private void Redraw()

@@ -15,15 +15,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Chr_SpaceSoldier_Female_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1320470046156480, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1379658948794438, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1493233135004794, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1587755743931638, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1751108262309926, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1752569338788628, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1757364426181446, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829675631271568, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -119,6 +139,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d8dfda64987cff5419b3497636a384d6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
+--- !u!4 &6219258756112672034 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4580326200799618, guid: 0418708de6c1f5d4799def6776f61029,
+    type: 3}
+  m_PrefabInstance: {fileID: 6223828636549649568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6219281386646480034 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4547937131638786, guid: 0418708de6c1f5d4799def6776f61029,
+    type: 3}
+  m_PrefabInstance: {fileID: 6223828636549649568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6219315917796282338 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4514368357931842, guid: 0418708de6c1f5d4799def6776f61029,
@@ -131,6 +163,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6223828636549649568}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &6219984194363954212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4127017128263812, guid: 0418708de6c1f5d4799def6776f61029,
+    type: 3}
+  m_PrefabInstance: {fileID: 6223828636549649568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7269313169778867189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +176,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 154766004448010429, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: clothingConfigs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 154766004448010429, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: clothingConfigs.Array.data[0].characterMesh
+      value: 
+      objectReference: {fileID: 6219258756112672034}
+    - target: {fileID: 154766004448010429, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: clothingConfigs.Array.data[1].characterMesh
+      value: 
+      objectReference: {fileID: 6219984194363954212}
+    - target: {fileID: 154766004448010429, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: clothingConfigs.Array.data[1].inventoryItem
+      value: 
+      objectReference: {fileID: 11400000, guid: ae92305d7c3259f4bae3b41bff159805,
+        type: 2}
+    - target: {fileID: 154766004448010429, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: clothingConfigs.Array.data[2].characterMesh
+      value: 
+      objectReference: {fileID: 6219281386646480034}
+    - target: {fileID: 154766004448010429, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: clothingConfigs.Array.data[2].inventoryItem
+      value: 
+      objectReference: {fileID: 11400000, guid: ae92305d7c3259f4bae3b41bff159805,
+        type: 2}
     - target: {fileID: 1990751387811923262, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
         type: 3}
       propertyPath: m_RootOrder

@@ -55,14 +55,17 @@ namespace RPG.Control
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 SetCursorType(CursorType.UI);
+                
             }
 
+  
             return EventSystem.current.IsPointerOverGameObject();
         }
 
         private bool InteractWithComponent()
         {
             RaycastHit[] hits = RaycastAllSorted();
+
             foreach (var hit in hits)
             {
                 IRaycastable[] raycastables = hit.collider.gameObject.GetComponents<IRaycastable>();
@@ -73,6 +76,7 @@ namespace RPG.Control
                         SetCursorType(raycastable.GetCursorType());
                         if (InputManager.Instance.IsMouseButtonDown())
                         {
+                            selectedPlayer = PlayerSelector.GetFirstSelectedPlayer().GetComponent<PlayerSelector>();
                             raycastable.HandleActivation(selectedPlayer);
                         }
                         return true;
