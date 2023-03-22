@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1974782561756250533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2390934771795276630}
+  m_Layer: 0
+  m_Name: InfraredEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2390934771795276630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974782561756250533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 105087731945425415}
+  - {fileID: 8339201239365090142}
+  - {fileID: 8627637308716397796}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1518193806262923702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2390934771795276630}
+    m_Modifications:
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367508751278045503, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_Name
+      value: InfraredPointLight
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90c88055f6f780040b707c6ab8fd88d9, type: 3}
+--- !u!4 &105087731945425415 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1518193806262923702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7196589401962876757
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2390934771795276630}
+    m_Modifications:
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367508751278045503, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_Name
+      value: InfraredPointLight (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90c88055f6f780040b707c6ab8fd88d9, type: 3}
+--- !u!4 &8627637308716397796 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7196589401962876757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7484462362447986927
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2390934771795276630}
+    m_Modifications:
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367508751278045503, guid: 90c88055f6f780040b707c6ab8fd88d9,
+        type: 3}
+      propertyPath: m_Name
+      value: InfraredPointLight (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90c88055f6f780040b707c6ab8fd88d9, type: 3}
+--- !u!4 &8339201239365090142 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1469560535503879089, guid: 90c88055f6f780040b707c6ab8fd88d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7484462362447986927}
+  m_PrefabAsset: {fileID: 0}

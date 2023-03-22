@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using RPG.InventoryControl;
+using RPG.Core;
 
 namespace RPG.UI
 {
-    public class NightVisionToggleUI : MonoBehaviour
+   
+
+
+    public class TorchToggleUI : MonoBehaviour
     {
         [SerializeField] Image onBackgroundImage;
-        [SerializeField] NightVisionSettings inGameSettings;
+        [SerializeField] TorchSettings inGameSettings;
 
 
         Button button;
 
-        private void Start()
+        // Start is called before the first frame update
+        void Start()
         {
             ToggleBackgroundImage();
 
@@ -38,19 +42,18 @@ namespace RPG.UI
             inGameSettings.SettingsUpdated -= ToggleBackgroundImage;
         }
 
-        public void Button_OnClick()
-        {
-            inGameSettings.SetIsNighttVisionOn(!inGameSettings.IsNightVisionOn);
-        }
-
         private void ToggleBackgroundImage()
         {
-            onBackgroundImage.enabled = inGameSettings.IsNightVisionOn;
+            onBackgroundImage.enabled = inGameSettings.IsTorchOn;
         }
 
+
+        void Button_OnClick()
+        {
+            inGameSettings.SetIsTorchOn(!inGameSettings.IsTorchOn);
+        }
 
     }
 
 }
-
 

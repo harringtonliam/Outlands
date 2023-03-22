@@ -10,49 +10,29 @@ namespace RPG.Control
     public class InfraredEffect : MonoBehaviour
     {
         [SerializeField] GameObject infraRedEffect;
-        [SerializeField] string infraReditemId = "a7e50ca9-d716-497b-9513-b70df3821bc9";
 
         Equipment playerEquipment;
-        InGameSettings inGameSettings;
+        NightVisionSettings inGameSettings;
+
+
 
         private void Awake()
         {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            playerEquipment = player.GetComponent<Equipment>();
-            playerEquipment.equipmentUpdated += CheckForInfrared;
+            inGameSettings = FindObjectOfType<NightVisionSettings>();
         }
 
-        private void Start()
+
+        private void OnDisable()
         {
-            inGameSettings = FindObjectOfType<InGameSettings>();
-            inGameSettings.settingsUpdated += CheckForInfrared;
-            CheckForInfrared();
+            inGameSettings.SettingsUpdated -= SwitchEffect;
         }
 
-        private void CheckForInfrared()
-        {
-            InventoryItem headItem = playerEquipment.GetItemInSlot(EquipLocation.Helmet);
-            string foundId = string.Empty;
-            if (headItem != null)
-            {
-                foundId = headItem.ItemID;
-            }
 
-            if (foundId == infraReditemId  && inGameSettings.IsNightVisionOn)
-            {
-                SwitchEffect(true);
-            }
-            else
-            {
-                SwitchEffect(false);
-            }
-        }
-
-        private  void SwitchEffect(bool isEffectOn)
+        private  void SwitchEffect()
         {
             if (infraRedEffect == null) return;
 
-            infraRedEffect.SetActive(isEffectOn);
+            infraRedEffect.SetActive(inGameSettings.IsNightVisionOn);
         }
     }
 }

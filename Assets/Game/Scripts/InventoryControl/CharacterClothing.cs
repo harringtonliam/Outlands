@@ -14,6 +14,7 @@ namespace RPG.InventoryControl
         [Serializable]
         public struct ClothingConfig
         {
+            public EquipLocation equipLocation;
             public InventoryItem inventoryItem;
             public Transform characterMesh;
 
@@ -25,17 +26,25 @@ namespace RPG.InventoryControl
         void Start()
         {
             equipment = GetComponent<Equipment>();
-            equipment.equipmentUpdated += SetClothing;
-            SetClothing();
+            equipment.equipmentUpdated += ProcesssEquipmenyUpdated;
+            ProcesssEquipmenyUpdated();
         }
 
 
-        void SetClothing()
+        void ProcesssEquipmenyUpdated()
         {
-            InventoryItem bodyItem = equipment.GetItemInSlot(EquipLocation.Body);
+            SetClothing(EquipLocation.Helmet);
+            SetClothing(EquipLocation.Body);
+        }
+
+        void SetClothing(EquipLocation equipLocation)
+        {
+            InventoryItem itemEquiped = equipment.GetItemInSlot(equipLocation);
             for (int i = 0; i < clothingConfigs.Length; i++)
             {
-                    if (bodyItem == clothingConfigs[i].inventoryItem)
+                if (clothingConfigs[i].equipLocation == equipLocation)
+                {
+                    if (itemEquiped == clothingConfigs[i].inventoryItem)
                     {
                         clothingConfigs[i].characterMesh.gameObject.SetActive(true);
                     }
@@ -43,9 +52,12 @@ namespace RPG.InventoryControl
                     {
                         clothingConfigs[i].characterMesh.gameObject.SetActive(false);
                     }
+                }
             }
 
         }
+
+
     }
 }
 

@@ -8,11 +8,14 @@ namespace RPG.InventoryControl
     public class EquipableItem : InventoryItem
     {
         [SerializeField] EquipLocation allowedEquipLocation = EquipLocation.Weapon;
+        [SerializeField] bool isNightVisionEnabled = false;
 
         public EquipLocation AllowedEquiplocation
         {
             get { return allowedEquipLocation;  }
         }
+
+        public bool IsNightVisionEnabled { get { return isNightVisionEnabled; } }
 
     }
 }
