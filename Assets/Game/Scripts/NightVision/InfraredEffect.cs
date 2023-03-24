@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.InventoryControl;
-using System;
-using RPG.Core;
 
-namespace RPG.Control
+
+namespace RPG.NightVision
 {
     public class InfraredEffect : MonoBehaviour
     {
         [SerializeField] GameObject infraRedEffect;
 
-        Equipment playerEquipment;
+
         NightVisionSettings inGameSettings;
 
 
@@ -19,6 +17,11 @@ namespace RPG.Control
         private void Awake()
         {
             inGameSettings = FindObjectOfType<NightVisionSettings>();
+        }
+
+        private void OnEnable()
+        {
+            inGameSettings.SettingsUpdated += SwitchEffect;
         }
 
 
@@ -32,7 +35,7 @@ namespace RPG.Control
         {
             if (infraRedEffect == null) return;
 
-            infraRedEffect.SetActive(inGameSettings.IsNightVisionOn);
+            infraRedEffect.SetActive(inGameSettings.IsNightVisionOnAndEquiped());
         }
     }
 }

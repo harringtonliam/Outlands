@@ -152,7 +152,7 @@ namespace RPG.Combat
 
             if (AttackRollSuccessful())
             {
-                calculatedDamage = currentWeaponConfig.CalcWeaponDamage() + GetComponent<CharacterAbilities>().GetAbilityModifier(currentWeaponConfig.ModifierAbility);
+                calculatedDamage = currentWeaponConfig.CalcWeaponDamage();
             }
 
 
@@ -236,17 +236,67 @@ namespace RPG.Combat
 
         private bool AttackRollSuccessful()
         {
-            int targetArmourClass = target.GetComponent<ArmourClass>().CalculateArmourClass();
-            int diceRoll = FindObjectOfType<Dice>().RollDice(20, 1);
-            if (diceRoll >= 20) return true;
-            if (diceRoll <= 1) return false;
-            int attackRoll = diceRoll + currentWeaponConfig.WeaponToHitBonus + GetStatModifier();
-            if (attackRoll < targetArmourClass)
+            int chanceToHit = CalculateChanceToHit();
+            int attackRoll = FindObjectOfType<Dice>().RollDice(100, 1);
+            if (attackRoll >= 99) return false;
+            if (attackRoll <= 1) return true;
+            if (attackRoll < chanceToHit)
             {
                 WriteToConsole("attack missed");
             }
 
-            return attackRoll >= targetArmourClass;
+            return attackRoll <= chanceToHit;
+        }
+
+        private int CalculateChanceToHit()
+        {
+            int chanceToHit = 0;
+            CharacterAbilities characterAbilities = GetComponent<CharacterAbilities>();
+            int strenght = characterAbilities.GetAbilityScore(Ability.Strength);
+            int dexterity = characterAbilities.GetAbilityScore(Ability.Dexterity);
+            if (currentWeaponConfig.IsRangedWeapon)
+            {
+                chanceToHit = CalculateRangedWeaponChanceToHit(dexterity);
+            }
+            else
+            {
+               chanceToHit = CalcMeleeChanceToHit (strenght, dexterity);
+            }
+
+            return chanceToHit;
+        }
+
+        private int CalcMeleeChanceToHit(int strenght, int dexterity)
+        {
+            int chanceToHit = 0;
+            int statUsed = (strenght > dexterity ? strenght : dexterity);
+            chanceToHit = DivideByTwoRoundedUp(statUsed);
+            //TODO: add 10% for each skill level
+            chanceToHit += currentWeaponConfig.WeaponToHitBonus;
+            //ToDo: add 20 if target is being hit from behind or is stunned
+            //Todo: add 20 if the target is encumbered
+            //Todo: suubtract 10 if attacker is encuumber
+            //Todo: subtract 15 is target is defencing itself
+            Health attackerHealth = GetComponent<Health>();
+            if (attackerHealth.HealthPoints <= attackerHealth.GetMaxStamina() / 2)
+            {
+                chanceToHit -= 10;
+            }
+
+            return chanceToHit;
+        }
+
+        private int CalculateRangedWeaponChanceToHit(int dexterity)
+        {
+            int chanceToHit = 0;
+            chanceToHit = DivideByTwoRoundedUp(dexterity);
+            //TODO add all other modifiers
+            return chanceToHit;
+        }
+
+        private int DivideByTwoRoundedUp(int statUsed)
+        {
+            return (statUsed / 2) + (statUsed % 2 > 0 ? 1 : 0);
         }
 
         private int GetStatModifier()
@@ -254,7 +304,7 @@ namespace RPG.Combat
             CharacterAbilities characterAbilities = GetComponent<CharacterAbilities>();
             if (characterAbilities == null) return 0;
 
-            return characterAbilities.GetAbilityModifier(currentWeaponConfig.ModifierAbility);
+            return 0;
 
         }
 

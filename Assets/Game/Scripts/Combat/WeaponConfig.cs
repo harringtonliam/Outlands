@@ -13,7 +13,7 @@ namespace RPG.Combat
         [SerializeField] AnimatorOverrideController weaponOverrideController = null;
         [SerializeField] Weapon equipedPrefab = null;
         [SerializeField] AmmunitionType ammunitionType = AmmunitionType.None;
-        [SerializeField] int weaponDamageDice = 4;
+        [SerializeField] int weaponDamageDice = 10;
         [SerializeField] int weaponDamageDiceNumber = 1;
         [SerializeField] int weaponDamageAdditiveBonus = 0;
         [SerializeField] int weaponToHitBonus = 0;
@@ -21,7 +21,8 @@ namespace RPG.Combat
         [SerializeField] bool isRightHanded = true;
         [SerializeField] bool isRangedWeapon = false;
         [SerializeField] Projectile projectile = null;
-        [SerializeField] Ability modifierAbility = Ability.Strength;
+        [SerializeField] ArmourType defense = ArmourType.Inertia;
+
 
 
         const string weaponName = "Weapon";
@@ -59,14 +60,15 @@ namespace RPG.Combat
             get { return weaponDamageAdditiveBonus; }
         }
 
-        public Ability ModifierAbility
-        {
-            get { return modifierAbility; }
-        }
 
         public bool IsRangedWeapon
         {
             get { return isRangedWeapon; }
+        }
+
+        public ArmourType Defense
+        {
+            get { return defense; }
         }
 
         public Weapon Spawn(Transform rightHand, Transform leftHand, Animator animator)

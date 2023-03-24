@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5547ff2762ea26f4ead53bbcb4215700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aIRelationship: 1
+  aIRelationship: 0
   chaseDistance: 5
   suspicionTime: 2
   aggrevationCoolDownTime: 2
@@ -115,6 +115,19 @@ MonoBehaviour:
   patrolSpeedFraction: 0.2
   shoutDistance: 5
   combatTargetGameObject: {fileID: 0}
+--- !u!114 &642361385321832748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843805610886130113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cea00ccad5f0f428024192eb852130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infraRedEffect: {fileID: 7702041311905268955}
 --- !u!114 &2584465977025961955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,20 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f423befc910a9704495601a708bf24dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &642361385321832748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8843805610886130113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0cea00ccad5f0f428024192eb852130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infraRedEffect: {fileID: 7702041311905268955}
-  infraReditemId: a7e50ca9-d716-497b-9513-b70df3821bc9
 --- !u!1001 &5848013473595833332
 PrefabInstance:
   m_ObjectHideFlags: 0

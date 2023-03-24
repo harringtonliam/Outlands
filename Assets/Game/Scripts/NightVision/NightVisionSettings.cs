@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using RPG.InventoryControl;
+using RPG.Control;
+using RPG.Attributes;
 
-namespace RPG.InventoryControl
+namespace RPG.NightVision
 {
     public class NightVisionSettings: MonoBehaviour
     {
@@ -12,6 +15,8 @@ namespace RPG.InventoryControl
         bool isNightVisionEquiped;
 
         Equipment[] playerEquipments;
+        PlayerSelector[] playerSelectors;
+        Health[] playerHealths;
 
         public event Action SettingsUpdated;
 
@@ -29,10 +34,16 @@ namespace RPG.InventoryControl
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
             playerEquipments = new Equipment[players.Length];
+            playerSelectors =  new PlayerSelector[players.Length];
+            playerHealths = new Health[players.Length];
             for (int i = 0; i < players.Length; i++)
             {
                 playerEquipments[i] = players[i].GetComponent<Equipment>();
                 playerEquipments[i].equipmentUpdated += CheckForNightVisionEquipment;
+                playerSelectors[i] = players[i].GetComponent<PlayerSelector>();
+                playerSelectors[i].selectedUpdated += CheckForNightVisionEquipment;
+                playerHealths[i] = players[i].GetComponent<Health>();
+                playerHealths[i].deathUpdated += CheckForNightVisionEquipment;
             }
         }
 
@@ -41,6 +52,8 @@ namespace RPG.InventoryControl
             for (int i = 0; i < playerEquipments.Length; i++)
             {
                 playerEquipments[i].equipmentUpdated -= CheckForNightVisionEquipment;
+                playerSelectors[i].selectedUpdated -= CheckForNightVisionEquipment;
+                playerHealths[i].deathUpdated -= CheckForNightVisionEquipment;
             }
         }
 
@@ -59,7 +72,10 @@ namespace RPG.InventoryControl
             isNightVisionEquiped = false;
             for (int i = 0; i < playerEquipments.Length; i++)
             {
-                if (playerEquipments[i].GetItemInSlot(EquipLocation.Helmet).IsNightVisionEnabled)
+                var equipedItem = playerEquipments[i].GetItemInSlot(EquipLocation.Helmet);
+                var health = playerEquipments[i].GetComponent<Health>();
+                var playerSelctor = playerEquipments[i].GetComponent<PlayerSelector>();
+                if (equipedItem != null && equipedItem.IsNightVisionEnabled  && !health.IsDead && playerSelctor.IsSelected)
                 {
                     isNightVisionEquiped = true;
                 }

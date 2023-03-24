@@ -15,8 +15,6 @@ namespace RPG.Core
 
         public void SetIsTorchOn(bool torchOn)
         {
-            Debug.Log("SetIsTorchOn " + torchOn.ToString());
-
             isTorchOn = torchOn;
 
             if (SettingsUpdated != null)

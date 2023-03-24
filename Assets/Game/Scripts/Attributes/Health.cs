@@ -14,6 +14,7 @@ namespace RPG.Attributes
         [SerializeField] UnityEvent onDie;
 
         public event Action healthUpdated;
+        public event Action deathUpdated;
 
         GameConsole gameConsole;
         CharacterSheet characterSheet;
@@ -132,6 +133,11 @@ namespace RPG.Attributes
         {
             if (isDead) return;
             onDie.Invoke();
+            if (deathUpdated != null)
+            {
+                deathUpdated();
+            }
+
             Animator animator = GetComponent<Animator>();
             if (animator != null)
             {

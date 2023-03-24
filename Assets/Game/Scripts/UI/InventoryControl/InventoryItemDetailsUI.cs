@@ -137,7 +137,6 @@ namespace RPG.UI.InventoryControl
                     weaponDamageBonusText.text = "-" + weaponConfig.WeaponDamageAdditiveBonus.ToString();
                 }
                 weaponRangeText.text = weaponConfig.WeaponRange.ToString();
-                modifierAbilityText.text = weaponConfig.ModifierAbility.ToString();
                 ammoTypeText.text = weaponConfig.AmmunitionType.ToString();
 
                 weaponDisplayArea.SetActive(true);
