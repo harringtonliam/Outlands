@@ -154,6 +154,10 @@ namespace RPG.Combat
             {
                 calculatedDamage = currentWeaponConfig.CalcWeaponDamage();
             }
+            else
+            {
+                return;
+            }
 
 
 
@@ -163,7 +167,7 @@ namespace RPG.Combat
             }
             else
             { 
-                target.TakeDamage(calculatedDamage, gameObject);
+                target.TakeDamage(calculatedDamage, gameObject, currentWeaponConfig.Defense);
             }
         }
 
@@ -240,7 +244,7 @@ namespace RPG.Combat
             int attackRoll = FindObjectOfType<Dice>().RollDice(100, 1);
             if (attackRoll >= 99) return false;
             if (attackRoll <= 1) return true;
-            if (attackRoll < chanceToHit)
+            if (attackRoll > chanceToHit)
             {
                 WriteToConsole("attack missed");
             }

@@ -4,6 +4,7 @@ using RPG.Stats;
 using RPG.Core;
 using UnityEngine.Events;
 using System;
+using RPG.InventoryControl;
 
 namespace RPG.Attributes
 {
@@ -19,6 +20,8 @@ namespace RPG.Attributes
         GameConsole gameConsole;
         CharacterSheet characterSheet;
         string characterName;
+
+        EquipedArmourHandler equipedArmourHandler;
 
 
         float currentStamina = -1f;
@@ -48,6 +51,8 @@ namespace RPG.Attributes
                 healthUpdated();
             }
 
+            equipedArmourHandler = GetComponent<EquipedArmourHandler>();
+
 
         }
 
@@ -71,7 +76,7 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return ( currentStamina / GetMaxStamina()) * 100;
+            return (currentStamina / GetMaxStamina()) * 100;
         }
 
         public float GetMaxStamina()
@@ -83,10 +88,22 @@ namespace RPG.Attributes
 
         public void TakeDamage(float damage, GameObject instigator)
         {
-            currentStamina = Mathf.Max(currentStamina - damage, 0);
+            TakeDamage(damage, instigator, ArmourType.Inertia);
+        }
+
+        public void TakeDamage(float damage, GameObject instigator, ArmourType defense)
+        {
+            float percentDamageReduction = equipedArmourHandler.GetPercentDamageReduction(defense);
+            float damageReducedBy = damage * (percentDamageReduction / 100f);
+            float calculatedDamage = (int)(Math.Ceiling(Mathf.Max(damage - damageReducedBy, 0f)));
+            string logMessage = "Take damage Amour Type =  {0} , damage= {1} , %damageReduction= {2}, damageReducedBy =  {3}, finalDamage = {4} ";
+
+            Debug.Log(String.Format(logMessage, defense.ToString(), damage,  percentDamageReduction, damageReducedBy, calculatedDamage));
+
+            currentStamina = Mathf.Max(currentStamina - calculatedDamage, 0);
             if (damage > 0)
             {
-                WriteDamageToConsole(damage);
+                WriteDamageToConsole(calculatedDamage);
             }
             if (healthUpdated != null)
             {
@@ -97,12 +114,15 @@ namespace RPG.Attributes
             {
                 AwardExperience();
                 Die();
-
             }
             else if (instigator.tag == "Player")
             {
                 takeDamage.Invoke(damage);
             }
+
+            
+            
+
         }
 
 
