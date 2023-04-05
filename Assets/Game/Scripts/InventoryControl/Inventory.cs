@@ -21,6 +21,7 @@ namespace RPG.InventoryControl
         {
             public InventoryItem inventoryItem;
             public int number;
+            public int remainingUses;
 
         }
 
@@ -28,16 +29,16 @@ namespace RPG.InventoryControl
 
         private void Awake()
         {
-            InventorySlot[] tempInevntorySlots = new InventorySlot[inventorySize];
+            InventorySlot[] tempInventorySlots = new InventorySlot[inventorySize];
 
             if (inventorySlots != null)
             {
                 for (int i = 0; i < inventorySlots.Length; i++)
                 {
-                    tempInevntorySlots[i] = inventorySlots[i];
+                    tempInventorySlots[i] = inventorySlots[i];
                 }
             }
-            inventorySlots = tempInevntorySlots;
+            inventorySlots = tempInventorySlots;
         }
 
         public static Inventory GetPlayerInventory()
@@ -194,6 +195,7 @@ namespace RPG.InventoryControl
         {
             public string itemID;
             public int number;
+            public int remainingUses;
         }
 
         public object CaptureState()
@@ -205,6 +207,7 @@ namespace RPG.InventoryControl
                 {
                     slotStrings[i].itemID = inventorySlots[i].inventoryItem.ItemID;
                     slotStrings[i].number = inventorySlots[i].number;
+                    slotStrings[i].remainingUses = inventorySlots[i].remainingUses;
                 }
             }
             return slotStrings;
@@ -217,6 +220,7 @@ namespace RPG.InventoryControl
             {
                 inventorySlots[i].inventoryItem = InventoryItem.GetFromID(slotStrings[i].itemID);
                 inventorySlots[i].number = slotStrings[i].number;
+                inventorySlots[i].remainingUses = slotStrings[i].remainingUses;
             }
             if (inventoryUpdated != null)
             {

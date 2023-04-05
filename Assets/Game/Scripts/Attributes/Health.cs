@@ -93,12 +93,11 @@ namespace RPG.Attributes
 
         public void TakeDamage(float damage, GameObject instigator, ArmourType defense)
         {
-            float percentDamageReduction = equipedArmourHandler.GetPercentDamageReduction(defense);
-            float damageReducedBy = damage * (percentDamageReduction / 100f);
+            float damageReducedBy = equipedArmourHandler.GetDamageReductionAmount(defense, damage);
             float calculatedDamage = (int)(Math.Ceiling(Mathf.Max(damage - damageReducedBy, 0f)));
-            string logMessage = "Take damage Amour Type =  {0} , damage= {1} , %damageReduction= {2}, damageReducedBy =  {3}, finalDamage = {4} ";
+            string logMessage = "Take damage Amour Type =  {0} , damage= {1} ,  damageReducedBy =  {2}, finalDamage = {3} ";
 
-            Debug.Log(String.Format(logMessage, defense.ToString(), damage,  percentDamageReduction, damageReducedBy, calculatedDamage));
+            Debug.Log(String.Format(logMessage, defense.ToString(), damage,   damageReducedBy, calculatedDamage));
 
             currentStamina = Mathf.Max(currentStamina - calculatedDamage, 0);
             if (damage > 0)

@@ -246,6 +246,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedVisual: {fileID: 1990751387811923262}
   startSelected: 0
+--- !u!114 &2322883788840815612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52be68b8a8bbc36499a4a839a5a5ee12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5202403594515492424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +270,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f423befc910a9704495601a708bf24dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equippedItems:
+  - equipLocation: 0
+    equipableItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - equipLocation: 1
+    equipableItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - equipLocation: 2
+    equipableItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - equipLocation: 5
+    equipableItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - equipLocation: 8
+    equipableItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - equipLocation: 6
+    equipableItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - equipLocation: 6
+    equipableItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
 --- !u!114 &5556353276555363839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,18 +334,6 @@ MonoBehaviour:
   - weaponConfig: {fileID: 0}
     number: 0
     isActive: 0
---- !u!114 &2322883788840815612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3276940032594803481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52be68b8a8bbc36499a4a839a5a5ee12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4343573665051652465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3264242603453066268, guid: eedd23ba60ea2734997be47a6b5657b8,

@@ -18,7 +18,8 @@ namespace RPG.InventoryControl
         {
             float percentDamageReduction = 0f;
 
-            Armour armourToUse = null; ;
+            Armour armourToUse = null;
+            EquipLocation slotToUse;
 
             foreach (var slot in equipment.GetAllPopulatedSlots())
             {
@@ -28,11 +29,42 @@ namespace RPG.InventoryControl
                 {
                     armourToUse = equipedArmour;
                     percentDamageReduction = equipedArmour.PercentDamageAbsorbtion;
+                    slotToUse = slot;
                 }
             }
 
+
+
             return percentDamageReduction;
 
+        }
+
+        public float GetDamageReductionAmount (ArmourType armourType, float damage)
+        {
+            float damageReducedBy = 0f;
+            float percentDamageReduction = 0f;
+            Armour armourToUse = null;
+            EquipLocation slotToUse = EquipLocation.Body;
+
+            foreach (var slot in equipment.GetAllPopulatedSlots())
+            {
+                var equipedItem = equipment.GetItemInSlot(slot);
+                var equipedArmour = equipedItem as Armour;
+                if (equipedArmour != null && equipedArmour.ArmourType == armourType && equipedArmour.PercentDamageAbsorbtion >= percentDamageReduction)
+                {
+                    armourToUse = equipedArmour;
+                    percentDamageReduction = equipedArmour.PercentDamageAbsorbtion;
+                    slotToUse = slot;
+                }
+            }
+
+            if (armourToUse != null)
+            {
+                damageReducedBy =  (int)Mathf.Ceil(damage * (percentDamageReduction / 100f));
+                equipment.UpdateRemainingUses(slotToUse, (int)damageReducedBy * -1);
+            }
+
+            return damageReducedBy;
         }
     }
 

@@ -25,6 +25,12 @@ namespace RPG.InventoryControl
         [SerializeField] int maxNumberInStack = 20;
         [Tooltip("Item mass in kg")]
         [SerializeField] float mass = 1f;
+        [Tooltip("The item has a limited number of uses.  Does not apply to stackable items")]
+        [SerializeField] bool itemHasUses = false;
+        [Tooltip("The number of times and item can be used.")]
+        [SerializeField] int numberOfUses = 1;
+        [Tooltip("When all uses are used the item is destroyed")]
+        [SerializeField] bool itemDestroyedWhenCompletelyUsed = false;
 
         public string  ItemID { get { return itemID; } }
         public string DisplayName {  get { return displayName; } }
@@ -32,6 +38,9 @@ namespace RPG.InventoryControl
         public Sprite Icon { get { return icon; } }
         public bool IsStackable {get {return isStackable;} }
         public int MaxNumberInStack {  get { return maxNumberInStack; } }
+        public bool ItemHasUses { get { return itemHasUses; } }
+        public int NumberOfUses { get { return NumberOfUses; } }
+        public bool ItemDestroyedWhenCompletelyUsed {  get { return itemDestroyedWhenCompletelyUsed;  } }
 
         static Dictionary<string, InventoryItem> itemLookupCache;
 

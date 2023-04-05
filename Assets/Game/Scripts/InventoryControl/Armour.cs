@@ -11,7 +11,6 @@ namespace RPG.InventoryControl
     {
         [SerializeField] ArmourType armourType;
         [SerializeField] float percentDamageAbsorbtion = 50f;
-        [SerializeField] int numberOfDamagePointsLeft = 50;
 
         public float PercentDamageAbsorbtion
         {
@@ -23,9 +22,5 @@ namespace RPG.InventoryControl
             get { return armourType; }
         }
 
-        public int NumberOfDamagePointsLeft
-        {
-            get { return numberOfDamagePointsLeft; }
-        }
     }
 }

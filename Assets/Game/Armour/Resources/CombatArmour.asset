@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: CombatArmour
   m_EditorClassIdentifier: 
   itemID: 8698eaf9-ed9a-4c38-8998-dac268f99f1e
-  displayName: Comabt Armour
+  displayName: Combat Armour
   description: Military Combat Armour.  Projexts against melee, projectile and gyrojet
     weapons, fragmentation grenades, and explosives.
   icon: {fileID: 21300000, guid: 9239d38cb7dc2eb40b56d1709c7eb252, type: 3}
-  pickup: {fileID: 0}
+  pickup: {fileID: 8822870477362308269, guid: 29e47bfdef8173141a051cced100492a, type: 3}
   isStackable: 0
   maxNumberInStack: 1
   mass: 20
+  itemHasUses: 1
+  numberOfUses: 50
+  itemDestroyedWhenCompletelyUsed: 0
   allowedEquipLocation: 1
+  isNightVisionEnabled: 0
   armourType: 1
   percentDamageAbsorbtion: 50
-  numberOfDamagePointsLeft: 50
