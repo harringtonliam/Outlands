@@ -18,6 +18,7 @@ namespace RPG.InventoryControl
             public GameObject pickupGameObject;
             public InventoryItem inventoryItem;
             public int number;
+            public int remainingUses;
             public Vector3 position;
         }
 
@@ -34,12 +35,13 @@ namespace RPG.InventoryControl
            
         }
 
-        public void AddItem(InventoryItem newItem, int number, Vector3 position )
+        public void AddItem(InventoryItem newItem, int number, int numberOfUses, Vector3 position )
         {
             InventoryItemSlot inventoryItemSlot;
             inventoryItemSlot.pickupGameObject = null;
             inventoryItemSlot.inventoryItem = newItem;
             inventoryItemSlot.number = number;
+            inventoryItemSlot.remainingUses = numberOfUses;
             inventoryItemSlot.position = position;
             currentItemsInScene.Add(inventoryItemSlot);
         }
@@ -66,6 +68,7 @@ namespace RPG.InventoryControl
                 inventoryItemSlot.pickupGameObject = pickup.gameObject;
                 inventoryItemSlot.inventoryItem = pickup.InventoryItem;
                 inventoryItemSlot.number = pickup.NumberOfItems;
+                inventoryItemSlot.remainingUses = pickup.RemainingUses;
                 inventoryItemSlot.position = pickup.transform.position;
                 pickupsInScene.Add(inventoryItemSlot);
             }
@@ -77,7 +80,7 @@ namespace RPG.InventoryControl
         {
             foreach (var slot in originalItemsInScene)
             {
-                Pickup spawnedPickup = slot.inventoryItem.SpawnPickup(slot.position, slot.number);
+                Pickup spawnedPickup = slot.inventoryItem.SpawnPickup(slot.position, slot.number, slot.remainingUses);
                 spawnedPickup.transform.parent = this.transform;
             }
         }
@@ -98,6 +101,7 @@ namespace RPG.InventoryControl
         {
             public string inventoryItemId;
             public int number;
+            public int remainingUses;
             public SerializableVector3 position;
         }
 
@@ -140,12 +144,13 @@ namespace RPG.InventoryControl
                     Vector3 newPosition = slotStrings[i].position.ToVector();
                     newSlot.position = newPosition;
 
-                    Pickup newPickup = newItem.SpawnPickup(newPosition, slotStrings[i].number);
+                    Pickup newPickup = newItem.SpawnPickup(newPosition, slotStrings[i].number, slotStrings[i].remainingUses);
                     newPickup.transform.parent = this.transform;
 
                     newSlot.pickupGameObject = newPickup.gameObject;
                     newSlot.inventoryItem = newItem;
                     newSlot.number = slotStrings[i].number;
+                    newSlot.remainingUses = slotStrings[i].remainingUses;
                     newSlot.position = newPosition;
 
                     currentItemsInScene.Add(newSlot);

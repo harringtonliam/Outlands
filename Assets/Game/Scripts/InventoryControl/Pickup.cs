@@ -11,13 +11,14 @@ namespace RPG.InventoryControl
         //Config
         [SerializeField] InventoryItem inventoryItem = null;
         [SerializeField] int numberOfItems = 1;
+        [SerializeField] int remainingUses = 1;
 
 
         public InventoryItem InventoryItem { get { return inventoryItem; } }
         public int NumberOfItems { get { return numberOfItems; } }
+        public int RemainingUses { get { return remainingUses; } }
 
-
-        public void Setup(InventoryItem item, int number)
+        public void Setup(InventoryItem item, int number, int numberOfUses)
         {
             this.inventoryItem = item;
             if (!item.IsStackable)
@@ -26,11 +27,12 @@ namespace RPG.InventoryControl
             }
 
             this.numberOfItems = number;
+            this.remainingUses = numberOfUses;
         }
 
         public void PickupItem(Inventory inventory)
         {
-            bool slotFoundOk = inventory.AddToFirstEmptySlot(inventoryItem, numberOfItems);
+            bool slotFoundOk = inventory.AddToFirstEmptySlot(inventoryItem, numberOfItems, remainingUses);
             if (slotFoundOk)
             {
                 Destroy(gameObject);

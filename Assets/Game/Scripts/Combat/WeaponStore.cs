@@ -18,6 +18,7 @@ namespace RPG.Combat
             public WeaponConfig weaponConfig;
             public int number;
             public bool isActive;
+            public int remainingUses;
         }
 
         public event Action storeUpdated;
@@ -50,7 +51,7 @@ namespace RPG.Combat
         }
 
 
-        public void AddAction(InventoryItem item, int index, int number, bool isActive)
+        public void AddAction(InventoryItem item, int index, int number, bool isActive, int numberOfUses)
         {
             if (object.ReferenceEquals(item, dockedItems[index].weaponConfig))
             {
@@ -62,6 +63,7 @@ namespace RPG.Combat
                 slot.weaponConfig = item as WeaponConfig;
                 slot.number = number;
                 slot.isActive = isActive;
+                slot.remainingUses = numberOfUses;
                 dockedItems[index] = slot;
             }
             SetActiveWeapon(index);
@@ -184,6 +186,7 @@ namespace RPG.Combat
             public string itemID;
             public int number;
             public bool isActive;
+            public int remainingUses;
         }
 
         public object CaptureState()
@@ -196,6 +199,7 @@ namespace RPG.Combat
                     state[i].itemID = dockedItems[i].weaponConfig.ItemID;
                     state[i].number = dockedItems[i].number;
                     state[i].isActive = dockedItems[i].isActive;
+                    state[i].remainingUses = dockedItems[i].remainingUses;
                 }
             }
             return state;
@@ -207,7 +211,7 @@ namespace RPG.Combat
             int activeWeaponIndex = 0;
             for (int i = 0; i < stateDict.Length; i++)
             {
-                AddAction(WeaponConfig.GetFromID(stateDict[i].itemID) as WeaponConfig, i, stateDict[i].number, stateDict[i].isActive);
+                AddAction(WeaponConfig.GetFromID(stateDict[i].itemID) as WeaponConfig, i, stateDict[i].number, stateDict[i].isActive, stateDict[i].remainingUses);
                 if (stateDict[i].isActive) activeWeaponIndex = i;
             }
             SetActiveWeapon(activeWeaponIndex);

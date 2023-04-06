@@ -28,7 +28,7 @@ namespace RPG.Control
             {
                 if (inventory.GetItemInSlot(i) != null && inventory.GetItemInSlot(i).ItemID == weaponToLookFor.ItemID)
                 {
-                    weaponStore.AddAction(weaponToLookFor, 0, 1, true);
+                    weaponStore.AddAction(weaponToLookFor, 0, 1, true, 1);
                 }
             }
         }

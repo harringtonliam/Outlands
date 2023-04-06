@@ -24,9 +24,9 @@ namespace RPG.UI.InventoryControl
 
         // PUBLIC
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, int numberOfUses)
         {
-            store.AddAction(item, index, number);
+            store.AddAction(item, index, number, numberOfUses);
         }
 
         public InventoryItem GetItem()
@@ -37,6 +37,11 @@ namespace RPG.UI.InventoryControl
         public int GetNumber()
         {
             return store.GetNumber(index);
+        }
+
+        public int GetNumberOfUses()
+        {
+            return store.GetAction(index).NumberOfUses;
         }
 
         public int MaxAcceptable(InventoryItem item)

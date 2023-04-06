@@ -23,13 +23,13 @@ namespace RPG.UI.InventoryControl
         }
 
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, int numberOfUses)
         {
             GameObject playerCharacter = GetComponent<PlayerCharacterUI>().PlayerCharacterGameObject;
             Inventory playerCharacterInventory = playerCharacter.GetComponent<Inventory>();
             if (playerCharacterInventory == null) return;
 
-            playerCharacterInventory.AddToFirstEmptySlot(item, number);
+            playerCharacterInventory.AddToFirstEmptySlot(item, number, numberOfUses);
 
         }
 
@@ -39,6 +39,11 @@ namespace RPG.UI.InventoryControl
         }
 
         public int GetNumber()
+        {
+            return 0;
+        }
+
+        public int GetNumberOfUses()
         {
             return 0;
         }

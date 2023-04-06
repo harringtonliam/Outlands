@@ -17,6 +17,7 @@ namespace RPG.InventoryControl
         {
             public ActionItem actionItem;
             public int number;
+            public int remainingUses;
         }
 
         public event Action storeUpdated;
@@ -41,7 +42,7 @@ namespace RPG.InventoryControl
         }
 
 
-        public void AddAction(InventoryItem item, int index, int number)
+        public void AddAction(InventoryItem item, int index, int number, int numberOfUses)
         {
             if (object.ReferenceEquals(item, dockedItems[index].actionItem))
             {
@@ -52,6 +53,7 @@ namespace RPG.InventoryControl
                 var slot = new DockedItemSlot();
                 slot.actionItem = item as ActionItem;
                 slot.number = number;
+                slot.remainingUses = numberOfUses;
                 dockedItems[index] = slot;
             }
             if (storeUpdated != null)
@@ -118,6 +120,7 @@ namespace RPG.InventoryControl
         {
             public string itemID;
             public int number;
+            public int remainingUses;
         }
 
         public object CaptureState()
@@ -129,6 +132,7 @@ namespace RPG.InventoryControl
                 {
                     state[i].itemID = dockedItems[i].actionItem.ItemID;
                     state[i].number = dockedItems[i].number;
+                    state[i].remainingUses = dockedItems[i].remainingUses;
                 }
             }
             return state;
@@ -139,7 +143,7 @@ namespace RPG.InventoryControl
             var stateDict = (DockedItemRecord[])state;
             for (int i = 0; i < stateDict.Length; i++)
             {
-                AddAction(ActionItem.GetFromID(stateDict[i].itemID) as ActionItem, i, stateDict[i].number);
+                AddAction(ActionItem.GetFromID(stateDict[i].itemID) as ActionItem, i, stateDict[i].number, stateDict[i].remainingUses);
             }
 
             if (storeUpdated != null)

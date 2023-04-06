@@ -22,13 +22,13 @@ namespace RPG.UI.InventoryControl
         }
 
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, int numberOfUses)
         {
             if (scenePickups != null)
             {
                 Vector3 dropPosition = player.transform.position + Vector3.forward;
-                scenePickups.AddItem(item, number, dropPosition);
-                Pickup newPickup = item.SpawnPickup(dropPosition, number);
+                scenePickups.AddItem(item, number, numberOfUses, dropPosition);
+                Pickup newPickup = item.SpawnPickup(dropPosition, number, numberOfUses);
                 newPickup.transform.parent = scenePickups.transform;
             }
         }
@@ -39,6 +39,11 @@ namespace RPG.UI.InventoryControl
         }
 
         public int GetNumber()
+        {
+            return 0;
+        }
+
+        public int GetNumberOfUses()
         {
             return 0;
         }

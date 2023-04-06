@@ -10,6 +10,8 @@ namespace RPG.UI.Dragging
 
         int GetNumber();
 
+        int GetNumberOfUses();
+
         void RemoveItems(int number);
     }
 }

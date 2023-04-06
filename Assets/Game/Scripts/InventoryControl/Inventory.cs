@@ -22,7 +22,6 @@ namespace RPG.InventoryControl
             public InventoryItem inventoryItem;
             public int number;
             public int remainingUses;
-
         }
 
         public event Action inventoryUpdated;
@@ -58,7 +57,7 @@ namespace RPG.InventoryControl
             return inventorySlots.Length;
         }
 
-        public bool AddToFirstEmptySlot(InventoryItem item, int number)
+        public bool AddToFirstEmptySlot(InventoryItem item, int number, int numberOfUses)
         {
             int i = FindEmptySlot();
 
@@ -69,6 +68,7 @@ namespace RPG.InventoryControl
 
             inventorySlots[i].inventoryItem = item;
             inventorySlots[i].number += number;
+            inventorySlots[i].remainingUses = numberOfUses;
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -113,11 +113,11 @@ namespace RPG.InventoryControl
         }
 
 
-        public bool AddItemToSlot(int slot, InventoryItem item, int number)
+        public bool AddItemToSlot(int slot, InventoryItem item, int number, int numberOfUses)
         {
             if (inventorySlots[slot].inventoryItem != null)
             {
-                return AddToFirstEmptySlot(item, number); ;
+                return AddToFirstEmptySlot(item, number, numberOfUses); 
             }
 
             var i = FindStack(item);
@@ -137,6 +137,7 @@ namespace RPG.InventoryControl
 
             inventorySlots[slot].inventoryItem = item;
             inventorySlots[slot].number += number;
+            inventorySlots[slot].remainingUses = numberOfUses;
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();

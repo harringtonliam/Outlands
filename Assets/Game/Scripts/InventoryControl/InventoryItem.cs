@@ -39,7 +39,7 @@ namespace RPG.InventoryControl
         public bool IsStackable {get {return isStackable;} }
         public int MaxNumberInStack {  get { return maxNumberInStack; } }
         public bool ItemHasUses { get { return itemHasUses; } }
-        public int NumberOfUses { get { return NumberOfUses; } }
+        public int NumberOfUses { get { return numberOfUses; } }
         public bool ItemDestroyedWhenCompletelyUsed {  get { return itemDestroyedWhenCompletelyUsed;  } }
 
         static Dictionary<string, InventoryItem> itemLookupCache;
@@ -71,11 +71,11 @@ namespace RPG.InventoryControl
         }
 
 
-        public Pickup SpawnPickup(Vector3 position, int number)
+        public Pickup SpawnPickup(Vector3 position, int number, int numberOfUses)
         {
             var pickup = Instantiate(this.pickup);
             pickup.transform.position = position;
-            pickup.Setup(this, number);
+            pickup.Setup(this, number, numberOfUses);
             return pickup;
         }
 

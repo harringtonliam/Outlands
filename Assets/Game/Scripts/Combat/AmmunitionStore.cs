@@ -17,6 +17,7 @@ namespace RPG.Combat
         {
             public Ammunition ammunition;
             public int number;
+            public int remainingUses;
         }
 
         public event Action storeUpdated;
@@ -42,7 +43,7 @@ namespace RPG.Combat
         }
 
 
-        public void AddAction(InventoryItem item, int index, int number)
+        public void AddAction(InventoryItem item, int index, int number, int numberOfUses)
         {
             if (object.ReferenceEquals(item, dockedItems[index].ammunition))
             {
@@ -53,6 +54,7 @@ namespace RPG.Combat
                 var slot = new DockedItemSlot();
                 slot.ammunition = item as Ammunition;
                 slot.number = number;
+                slot.remainingUses = numberOfUses;
                 dockedItems[index] = slot;
             }
             if (storeUpdated != null)
@@ -116,6 +118,7 @@ namespace RPG.Combat
         {
             public string itemID;
             public int number;
+            public int remainingUses;
         }
 
         public object CaptureState()
@@ -127,7 +130,8 @@ namespace RPG.Combat
                 {
                     state[i].itemID = dockedItems[i].ammunition.ItemID;
                     state[i].number = dockedItems[i].number;
-                 }
+                    state[i].remainingUses = dockedItems[i].remainingUses;
+                }
             }
             return state;
 
@@ -139,7 +143,7 @@ namespace RPG.Combat
 
             for (int i = 0; i < stateDict.Length; i++)
             {
-                AddAction(Ammunition.GetFromID(stateDict[i].itemID) as Ammunition, i, stateDict[i].number);
+                AddAction(Ammunition.GetFromID(stateDict[i].itemID) as Ammunition, i, stateDict[i].number, stateDict[i].remainingUses);
             }
 
             if (storeUpdated != null)

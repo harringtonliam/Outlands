@@ -39,9 +39,9 @@ namespace RPG.UI.InventoryControl
             playerEquipment.equipmentUpdated -= RedrawUI;
         }
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, int numberOfUses)
         {
-            playerEquipment.AddItem(equipLocation, (EquipableItem)item);
+            playerEquipment.AddItem(equipLocation, (EquipableItem)item, number, numberOfUses);
         }
 
         public InventoryItem GetItem()
@@ -59,6 +59,11 @@ namespace RPG.UI.InventoryControl
             {
                 return 0;
             }
+        }
+
+        public int GetNumberOfUses()
+        {
+             return playerEquipment.GetItemInSlot(equipLocation).NumberOfUses;
         }
 
         public int MaxAcceptable(InventoryItem item)

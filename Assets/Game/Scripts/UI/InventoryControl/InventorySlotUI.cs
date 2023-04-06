@@ -25,9 +25,9 @@ namespace RPG.UI.InventoryControl
             icon.SetItem(inventory.GetItemInSlot(index),  inventory.GetNumberInSlot(index));
         }
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int number, int numberOfUses)
         {
-            inventory.AddItemToSlot(index, item, number);
+            inventory.AddItemToSlot(index, item, number, numberOfUses);
         }
 
         public InventoryItem GetItem()
@@ -38,6 +38,11 @@ namespace RPG.UI.InventoryControl
         public int GetNumber()
         {
             return inventory.GetNumberInSlot(index);
+        }
+
+        public int GetNumberOfUses()
+        {
+            return inventory.GetItemInSlot(index).NumberOfUses;
         }
 
         public int MaxAcceptable(InventoryItem item)

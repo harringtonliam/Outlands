@@ -90,6 +90,7 @@ namespace RPG.UI.Dragging
         {
             var draggingItem = dragSource.GetItem();
             var draggingNumber = dragSource.GetNumber();
+            var draggingRemainingUses = dragSource.GetNumberOfUses();
 
             var acceptable = destination.MaxAcceptable(draggingItem);
             var toTransfer = Mathf.Min(acceptable, draggingNumber);
@@ -97,7 +98,7 @@ namespace RPG.UI.Dragging
             if (toTransfer > 0)
             {
                 dragSource.RemoveItems(toTransfer);
-                destination.AddItems(draggingItem, toTransfer);
+                destination.AddItems(draggingItem, toTransfer, draggingRemainingUses);
                 return false;
             }
 
@@ -109,8 +110,10 @@ namespace RPG.UI.Dragging
             // Provisionally remove item from both sides. 
             var removedSourceNumber = source.GetNumber();
             var removedSourceItem = source.GetItem();
+            var removedSourceNumberOfUses = source.GetNumberOfUses();
             var removedDestinationNumber = destination.GetNumber();
             var removedDestinationItem = destination.GetItem();
+            var removedDestinationNumberOfUses = destination.GetNumberOfUses();
 
             source.RemoveItems(removedSourceNumber);
             destination.RemoveItems(removedDestinationNumber);
@@ -121,12 +124,12 @@ namespace RPG.UI.Dragging
             // Do take backs (if needed)
             if (sourceTakeBackNumber > 0)
             {
-                source.AddItems(removedSourceItem, sourceTakeBackNumber);
+                source.AddItems(removedSourceItem, sourceTakeBackNumber, removedSourceNumberOfUses);
                 removedSourceNumber -= sourceTakeBackNumber;
             }
             if (destinationTakeBackNumber > 0)
             {
-                destination.AddItems(removedDestinationItem, destinationTakeBackNumber);
+                destination.AddItems(removedDestinationItem, destinationTakeBackNumber, removedDestinationNumberOfUses);
                 removedDestinationNumber -= destinationTakeBackNumber;
             }
 
@@ -137,11 +140,11 @@ namespace RPG.UI.Dragging
             {
                 if (removedDestinationNumber > 0)
                 {
-                    destination.AddItems(removedDestinationItem, removedDestinationNumber);
+                    destination.AddItems(removedDestinationItem, removedDestinationNumber, removedDestinationNumberOfUses);
                 }
                 if (removedSourceNumber > 0)
                 {
-                    source.AddItems(removedSourceItem, removedSourceNumber);
+                    source.AddItems(removedSourceItem, removedSourceNumber, removedSourceNumberOfUses);
                 }
                 return;
             }
@@ -149,11 +152,11 @@ namespace RPG.UI.Dragging
             // Do swaps
             if (removedDestinationNumber > 0)
             {
-                source.AddItems(removedDestinationItem, removedDestinationNumber);
+                source.AddItems(removedDestinationItem, removedDestinationNumber, removedDestinationNumberOfUses);
             }
             if (removedSourceNumber > 0)
             {
-                destination.AddItems(removedSourceItem, removedSourceNumber);
+                destination.AddItems(removedSourceItem, removedSourceNumber, removedSourceNumberOfUses);
             }
         }
 

@@ -26,7 +26,6 @@ namespace RPG.UI.InventoryControl
 
         private void OnEnable()
         {
-
             objectInventory = Inventory.GetPlayerInventory();
             objectInventory.inventoryUpdated += Redraw;
             Redraw();
