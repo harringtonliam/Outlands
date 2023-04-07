@@ -31,7 +31,6 @@ namespace RPG.Combat
             }
         }
 
-
         public WeaponConfig GetAction(int index)
         {
             //if (dockedItems.Length <= index)
@@ -50,6 +49,29 @@ namespace RPG.Combat
             return 0;
         }
 
+
+        public int GetNumberOfUses(int index)
+        {
+            if (dockedItems.Length > index)
+            {
+                return dockedItems[index].remainingUses;
+            }
+            return 0;
+        }
+
+        public float GetTotalMass()
+        {
+            float weaponMass = 0f;
+            for (int i = 0; i < dockedItems.Length; i++)
+            {
+                if (dockedItems[i].weaponConfig != null)
+                {
+                    weaponMass += dockedItems[i].weaponConfig.Mass;
+                }
+            }
+
+            return weaponMass;
+        }
 
         public void AddAction(InventoryItem item, int index, int number, bool isActive, int numberOfUses)
         {
@@ -82,6 +104,7 @@ namespace RPG.Combat
                 {
                     dockedItems[index].weaponConfig = null;
                     dockedItems[index].number = 0;
+                    dockedItems[index].remainingUses = 0;
                     dockedItems[index].isActive = false;
                 }
                 if (storeUpdated != null)

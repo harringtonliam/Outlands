@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using RPG.Core;
 using RPG.Saving;
 using RPG.Attributes;
+using RPG.Stats;
 
 namespace RPG.Movement
 {
@@ -68,7 +69,12 @@ namespace RPG.Movement
         public void MoveTo(Vector3 destination, float speedFraction)
         {
             navMeshAgent.destination = destination;
-            navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
+            float currentMaxSpeed = maxSpeed;
+            if (GetComponent<Encumberance>().IsEncumbered())
+            {
+                currentMaxSpeed = maxSpeed / 2;
+            }
+            navMeshAgent.speed = currentMaxSpeed * Mathf.Clamp01(speedFraction);
             navMeshAgent.isStopped = false;
         }
 

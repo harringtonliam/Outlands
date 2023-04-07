@@ -42,6 +42,7 @@ namespace RPG.Stats
         {
             return characterAbilities;
         }
+
     }
 
     [System.Serializable]

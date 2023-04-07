@@ -43,7 +43,7 @@ namespace RPG.UI.InventoryControl
 
         public int GetNumberOfUses()
         {
-            return store.GetAction(index).NumberOfUses;
+            return store.GetNumberOfUses(index);
         }
 
         public int MaxAcceptable(InventoryItem item)

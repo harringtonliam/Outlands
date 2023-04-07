@@ -63,7 +63,7 @@ namespace RPG.UI.InventoryControl
 
         public int GetNumberOfUses()
         {
-             return playerEquipment.GetItemInSlot(equipLocation).NumberOfUses;
+             return playerEquipment.GetNumberOfUsesinSlot(equipLocation);
         }
 
         public int MaxAcceptable(InventoryItem item)

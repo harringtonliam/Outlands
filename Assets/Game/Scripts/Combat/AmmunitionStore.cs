@@ -42,6 +42,30 @@ namespace RPG.Combat
             return 0;
         }
 
+        public int GetNumberOfUses(int index)
+        {
+            if (dockedItems.Length > index && dockedItems[index] != null)
+            {
+                return dockedItems[index].remainingUses;
+            }
+            return 0;
+        }
+
+        public float GetTotalMass()
+        {
+            float ammunitionMass = 0f;
+            for (int i = 0; i < dockedItems.Length; i++)
+            {
+                if (dockedItems[i].ammunition != null)
+                {
+                    ammunitionMass += dockedItems[i].ammunition.Mass;
+                }
+            }
+
+            return ammunitionMass;
+        }
+
+
 
         public void AddAction(InventoryItem item, int index, int number, int numberOfUses)
         {
@@ -72,6 +96,7 @@ namespace RPG.Combat
                 {
                     dockedItems[index].ammunition = null;
                     dockedItems[index].number = 0;
+                    dockedItems[index].remainingUses = 0;
                 }
                 if (storeUpdated != null)
                 {

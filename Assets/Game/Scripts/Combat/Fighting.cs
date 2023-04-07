@@ -7,14 +7,11 @@ using System;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Stats;
-using RPG.InventoryControl;
 
 namespace RPG.Combat
 {
     public class Fighting : MonoBehaviour, IAction, ISaveable
     {
-
-
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
@@ -28,6 +25,7 @@ namespace RPG.Combat
         AmmunitionStore ammoStore;
         GameConsole gameConsole;
         CharacterSheet characterSheet;
+        CharacterSkillLevel characterSkillLevel;
 
 
         private void Awake()
@@ -50,7 +48,10 @@ namespace RPG.Combat
 
             ammoStore = GetComponent<AmmunitionStore>();
             characterSheet = GetComponent<CharacterSheet>();
+            characterSkillLevel = GetComponent<CharacterSkillLevel>();
+            //TODO: find a way to remove FindObject Of type
             gameConsole = FindObjectOfType<GameConsole>();
+
 
         }
 
@@ -275,13 +276,23 @@ namespace RPG.Combat
             int chanceToHit = 0;
             int statUsed = (strenght > dexterity ? strenght : dexterity);
             chanceToHit = DivideByTwoRoundedUp(statUsed);
+            Health attackerHealth = GetComponent<Health>();
             //TODO: add 10% for each skill level
             chanceToHit += currentWeaponConfig.WeaponToHitBonus;
-            //ToDo: add 20 if target is being hit from behind or is stunned
-            //Todo: add 20 if the target is encumbered
-            //Todo: suubtract 10 if attacker is encuumber
-            //Todo: subtract 15 is target is defencing itself
-            Health attackerHealth = GetComponent<Health>();
+            if(IsAttackFromBehind()  || IsTargetStunned())
+            {
+                chanceToHit += 20;
+            }
+            if(IsEncumbered(target))
+            {
+                chanceToHit += 20;
+            }
+            if(IsEncumbered(attackerHealth))
+            { 
+                chanceToHit -= 10;
+            }
+            //Todo: subtract 15 is target is defending itself
+
             if (attackerHealth.HealthPoints <= attackerHealth.GetMaxStamina() / 2)
             {
                 chanceToHit -= 10;
@@ -321,6 +332,31 @@ namespace RPG.Combat
         private bool GetIsInRange(Transform targetTransform)
         {
             return currentWeaponConfig.WeaponRange >= Vector3.Distance(targetTransform.position, transform.position);
+        }
+
+        private bool IsAttackFromBehind()
+        {
+            float angle = Vector3.Angle(target.transform.forward, transform.forward);
+            if (angle <= 15f)
+            {
+                Debug.Log("Attack from behind");
+                return true;
+            }
+
+            return false;
+        }
+
+        //TODO: check if target is stunned
+        private bool IsTargetStunned()
+        {
+            return false;
+        }
+
+        public bool IsEncumbered(Health target)
+        {
+            Encumberance encumberance = target.GetComponent<Encumberance>();
+            if (encumberance == null) return false;
+            return encumberance.IsEncumbered();
         }
 
         private void WriteToConsole(string consoleText)

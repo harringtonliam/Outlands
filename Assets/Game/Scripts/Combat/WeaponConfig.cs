@@ -22,6 +22,7 @@ namespace RPG.Combat
         [SerializeField] bool isRangedWeapon = false;
         [SerializeField] Projectile projectile = null;
         [SerializeField] ArmourType defense = ArmourType.Inertia;
+        [SerializeField] Skill weaponSkill = Skill.MeleeWeapons;
 
 
 
@@ -70,6 +71,8 @@ namespace RPG.Combat
         {
             get { return defense; }
         }
+
+        public Skill WeaponSkill { get { return weaponSkill; } }
 
         public Weapon Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {

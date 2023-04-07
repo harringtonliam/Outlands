@@ -4,6 +4,7 @@ using UnityEngine;
 using RPG.InventoryControl;
 using RPG.UI.Dragging;
 using RPG.Combat;
+using RPG.Control;
 
 namespace RPG.UI.InventoryControl
 {
@@ -18,12 +19,18 @@ namespace RPG.UI.InventoryControl
         WeaponStore weaponStore;
 
         // LIFECYCLE METHODS
-        private void Awake()
+        private void OnEnable()
         {
-            weaponStore = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponStore>();
+            var player = PlayerSelector.GetFirstSelectedPlayer();
+            weaponStore = player.GetComponent<WeaponStore>();
             weaponStore.storeUpdated += UpdateIcon;
+            UpdateIcon();
         }
 
+        private void OnDisable()
+        {
+            weaponStore.storeUpdated -= UpdateIcon;
+        }
         // PUBLIC
 
         public void AddItems(InventoryItem item, int number, int numberOfUses)
@@ -43,7 +50,7 @@ namespace RPG.UI.InventoryControl
 
         public int GetNumberOfUses()
         {
-            return weaponStore.GetAction(index).NumberOfUses;
+            return weaponStore.GetNumberOfUses(index);
         }
 
         public int MaxAcceptable(InventoryItem item)

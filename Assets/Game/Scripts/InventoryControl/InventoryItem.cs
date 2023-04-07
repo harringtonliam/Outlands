@@ -38,6 +38,7 @@ namespace RPG.InventoryControl
         public Sprite Icon { get { return icon; } }
         public bool IsStackable {get {return isStackable;} }
         public int MaxNumberInStack {  get { return maxNumberInStack; } }
+        public float Mass { get { return mass; } }
         public bool ItemHasUses { get { return itemHasUses; } }
         public int NumberOfUses { get { return numberOfUses; } }
         public bool ItemDestroyedWhenCompletelyUsed {  get { return itemDestroyedWhenCompletelyUsed;  } }

@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: Unarmed
   m_EditorClassIdentifier: 
   itemID: a0476ad2-afd3-4dbd-87d4-048f03d3e7eb
-  displayName: 
+  displayName: Unarmed Attack
   description: Unarmed Attack
   icon: {fileID: 0}
   pickup: {fileID: 0}
   isStackable: 0
   maxNumberInStack: 1
+  mass: 0
+  itemHasUses: 0
+  numberOfUses: 1
+  itemDestroyedWhenCompletelyUsed: 0
   allowedEquipLocation: 3
+  isNightVisionEnabled: 0
   weaponOverrideController: {fileID: 22100000, guid: 8be67f4ca3eaebf4ebb46aa3a52c2abc,
     type: 2}
   equipedPrefab: {fileID: 7622007455297462716, guid: 4d9985b62155ce04a9c1b47e09636b31,
@@ -33,4 +38,5 @@ MonoBehaviour:
   isRightHanded: 1
   isRangedWeapon: 0
   projectile: {fileID: 0}
-  modifierAbility: 0
+  defense: 1
+  weaponSkill: 6

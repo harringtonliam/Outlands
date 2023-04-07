@@ -60,7 +60,7 @@ namespace RPG.InventoryControl
 
             if (armourToUse != null)
             {
-                damageReducedBy =  (int)Mathf.Ceil(damage * (percentDamageReduction / 100f));
+                damageReducedBy =  Mathf.Min((int)(damage * (percentDamageReduction / 100f)), equipment.GetNumberOfUsesinSlot(slotToUse));
                 equipment.UpdateRemainingUses(slotToUse, (int)damageReducedBy * -1);
             }
 

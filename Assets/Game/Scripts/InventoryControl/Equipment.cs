@@ -35,6 +35,32 @@ namespace RPG.InventoryControl
             return equippedItems[equipedLocationIndex].equipableItem;
         }
 
+        public int GetNumberOfUsesinSlot(EquipLocation equipLocation)
+        {
+            int equipedLocationIndex = IndexOfEquipedLocation(equipLocation);
+
+            if (equipedLocationIndex < 0)
+            {
+                return 0;
+            }
+
+            return equippedItems[equipedLocationIndex].remainingUses;
+        }
+
+        public float GetTotalMass()
+        {
+            float equipmentMass = 0f;
+            for (int i = 0; i < equippedItems.Length; i++)
+            {
+                if (equippedItems[i].equipableItem != null)
+                {
+                    equipmentMass += equippedItems[i].equipableItem.Mass;
+                }
+            }
+
+            return equipmentMass;
+        }
+
         private int IndexOfEquipedLocation(EquipLocation equipLocation)
         {
             for (int i = 0; i < equippedItems.Length; i++)

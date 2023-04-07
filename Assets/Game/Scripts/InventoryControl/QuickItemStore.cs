@@ -41,6 +41,28 @@ namespace RPG.InventoryControl
             return 0;
         }
 
+        public int GetNumberOfUses(int index)
+        {
+            if (dockedItems.Length > index && dockedItems[index] != null)
+            {
+                return dockedItems[index].remainingUses;
+            }
+            return 0;
+        }
+
+        public float GetTotalMass()
+        {
+            float itemMass = 0f;
+            for (int i = 0; i < dockedItems.Length; i++)
+            {
+                if (dockedItems[i].actionItem != null)
+                {
+                    itemMass += dockedItems[i].actionItem.Mass;
+                }
+            }
+
+            return itemMass;
+        }
 
         public void AddAction(InventoryItem item, int index, int number, int numberOfUses)
         {
@@ -85,6 +107,7 @@ namespace RPG.InventoryControl
                 {
                     dockedItems[index].actionItem = null;
                     dockedItems[index].number = 0;
+                    dockedItems[index].remainingUses = 0;
                 }
                 if (storeUpdated != null)
                 {

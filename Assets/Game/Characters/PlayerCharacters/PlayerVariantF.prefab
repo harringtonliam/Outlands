@@ -270,6 +270,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 127317310223430681, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: characterPrimarySkillArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127317310223430681, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: characterSkillLevels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 127317310223430681, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: characterSkillLevels.Array.data[0].skill
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 127317310223430681, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: characterSkillLevels.Array.data[1].skill
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 127317310223430681, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: characterSkillLevels.Array.data[0].skillLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127317310223430681, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
+        type: 3}
+      propertyPath: characterSkillLevels.Array.data[1].skillLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 154766004448010429, guid: 7c679a4360cf69f4dbaecb84a5af5cce,
         type: 3}
       propertyPath: clothingConfigs.Array.size

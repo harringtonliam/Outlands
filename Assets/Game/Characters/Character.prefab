@@ -149,6 +149,8 @@ GameObject:
   - component: {fileID: 5939353515277132964}
   - component: {fileID: 2036882326982100731}
   - component: {fileID: 7956514131103497343}
+  - component: {fileID: 2475453256545082917}
+  - component: {fileID: -8011974049481545356}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -402,6 +404,34 @@ MonoBehaviour:
   - ability: 7
     abilityValue: 40
   abilityModifiers: {fileID: 0}
+--- !u!114 &2475453256545082917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355427238564390516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad023fe366e1f04b8bb96e25c7f3cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8011974049481545356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355427238564390516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b2f3f249ced6c49950478cff64dd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillProgression: {fileID: 11400000, guid: 78d4b5f4fe0154c4eaa0a277fc9c1410, type: 2}
+  skillCost: {fileID: 11400000, guid: d1385d584f6a1de4fbef5b8c50e519bd, type: 2}
+  characterPrimarySkillArea: 0
+  characterSkillLevels: []
 --- !u!1 &6139337237686831868
 GameObject:
   m_ObjectHideFlags: 0

@@ -98,6 +98,11 @@ namespace RPG.InventoryControl
             return inventorySlots[slot].number;
         }
 
+        public int GetNumberOfUsesInSlot(int slot)
+        {
+            return inventorySlots[slot].remainingUses;
+        }
+
         public void RemoveFromSlot(int slot, int number)
         {
             inventorySlots[slot].number -= number;
@@ -105,6 +110,7 @@ namespace RPG.InventoryControl
             {
                 inventorySlots[slot].number = 0;
                 inventorySlots[slot].inventoryItem = null;
+                inventorySlots[slot].remainingUses = 0;
             }
             if (inventoryUpdated != null)
             {
@@ -190,6 +196,19 @@ namespace RPG.InventoryControl
             return -1;
         }
 
+        public float GetTotalMass()
+        {
+            float inventoryMass = 0f;
+            for (int i = 0; i < inventorySlots.Length; i++)
+            {
+                if (inventorySlots[i].inventoryItem != null)
+                {
+                    inventoryMass += inventorySlots[i].inventoryItem.Mass;
+                }
+            }
+
+            return inventoryMass;
+        }
 
         [System.Serializable]
         private struct InventorySlotRecord
