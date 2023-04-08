@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be251821316fed84a97e38991fa8f1a2, type: 3}
-  m_Name: Knife
+  m_Name: ElectricSword
   m_EditorClassIdentifier: 
-  itemID: 891ffff8-e295-47cb-a2b4-4ecb61979d99
-  displayName: Knife
-  description: 'Knife
-
-'
-  icon: {fileID: 21300000, guid: ac5287c47c65d1340928db8dcc51c396, type: 3}
-  pickup: {fileID: 8822870477362308269, guid: 7cdfce60eb76368479fa5e333794c8c9, type: 3}
+  itemID: bb2d43e0-a31e-40ed-a3ae-079ec068466f
+  displayName: Electric Sword
+  description: Electric Sword
+  icon: {fileID: 21300000, guid: 741fbdc4640155946b8d11d51d7207a9, type: 3}
+  pickup: {fileID: 8822870477362308269, guid: 7d3500c27f678964ea1e1d7c04cacda6, type: 3}
   isStackable: 0
   maxNumberInStack: 1
   mass: 1
@@ -27,19 +25,19 @@ MonoBehaviour:
   itemDestroyedWhenCompletelyUsed: 0
   allowedEquipLocation: 3
   isNightVisionEnabled: 0
-  weaponOverrideController: {fileID: 22100000, guid: 8d10a3ad23a05754ea4efada93bfbbb1,
+  weaponOverrideController: {fileID: 22100000, guid: 8bb6e30d1c842c143a7179606fe6852f,
     type: 2}
-  equipedPrefab: {fileID: 7622007455297462716, guid: 746d4e60cc866f64d9211b1c5956c7e8,
+  equipedPrefab: {fileID: 7622007455297462716, guid: d62f91a602403664dad7de1b5e0f41fb,
     type: 3}
   ammunitionType: 0
   weaponDamageDice: 10
-  weaponDamageDiceNumber: 1
+  weaponDamageDiceNumber: 4
   weaponDamageAdditiveBonus: 0
-  weaponToHitBonus: 5
+  weaponToHitBonus: 10
   weaponRange: 2
   isRightHanded: 1
   isRangedWeapon: 0
   addPunchingDamage: 1
   projectile: {fileID: 0}
-  defense: 1
+  defense: 2
   weaponSkill: 2

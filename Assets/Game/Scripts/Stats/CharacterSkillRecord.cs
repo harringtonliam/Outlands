@@ -25,6 +25,12 @@ namespace RPG.Stats
             return 0;
         }
 
+        public float GetSkillChance(Skill skill)
+        {
+            int skillLevel = GetSkillLevel(skill);
+            return skillProgression.GetSkillChance(skill, skillLevel);
+        }
+
         public object CaptureState()
         {
             return characterSkillLevels;

@@ -25,7 +25,8 @@ namespace RPG.Combat
         AmmunitionStore ammoStore;
         GameConsole gameConsole;
         CharacterSheet characterSheet;
-        CharacterSkillLevel characterSkillLevel;
+        CharacterSkillRecord characterSkillRecord;
+        CharacterAbilities characterAbilities;
 
 
         private void Awake()
@@ -48,7 +49,8 @@ namespace RPG.Combat
 
             ammoStore = GetComponent<AmmunitionStore>();
             characterSheet = GetComponent<CharacterSheet>();
-            characterSkillLevel = GetComponent<CharacterSkillLevel>();
+            characterSkillRecord = GetComponent<CharacterSkillRecord>();
+            characterAbilities = GetComponent<CharacterAbilities>();
             //TODO: find a way to remove FindObject Of type
             gameConsole = FindObjectOfType<GameConsole>();
 
@@ -154,6 +156,8 @@ namespace RPG.Combat
             if (AttackRollSuccessful())
             {
                 calculatedDamage = currentWeaponConfig.CalcWeaponDamage();
+                //Todo: add punching score damage
+                calculatedDamage += AddPunchingScoreDamage();
             }
             else
             {
@@ -170,6 +174,37 @@ namespace RPG.Combat
             { 
                 target.TakeDamage(calculatedDamage, gameObject, currentWeaponConfig.Defense);
             }
+        }
+
+        private float AddPunchingScoreDamage()
+        {
+            if (!currentWeaponConfig.AddPunchingDamage) return 0f;
+            characterAbilities = GetComponent<CharacterAbilities>();
+            int strenght = characterAbilities.GetAbilityScore(Ability.Strength);
+            float punchingScoreDamgae = 0f;
+            switch(strenght)
+            {
+                case > 80:
+                    punchingScoreDamgae = 5f;
+                    break;
+                case > 60:
+                    punchingScoreDamgae = 4f;
+                    break;
+                case > 40:
+                    punchingScoreDamgae = 3f;
+                    break;
+                case > 20:
+                    punchingScoreDamgae = 2f;
+                    break;
+                case > 1:
+                    punchingScoreDamgae = 1f;
+                    break;
+                default:
+                    punchingScoreDamgae = 0f;
+                    break;
+            }
+
+            return punchingScoreDamgae;
         }
 
         private void ChangeWeapon()
@@ -256,7 +291,6 @@ namespace RPG.Combat
         private int CalculateChanceToHit()
         {
             int chanceToHit = 0;
-            CharacterAbilities characterAbilities = GetComponent<CharacterAbilities>();
             int strenght = characterAbilities.GetAbilityScore(Ability.Strength);
             int dexterity = characterAbilities.GetAbilityScore(Ability.Dexterity);
             if (currentWeaponConfig.IsRangedWeapon)
@@ -277,7 +311,7 @@ namespace RPG.Combat
             int statUsed = (strenght > dexterity ? strenght : dexterity);
             chanceToHit = DivideByTwoRoundedUp(statUsed);
             Health attackerHealth = GetComponent<Health>();
-            //TODO: add 10% for each skill level
+            chanceToHit += GetWeaponSkillBonus(currentWeaponConfig.WeaponSkill);
             chanceToHit += currentWeaponConfig.WeaponToHitBonus;
             if(IsAttackFromBehind()  || IsTargetStunned())
             {
@@ -293,7 +327,7 @@ namespace RPG.Combat
             }
             //Todo: subtract 15 is target is defending itself
 
-            if (attackerHealth.HealthPoints <= attackerHealth.GetMaxStamina() / 2)
+            if (attackerHealth.HealthPoints <= (attackerHealth.GetMaxStamina() / 2))
             {
                 chanceToHit -= 10;
             }
@@ -344,6 +378,11 @@ namespace RPG.Combat
             }
 
             return false;
+        }
+
+        private int GetWeaponSkillBonus(Skill skill)
+        {
+            return (int)characterSkillRecord.GetSkillChance(skill);
         }
 
         //TODO: check if target is stunned

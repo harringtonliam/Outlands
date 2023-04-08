@@ -20,6 +20,7 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] bool isRightHanded = true;
         [SerializeField] bool isRangedWeapon = false;
+        [SerializeField] bool addPunchingDamage = false;
         [SerializeField] Projectile projectile = null;
         [SerializeField] ArmourType defense = ArmourType.Inertia;
         [SerializeField] Skill weaponSkill = Skill.MeleeWeapons;
@@ -61,7 +62,6 @@ namespace RPG.Combat
             get { return weaponDamageAdditiveBonus; }
         }
 
-
         public bool IsRangedWeapon
         {
             get { return isRangedWeapon; }
@@ -70,6 +70,11 @@ namespace RPG.Combat
         public ArmourType Defense
         {
             get { return defense; }
+        }
+
+        public bool AddPunchingDamage
+        {
+            get { return addPunchingDamage; }
         }
 
         public Skill WeaponSkill { get { return weaponSkill; } }
@@ -92,7 +97,6 @@ namespace RPG.Combat
             }
 
             return weapon;
-            
         }
 
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
