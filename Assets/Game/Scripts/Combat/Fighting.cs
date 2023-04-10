@@ -16,6 +16,7 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] WeaponConfig defaultWeaponConfig = null;
+        [SerializeField] StrengthScoreBonus strengthScoreBonus;
         [SerializeField] Health target;
 
         float timeSinceLastAttack = Mathf.Infinity;
@@ -151,20 +152,16 @@ namespace RPG.Combat
             }
 
             float calculatedDamage = 0;
-            
 
             if (AttackRollSuccessful())
             {
                 calculatedDamage = currentWeaponConfig.CalcWeaponDamage();
-                //Todo: add punching score damage
                 calculatedDamage += AddPunchingScoreDamage();
             }
             else
             {
                 return;
             }
-
-
 
             if (currentWeaponConfig.HasProjectile())
             {
@@ -179,30 +176,9 @@ namespace RPG.Combat
         private float AddPunchingScoreDamage()
         {
             if (!currentWeaponConfig.AddPunchingDamage) return 0f;
-            characterAbilities = GetComponent<CharacterAbilities>();
-            int strenght = characterAbilities.GetAbilityScore(Ability.Strength);
-            float punchingScoreDamgae = 0f;
-            switch(strenght)
-            {
-                case > 80:
-                    punchingScoreDamgae = 5f;
-                    break;
-                case > 60:
-                    punchingScoreDamgae = 4f;
-                    break;
-                case > 40:
-                    punchingScoreDamgae = 3f;
-                    break;
-                case > 20:
-                    punchingScoreDamgae = 2f;
-                    break;
-                case > 1:
-                    punchingScoreDamgae = 1f;
-                    break;
-                default:
-                    punchingScoreDamgae = 0f;
-                    break;
-            }
+            if (strengthScoreBonus == null) return 0f;
+    
+            float punchingScoreDamgae = strengthScoreBonus.GetDamage(characterAbilities.GetAbilityScore(Ability.Strength));
 
             return punchingScoreDamgae;
         }

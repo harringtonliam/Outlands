@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799e56110a9e0224899130d0b8e29146, type: 3}
+  m_Name: PunchingTable
+  m_EditorClassIdentifier: 
+  strengthScoreDamages:
+  - strengthScore: 80
+    pointsOfDamage: 5
+  - strengthScore: 60
+    pointsOfDamage: 4
+  - strengthScore: 40
+    pointsOfDamage: 3
+  - strengthScore: 20
+    pointsOfDamage: 2
+  - strengthScore: 1
+    pointsOfDamage: 1

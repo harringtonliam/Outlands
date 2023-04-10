@@ -14,6 +14,7 @@ namespace RPG.UI.InventoryControl
         // CONFIG DATA
         [SerializeField] GameObject textContainer = null;
         [SerializeField] TextMeshProUGUI itemNumber = null;
+        [SerializeField] Color usesColor = Color.blue;
 
         // PUBLIC
 
@@ -45,9 +46,15 @@ namespace RPG.UI.InventoryControl
                 {
                     textContainer.SetActive(true);
                     itemNumber.text = number.ToString();
+                    if (item.ItemHasUses)
+                    {
+                        textContainer.GetComponent<Image>().color = usesColor;
+                    }
                 }
             }
         }
+
+       
 
 
     }

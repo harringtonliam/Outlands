@@ -84,7 +84,13 @@ namespace RPG.UI.InventoryControl
 
         void RedrawUI()
         {
-            icon.SetItem(playerEquipment.GetItemInSlot(equipLocation));
+            var itemInSlot = playerEquipment.GetItemInSlot(equipLocation);
+            int numberToDisplay = 0;
+            if (itemInSlot != null && itemInSlot.ItemHasUses)
+            {
+                numberToDisplay = playerEquipment.GetNumberOfUsesinSlot(equipLocation);
+            }
+            icon.SetItem(itemInSlot, numberToDisplay);
         }
     }
 }

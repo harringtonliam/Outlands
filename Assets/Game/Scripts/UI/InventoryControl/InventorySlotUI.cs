@@ -22,7 +22,17 @@ namespace RPG.UI.InventoryControl
         {
             this.inventory = inventory;
             this.index = index;
-            icon.SetItem(inventory.GetItemInSlot(index),  inventory.GetNumberInSlot(index));
+            InventoryItem itemInSlot = inventory.GetItemInSlot(index);
+            int numberToDisplay = 0;
+            if (itemInSlot != null && itemInSlot.ItemHasUses)
+            {
+                numberToDisplay = inventory.GetNumberOfUsesInSlot(index);
+            }
+            else
+            {
+                numberToDisplay = inventory.GetNumberInSlot(index);
+            }
+            icon.SetItem(itemInSlot, numberToDisplay);
         }
 
         public void AddItems(InventoryItem item, int number, int numberOfUses)
