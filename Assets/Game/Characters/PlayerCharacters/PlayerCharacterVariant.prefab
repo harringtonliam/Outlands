@@ -328,12 +328,59 @@ MonoBehaviour:
   - weaponConfig: {fileID: 0}
     number: 0
     isActive: 0
+    remainingUses: 0
   - weaponConfig: {fileID: 0}
     number: 0
     isActive: 0
+    remainingUses: 0
   - weaponConfig: {fileID: 0}
     number: 0
     isActive: 0
+    remainingUses: 0
+--- !u!114 &9093719990992298198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de1ced23fb606f489e334e46013e76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dockedItems:
+  - ammunition: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - ammunition: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - ammunition: {fileID: 0}
+    number: 0
+    remainingUses: 0
+--- !u!114 &-3253184935281890186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042787eaafb37f043bc09b72094d946f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dockedItems:
+  - actionItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - actionItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - actionItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
 --- !u!4 &4343573665051652465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3264242603453066268, guid: eedd23ba60ea2734997be47a6b5657b8,
