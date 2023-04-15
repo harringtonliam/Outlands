@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.UI.Dragging;
 using RPG.InventoryControl;
+using RPG.Control;
 
 namespace RPG.UI.InventoryControl
 {
-    public class QuickItemSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
+    public class QuickItemSlotUI : SelectedPlayerBasedUI, IItemHolder, IDragContainer<InventoryItem>
     {
         // CONFIG DATA
         [SerializeField] InventoryItemIcon icon = null;
@@ -16,10 +17,17 @@ namespace RPG.UI.InventoryControl
         QuickItemStore store;
 
         // LIFECYCLE METHODS
-        private void Awake()
+        private void OnEnable()
         {
-            store = GameObject.FindGameObjectWithTag("Player").GetComponent<QuickItemStore>();
+            var player = PlayerSelector.GetFirstSelectedPlayer();
+            store = player.GetComponent<QuickItemStore>();
             store.storeUpdated += UpdateIcon;
+        }
+
+        private void OnDisable()
+        {
+            if (store == null) return;
+            store.storeUpdated -= UpdateIcon;
         }
 
         // PUBLIC
@@ -54,6 +62,12 @@ namespace RPG.UI.InventoryControl
             store.RemoveItems(index, number);
         }
 
+
+        public override void SelectedPlayerChanged()
+        {
+            OnDisable();
+            OnEnable();
+        }
         // PRIVATE
 
         void UpdateIcon()

@@ -7,24 +7,13 @@ using RPG.Control;
 
 namespace RPG.UI.InventoryControl
 {
-    public class EquipmentSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
+    public class EquipmentSlotUI : SelectedPlayerBasedUI, IItemHolder, IDragContainer<InventoryItem>
     {
         //Configuration
         [SerializeField] InventoryItemIcon icon = null;
         [SerializeField] EquipLocation equipLocation = EquipLocation.Weapon;
 
         Equipment playerEquipment;
-
-        private void Awake()
-        {
-
-        }
-
-        void Start()
-        {
-            
-        }
-
 
         private void OnEnable()
         {
@@ -36,6 +25,7 @@ namespace RPG.UI.InventoryControl
 
         private void OnDisable()
         {
+            if (playerEquipment == null) return;
             playerEquipment.equipmentUpdated -= RedrawUI;
         }
 
@@ -81,6 +71,12 @@ namespace RPG.UI.InventoryControl
             playerEquipment.RemoveItem(equipLocation);
         }
 
+        public override void SelectedPlayerChanged()
+        {
+            OnDisable();
+            OnEnable();
+        }
+
 
         void RedrawUI()
         {
@@ -92,6 +88,8 @@ namespace RPG.UI.InventoryControl
             }
             icon.SetItem(itemInSlot, numberToDisplay);
         }
+
+
     }
 }
 

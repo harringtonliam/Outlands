@@ -9,7 +9,7 @@ using RPG.Control;
 namespace RPG.UI.InventoryControl
 {
 
-    public class WeaponSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
+    public class WeaponSlotUI : SelectedPlayerBasedUI, IItemHolder, IDragContainer<InventoryItem>
     {
         // CONFIG DATA
         [SerializeField] InventoryItemIcon icon = null;
@@ -29,6 +29,7 @@ namespace RPG.UI.InventoryControl
 
         private void OnDisable()
         {
+            if (weaponStore == null) return;
             weaponStore.storeUpdated -= UpdateIcon;
         }
         // PUBLIC
@@ -61,6 +62,12 @@ namespace RPG.UI.InventoryControl
         public void RemoveItems(int number)
         {
             weaponStore.RemoveItems(index, number);
+        }
+
+        public override void SelectedPlayerChanged()
+        {
+            OnDisable();
+            OnEnable();
         }
 
         // PRIVATE

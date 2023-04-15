@@ -9,7 +9,7 @@ namespace RPG.UI.InventoryControl
 
 
 
-    public class InventoryUI : MonoBehaviour
+    public class InventoryUI : SelectedPlayerBasedUI
     {
         [SerializeField] InventorySlotUI inventorySlotUIPrefab = null;
 
@@ -33,7 +33,7 @@ namespace RPG.UI.InventoryControl
 
         private void OnDisable()
         {
-
+            if (objectInventory == null) return;
             objectInventory.inventoryUpdated -= Redraw;
         }
 
@@ -51,9 +51,13 @@ namespace RPG.UI.InventoryControl
             }
         }
 
+        public override void SelectedPlayerChanged()
+        {
+            OnDisable();
+            OnEnable();
+        }
 
 
- 
     }
 
 
