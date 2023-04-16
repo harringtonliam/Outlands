@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using RPG.InventoryControl;
 using RPG.UI.Dragging;
 using RPG.Combat;
@@ -14,9 +15,13 @@ namespace RPG.UI.InventoryControl
         // CONFIG DATA
         [SerializeField] InventoryItemIcon icon = null;
         [SerializeField] int index = 0;
+        [SerializeField] Sprite selectedSprite;
+        [SerializeField] Sprite normalSprite;
 
         // CACHE
         WeaponStore weaponStore;
+
+        Button button;
 
         // LIFECYCLE METHODS
         private void OnEnable()
@@ -25,6 +30,18 @@ namespace RPG.UI.InventoryControl
             weaponStore = player.GetComponent<WeaponStore>();
             weaponStore.storeUpdated += UpdateIcon;
             UpdateIcon();
+        }
+
+        private void Start()
+        {
+            if (button == null)
+            {
+                button = GetComponent<Button>();
+            }
+            if (button != null)
+            {
+                button.onClick.AddListener(EquipWeapon);
+            }
         }
 
         private void OnDisable()
@@ -72,13 +89,35 @@ namespace RPG.UI.InventoryControl
 
         // PRIVATE
 
-        void UpdateIcon()
+        private void UpdateIcon()
         {
             icon.SetItem(GetItem(), GetNumber());
+            SetSlotBackgroundImage();
         }
+
+        private void SetSlotBackgroundImage()
+        {
+            Image slotImage = GetComponent<Image>();
+            if (weaponStore.GetActiveWeaponIndex() == index)
+            {
+                slotImage.sprite = selectedSprite;
+            }
+            else
+            {
+                slotImage.sprite = normalSprite;
+            }
+        }
+
+        private void EquipWeapon()
+        {
+            Debug.Log("weaponequiped");
+            weaponStore.SetActiveWeapon(index);
+        }
+
     }
-
-
 }
+
+
+
 
 
