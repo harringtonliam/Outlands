@@ -32,11 +32,7 @@ namespace RPG.InventoryControl
                     slotToUse = slot;
                 }
             }
-
-
-
             return percentDamageReduction;
-
         }
 
         public float GetDamageReductionAmount (ArmourType armourType, float damage)

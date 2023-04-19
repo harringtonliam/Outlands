@@ -7,6 +7,7 @@ using System;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Stats;
+using System.Text;
 
 namespace RPG.Combat
 {
@@ -155,8 +156,7 @@ namespace RPG.Combat
 
             if (AttackRollSuccessful())
             {
-                calculatedDamage = currentWeaponConfig.CalcWeaponDamage();
-                calculatedDamage += AddPunchingScoreDamage();
+                calculatedDamage = GetWeaponDamage(out string breakdown);
             }
             else
             {
@@ -181,6 +181,27 @@ namespace RPG.Combat
             float punchingScoreDamgae = strengthScoreBonus.GetDamage(characterAbilities.GetAbilityScore(Ability.Strength));
 
             return punchingScoreDamgae;
+        }
+
+        public int GetWeaponDamage(out string breakdown)
+        {
+            int weaponDamage = currentWeaponConfig.CalcWeaponDamage();
+            int punchingScoreDamage = (int)AddPunchingScoreDamage();
+
+            StringBuilder breakdownBuilder = new StringBuilder();
+
+            breakdownBuilder.Append(currentWeaponConfig.WeaponDamageBreakdown());
+            if (punchingScoreDamage>0)
+            {
+                breakdownBuilder.Append("\r\n");
+                breakdownBuilder.Append(Ability.Strength.ToString()); 
+                breakdownBuilder.Append(" bonus: ");
+                breakdownBuilder.Append(punchingScoreDamage.ToString());
+            }
+
+            breakdown = breakdownBuilder.ToString();
+
+            return weaponDamage + punchingScoreDamage;
         }
 
         private void ChangeWeapon()
@@ -252,7 +273,8 @@ namespace RPG.Combat
 
         private bool AttackRollSuccessful()
         {
-            int chanceToHit = CalculateChanceToHit();
+            string breakdown = string.Empty;
+            int chanceToHit = CalculateChanceToHit(out breakdown);
             int attackRoll = FindObjectOfType<Dice>().RollDice(100, 1);
             if (attackRoll >= 99) return false;
             if (attackRoll <= 1) return true;
@@ -264,9 +286,10 @@ namespace RPG.Combat
             return attackRoll <= chanceToHit;
         }
 
-        private int CalculateChanceToHit()
+        private int CalculateChanceToHit(out string braakdown)
         {
             int chanceToHit = 0;
+            string localbreakdown = string.Empty;
             int strenght = characterAbilities.GetAbilityScore(Ability.Strength);
             int dexterity = characterAbilities.GetAbilityScore(Ability.Dexterity);
             if (currentWeaponConfig.IsRangedWeapon)
@@ -275,20 +298,37 @@ namespace RPG.Combat
             }
             else
             {
-               chanceToHit = CalcMeleeChanceToHit (strenght, dexterity);
+               chanceToHit = CalcMeleeChanceToHit (strenght, dexterity, out localbreakdown);
             }
+
+            braakdown = localbreakdown;
 
             return chanceToHit;
         }
 
-        private int CalcMeleeChanceToHit(int strenght, int dexterity)
+        public int CalculateBaseChanceToHit(out string breaddown)
         {
             int chanceToHit = 0;
-            int statUsed = (strenght > dexterity ? strenght : dexterity);
-            chanceToHit = DivideByTwoRoundedUp(statUsed);
-            Health attackerHealth = GetComponent<Health>();
-            chanceToHit += GetWeaponSkillBonus(currentWeaponConfig.WeaponSkill);
-            chanceToHit += currentWeaponConfig.WeaponToHitBonus;
+            string localbreakdown = string.Empty;
+            int strenght = characterAbilities.GetAbilityScore(Ability.Strength);
+            int dexterity = characterAbilities.GetAbilityScore(Ability.Dexterity);
+            if (currentWeaponConfig.IsRangedWeapon)
+            {
+                chanceToHit = CalculateRangedWeaponChanceToHit(dexterity);
+            }
+            else
+            {
+                chanceToHit = CalculateBaseMeleeChanceToHit(strenght, dexterity, out localbreakdown);
+            }
+
+            breaddown = localbreakdown;
+            return chanceToHit;
+        }
+
+        private int CalcMeleeChanceToHit(int strenght, int dexterity, out string breakdown)
+        {
+            int chanceToHit = CalculateBaseMeleeChanceToHit(strenght, dexterity, out breakdown);
+            
             if(IsAttackFromBehind()  || IsTargetStunned())
             {
                 chanceToHit += 20;
@@ -297,16 +337,69 @@ namespace RPG.Combat
             {
                 chanceToHit += 20;
             }
-            if(IsEncumbered(attackerHealth))
-            { 
-                chanceToHit -= 10;
-            }
+
             //Todo: subtract 15 is target is defending itself
 
+
+            return chanceToHit;
+        }
+
+        private int CalculateBaseMeleeChanceToHit(int strenght, int dexterity, out string breakdown)
+        {
+            breakdown = string.Empty;
+            int chanceToHit = 0;
+            Health attackerHealth = GetComponent<Health>();
+
+            int statUsed = 0;
+            string statUsedText = string.Empty;
+            if (strenght > dexterity)
+            {
+                statUsed = strenght;
+                statUsedText = Ability.Strength.ToString();
+            }
+            else
+            {
+                statUsed = dexterity;
+                statUsedText = Ability.Dexterity.ToString();
+            }
+                
+            
+            int baseChanceToHit = DivideByTwoRoundedUp(statUsed);
+            int skillBonus = GetWeaponSkillBonus(currentWeaponConfig.WeaponSkill);
+            int weaponBonus = currentWeaponConfig.WeaponToHitBonus;
+            int encumberedPenalty = 0;
+            if (IsEncumbered(attackerHealth))
+            {
+                encumberedPenalty -= 10;
+            }
+            int injuredPenalty = 0;
             if (attackerHealth.HealthPoints <= (attackerHealth.GetMaxStamina() / 2))
             {
-                chanceToHit -= 10;
+                injuredPenalty -= 10;
             }
+
+            chanceToHit = baseChanceToHit + skillBonus + weaponBonus + encumberedPenalty + injuredPenalty;
+            StringBuilder breakdownbuilder = new StringBuilder();
+            breakdownbuilder.Append("Base chance to hit: " + baseChanceToHit + "% (" + statUsedText + ")\r\n");
+            if (skillBonus > 0)
+            {
+                breakdownbuilder.Append("Skill Bonus " + currentWeaponConfig.WeaponSkill + ": " + skillBonus + "%\r\n");
+            }
+            if (weaponBonus > 0)
+            {
+                breakdownbuilder.Append("Weapon Bonus " + currentWeaponConfig.DisplayName + ": " + weaponBonus + "%\r\n");
+            }
+            if (encumberedPenalty < 0)
+            {
+                breakdownbuilder.Append("Encumbered Penalty: " + encumberedPenalty + "%\r\n");
+            }
+            if (injuredPenalty < 0)
+            {
+                breakdownbuilder.Append("Injured Penalty: " + injuredPenalty + "%\r\n");
+            }
+            breakdownbuilder.Append("Total: " + chanceToHit + "%");
+
+            breakdown = breakdownbuilder.ToString();
 
             return chanceToHit;
         }

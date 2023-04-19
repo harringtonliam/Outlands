@@ -3,7 +3,7 @@ using RPG.Core;
 using RPG.Attributes;
 using RPG.Stats;
 using RPG.InventoryControl;
-using System;
+using System.Text;
 
 namespace RPG.Combat
 {
@@ -75,6 +75,25 @@ namespace RPG.Combat
         public bool AddPunchingDamage
         {
             get { return addPunchingDamage; }
+        }
+
+        public string WeaponDamageBreakdown()
+        {
+            StringBuilder breakdown = new StringBuilder();
+            breakdown.Append(this.DisplayName + ": ");
+            if (weaponDamageDiceNumber > 0)
+            {
+                breakdown.Append(weaponDamageDiceNumber);
+                breakdown.Append("xD");
+                breakdown.Append(weaponDamageDice);
+            }
+            if (WeaponDamageAdditiveBonus>0)
+            {
+                breakdown.Append(" + ");
+                breakdown.Append(WeaponDamageAdditiveBonus);
+            }
+
+            return breakdown.ToString();
         }
 
         public Skill WeaponSkill { get { return weaponSkill; } }

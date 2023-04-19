@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.InventoryControl;
 using RPG.Combat;
+using System;
 
 namespace RPG.Stats
 {
     public class Encumberance : MonoBehaviour
     {
-        
-
-
         CharacterAbilities characterAbilities;
         Inventory inventory;
         Equipment equipment;
@@ -20,6 +18,7 @@ namespace RPG.Stats
 
         float totalMass = 0f;
 
+        public event Action encumberanceUpdated;
 
         private void Start()
         {
@@ -110,18 +109,32 @@ namespace RPG.Stats
             {
                 totalMass += quickItemStore.GetTotalMass();
             }
+
+            if (encumberanceUpdated != null)
+            {
+                encumberanceUpdated();
+            }
         }
 
         public bool IsEncumbered()
         {
-            float strenght = characterAbilities.GetAbilityScore(Ability.Strength);
-
-            if((strenght/2) < totalMass)
+            if(GetMaxUnencumberedCapacity() < totalMass)
             {
                 return true;
             }
 
             return false;
+        }
+
+        public float GetMaxUnencumberedCapacity()
+        {
+            float strenght = characterAbilities.GetAbilityScore(Ability.Strength);
+            return strenght / 2;
+        }
+
+        public float GetTotalCarried()
+        {
+            return totalMass;
         }
     }
 
