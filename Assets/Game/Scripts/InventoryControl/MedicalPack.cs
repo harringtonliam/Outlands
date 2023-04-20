@@ -41,9 +41,7 @@ namespace RPG.InventoryControl
                 actionScheduler.CancelCurrentAction();
             }
 
-            Dice dice = FindObjectOfType<Dice>();
-
-            int healingAmount = dice.RollDice(medicalPackHealingDice, medicalPackHealingDiceNumber) + medicalPackHealingAdditiveBonus;
+            int healingAmount = Dice.RollDice(medicalPackHealingDice, medicalPackHealingDiceNumber) + medicalPackHealingAdditiveBonus;
 
             health.Heal(healingAmount);
             PlayFx();

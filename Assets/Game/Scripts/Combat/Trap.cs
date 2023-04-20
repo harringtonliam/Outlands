@@ -35,7 +35,7 @@ namespace RPG.Combat
 
             if (health == null) return;
 
-            float calcDamage = FindObjectOfType<Dice>().RollDice(damgeDice, damageDiceNumber) + damageAdditiveBonus;
+            float calcDamage = Dice.RollDice(damgeDice, damageDiceNumber) + damageAdditiveBonus;
 
             if (other.tag == playerTag)
             {

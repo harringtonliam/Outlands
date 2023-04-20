@@ -275,7 +275,7 @@ namespace RPG.Combat
         {
             string breakdown = string.Empty;
             int chanceToHit = CalculateChanceToHit(out breakdown);
-            int attackRoll = FindObjectOfType<Dice>().RollDice(100, 1);
+            int attackRoll = Dice.RollDice(100, 1);
             if (attackRoll >= 99) return false;
             if (attackRoll <= 1) return true;
             if (attackRoll > chanceToHit)

@@ -156,8 +156,7 @@ namespace RPG.Combat
 
         public int CalcWeaponDamage()
         {
-            Dice dice = FindObjectOfType<Dice>();
-            int calculatedDamage = Mathf.Clamp(dice.RollDice(weaponDamageDice, weaponDamageDiceNumber) + weaponDamageAdditiveBonus, 1, 100) ;
+            int calculatedDamage = Mathf.Clamp(Dice.RollDice(weaponDamageDice, weaponDamageDiceNumber) + weaponDamageAdditiveBonus, 1, 100) ;
             return calculatedDamage;
         }
             

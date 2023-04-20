@@ -6,7 +6,20 @@ namespace RPG.Core
 {
     public class Dice : MonoBehaviour
     {
-        public int RollDice(int diceSize, int diceNumber)
+        private static Dice _instance;
+
+        private void Awake()
+        {
+            if(_instance != null  && _instance != this)
+            {
+                Destroy(this.gameObject);
+            } else {
+                _instance = this;
+            }
+        }
+
+
+        public static int RollDice(int diceSize, int diceNumber)
         {
             int result = 0;
 
