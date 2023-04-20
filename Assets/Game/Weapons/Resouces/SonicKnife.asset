@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be251821316fed84a97e38991fa8f1a2, type: 3}
+  m_Name: SonicKnife
+  m_EditorClassIdentifier: 
+  itemID: a1eac6c8-831b-4f3e-bfc7-7e3684dd0bdc
+  displayName: Sonic Knife
+  description: Sonic Knife
+  icon: {fileID: 21300000, guid: 4196325dfa7076341b688875d625ba55, type: 3}
+  pickup: {fileID: 8822870477362308269, guid: 9c7cbbd7e69e459499688ca39742f07f, type: 3}
+  isStackable: 0
+  maxNumberInStack: 20
+  mass: 1
+  itemHasUses: 0
+  numberOfUses: 1
+  itemDestroyedWhenCompletelyUsed: 0
+  allowedEquipLocation: 3
+  isNightVisionEnabled: 0
+  weaponOverrideController: {fileID: 22100000, guid: cfe3e9694d53da045a75e07673523742,
+    type: 2}
+  equipedPrefab: {fileID: 7622007455297462716, guid: bcad1c0caa9332c43a98776347195ceb,
+    type: 3}
+  ammunitionType: 0
+  weaponDamageDice: 10
+  weaponDamageDiceNumber: 3
+  weaponDamageAdditiveBonus: 0
+  weaponToHitBonus: 10
+  weaponRange: 2
+  isRightHanded: 1
+  isRangedWeapon: 0
+  addPunchingDamage: 0
+  projectile: {fileID: 0}
+  defense: 3
+  weaponSkill: 2
