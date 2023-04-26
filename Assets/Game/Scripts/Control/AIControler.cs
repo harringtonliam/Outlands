@@ -23,10 +23,7 @@ namespace RPG.Control
         [SerializeField] float shoutDistance = 5f;
         [SerializeField] GameObject combatTargetGameObject;
 
-        GameObject player;
         Mover mover;
-
-
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceAggrevated = Mathf.Infinity;
@@ -40,11 +37,10 @@ namespace RPG.Control
 
         private void Awake()
         {
-            player = GameObject.FindWithTag("Player");
-            mover = GetComponent<Mover>();
+             mover = GetComponent<Mover>();
             if (aIRelationship == AIRelationship.Hostile)
             {
-                combatTargetGameObject = player;
+                IsAggrevated();
             }
         }
 
@@ -206,9 +202,18 @@ namespace RPG.Control
 
         private float DistanceToCombatTarget()
         {
-            if (combatTargetGameObject == null) return Mathf.Infinity;
-            float distance = Vector3.Distance(combatTargetGameObject.transform.position, transform.position);
-            return distance;
+            float shortestDistancetToTarget = Mathf.Infinity;
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in players)
+            {
+                float distance = Vector3.Distance(player.transform.position, transform.position);
+                if (distance < shortestDistancetToTarget)
+                {
+                    shortestDistancetToTarget = distance;
+                    combatTargetGameObject = player;
+                }
+            }
+            return shortestDistancetToTarget;
         }
 
         void OnDrawGizmosSelected()

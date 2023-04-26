@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using RPG.Attributes;
+using RPG.Core;
 
 namespace RPG.InventoryControl
 {
@@ -14,6 +15,7 @@ namespace RPG.InventoryControl
 
         bool isOpen = false;
         ContainerLink containerLink = null;
+        Inventory player = null;
         
 
         private void Start()
@@ -45,14 +47,15 @@ namespace RPG.InventoryControl
             }
         }
 
-        public void OpenContainer()
+        public void OpenContainer(Inventory playerInventory)
         {
             if (isOpen) return;
 
+            player = playerInventory;
             isOpen = true;
             if (containerLink != null)
             {
-                containerLink.OpenContainer(this);
+                containerLink.OpenContainer(this, playerInventory);
             }
             
         }
@@ -60,13 +63,9 @@ namespace RPG.InventoryControl
         public void CloseContainer()
         {
             if (!isOpen) return;
-
             isOpen = false;
-            if (containerLink != null)
-            {
-                containerLink.CloseContainer();
-            }
         }
+
 
         private bool IsDead()
         {
@@ -78,9 +77,6 @@ namespace RPG.InventoryControl
             }
             return false;
         }
-
-
-
     }
 }
 

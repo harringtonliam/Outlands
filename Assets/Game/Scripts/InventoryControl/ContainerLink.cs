@@ -7,20 +7,14 @@ namespace RPG.InventoryControl
 {
     public class ContainerLink : MonoBehaviour
     {
-
-        [SerializeField] UnityEvent<Inventory> openContainer;
-        [SerializeField] UnityEvent closeContainer;
+        [SerializeField] UnityEvent<Inventory, Inventory> openContainer;
 
 
-        public void OpenContainer(Container container)
+        public void OpenContainer(Container container, Inventory playerInventory)
         {
             Inventory inventory = container.GetComponent<Inventory>();
-            openContainer.Invoke(inventory);
+            openContainer.Invoke(inventory, playerInventory);
         }
 
-        public void CloseContainer()
-        {
-            closeContainer.Invoke();
-        }
     }
 }

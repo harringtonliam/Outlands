@@ -21,17 +21,25 @@ namespace RPG.UI.InventoryControl
         [SerializeField] string defaultContainerName;
         [SerializeField] Sprite defaultContainerImage;
 
+        private Container container;
+        private Inventory playerInventory;
+
         void Start()
         {
             uiCanvas.SetActive(false);
         }
 
-        public void OpenContainer(Inventory inventory)
+        public void OpenContainer(Inventory containerInventory, Inventory player)
         {
+            Debug.Log("OpenContainerUI OpenContainer");
+            container = containerInventory.GetComponent<Container>();
+            this.playerInventory = player;
+            this.playerInventory.GetComponent<ContainerOpener>().onOpenContainerCancel += HideDisplay;
+
             uiCanvas.SetActive(true);
             if (containerInventoryUI != null)
             {
-                containerInventoryUI.SetInventoryObject(inventory);
+                containerInventoryUI.SetInventoryObject(containerInventory);
             }
 
             if (containerscrollRect != null)
@@ -45,7 +53,7 @@ namespace RPG.UI.InventoryControl
                 Canvas.ForceUpdateCanvases();
             }
 
-            CharacterSheet containerCharacterSheet = inventory.GetComponent<CharacterSheet>();
+            CharacterSheet containerCharacterSheet = containerInventory.GetComponent<CharacterSheet>();
             if (containerCharacterSheet != null)
             {
                 containerName.text = containerCharacterSheet.CharacterName;
@@ -56,18 +64,23 @@ namespace RPG.UI.InventoryControl
                 containerName.text = defaultContainerName;
                 containerImage.sprite = defaultContainerImage;
             }
-            CharacterSheet characterSheet = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterSheet>();
+
+            CharacterSheet characterSheet = playerInventory.GetComponent<CharacterSheet>();
             playerName.text = characterSheet.CharacterName;
             playerImage.sprite = characterSheet.Portrait;
-
-
         }
 
-        public void CloseContainer()
+        public void Close()
+        {
+            playerInventory.GetComponent<ContainerOpener>().Cancel();
+        }
+
+
+        private void HideDisplay()
         {
             uiCanvas.SetActive(false);
+            playerInventory.GetComponent<ContainerOpener>().onOpenContainerCancel -= HideDisplay;
         }
-
     }
 
 }

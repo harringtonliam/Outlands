@@ -25,6 +25,7 @@ namespace RPG.Core
 
         public void CancelCurrentAction()
         {
+            Debug.Log("CancelCurremtAction " + gameObject.name);
             StartAction(null);
         }
 

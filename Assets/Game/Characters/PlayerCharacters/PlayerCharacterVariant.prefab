@@ -173,6 +173,41 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1228236291626311021}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3253184935281890186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042787eaafb37f043bc09b72094d946f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dockedItems:
+  - actionItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - actionItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+  - actionItem: {fileID: 0}
+    number: 0
+    remainingUses: 0
+--- !u!114 &-201061947758525408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591f547fd0fc61844aa22e852cb796d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openRange: 2
 --- !u!114 &154766004448010429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,28 +392,6 @@ MonoBehaviour:
     number: 0
     remainingUses: 0
   - ammunition: {fileID: 0}
-    number: 0
-    remainingUses: 0
---- !u!114 &-3253184935281890186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3276940032594803481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042787eaafb37f043bc09b72094d946f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dockedItems:
-  - actionItem: {fileID: 0}
-    number: 0
-    remainingUses: 0
-  - actionItem: {fileID: 0}
-    number: 0
-    remainingUses: 0
-  - actionItem: {fileID: 0}
     number: 0
     remainingUses: 0
 --- !u!4 &4343573665051652465 stripped

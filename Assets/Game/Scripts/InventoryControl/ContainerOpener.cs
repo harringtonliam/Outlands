@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Core;
 using RPG.Movement;
+using System;
 
 namespace RPG.InventoryControl
 {
@@ -11,6 +12,8 @@ namespace RPG.InventoryControl
         [SerializeField] float openRange = 1f;
 
         Container target;
+
+        public event Action onOpenContainerCancel;
 
         // Update is called once per frame
         void Update()
@@ -31,7 +34,8 @@ namespace RPG.InventoryControl
         private void OpenBehaviour()
         {
             transform.LookAt(target.transform);
-            target.OpenContainer();
+            Inventory inventory = GetComponent<Inventory>();
+            target.OpenContainer(inventory);
         }
 
         public void StartOpenContainer(GameObject container)
@@ -43,12 +47,18 @@ namespace RPG.InventoryControl
 
         public void Cancel()
         {
-            target.CloseContainer();
-            target = null;
+            if (target != null)
+            {
+                target.CloseContainer();
+                target = null;
+            }
+
             GetComponent<Mover>().Cancel();
+            if (onOpenContainerCancel != null)
+            {
+                onOpenContainerCancel();
+            }
         }
-
-
 
         private bool GetIsInRange()
         {
