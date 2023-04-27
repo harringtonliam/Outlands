@@ -21,7 +21,7 @@ namespace RPG.UI.InventoryControl
         [SerializeField] string defaultContainerName;
         [SerializeField] Sprite defaultContainerImage;
 
-        private Container container;
+        private Inventory containerInventory;
         private Inventory playerInventory;
 
         void Start()
@@ -29,17 +29,17 @@ namespace RPG.UI.InventoryControl
             uiCanvas.SetActive(false);
         }
 
-        public void OpenContainer(Inventory containerInventory, Inventory player)
+        public void OpenContainer(Inventory container, Inventory player)
         {
             Debug.Log("OpenContainerUI OpenContainer");
-            container = containerInventory.GetComponent<Container>();
+            containerInventory = container;
             this.playerInventory = player;
             this.playerInventory.GetComponent<ContainerOpener>().onOpenContainerCancel += HideDisplay;
 
             uiCanvas.SetActive(true);
             if (containerInventoryUI != null)
             {
-                containerInventoryUI.SetInventoryObject(containerInventory);
+                containerInventoryUI.SetInventoryObject(container);
             }
 
             if (containerscrollRect != null)
@@ -53,7 +53,7 @@ namespace RPG.UI.InventoryControl
                 Canvas.ForceUpdateCanvases();
             }
 
-            CharacterSheet containerCharacterSheet = containerInventory.GetComponent<CharacterSheet>();
+            CharacterSheet containerCharacterSheet = container.GetComponent<CharacterSheet>();
             if (containerCharacterSheet != null)
             {
                 containerName.text = containerCharacterSheet.CharacterName;
@@ -73,6 +73,21 @@ namespace RPG.UI.InventoryControl
         public void Close()
         {
             playerInventory.GetComponent<ContainerOpener>().Cancel();
+        }
+
+        public void TakeAll()
+        {
+            for (int i = 0; i < containerInventory.GetSize(); i++)
+            {
+                if (containerInventory.GetItemInSlot(i) != null)
+                {
+                    bool slotFound = playerInventory.AddToFirstEmptySlot(containerInventory.GetItemInSlot(i), containerInventory.GetNumberInSlot(i), containerInventory.GetNumberOfUsesInSlot(i));
+                    if (slotFound)
+                    {
+                        containerInventory.RemoveFromSlot(i, containerInventory.GetNumberInSlot(i));
+                    }
+                }
+            }
         }
 
 
