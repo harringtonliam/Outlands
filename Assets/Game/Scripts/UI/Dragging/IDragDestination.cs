@@ -8,7 +8,7 @@ namespace RPG.UI.Dragging
     {
         int MaxAcceptable(T item);
 
-        void AddItems(T item, int number, int numberOfUses);
+        bool AddItems(T item, int number, int numberOfUses);
     }
 }
 

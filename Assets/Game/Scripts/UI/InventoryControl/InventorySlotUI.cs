@@ -35,9 +35,10 @@ namespace RPG.UI.InventoryControl
             icon.SetItem(itemInSlot, numberToDisplay);
         }
 
-        public void AddItems(InventoryItem item, int number, int numberOfUses)
+        public bool AddItems(InventoryItem item, int number, int numberOfUses)
         {
             inventory.AddItemToSlot(index, item, number, numberOfUses);
+            return true;
         }
 
         public InventoryItem GetItem()
@@ -68,9 +69,6 @@ namespace RPG.UI.InventoryControl
         {
             inventory.RemoveFromSlot(index, number);
         }
-
-
-
 
     }
 

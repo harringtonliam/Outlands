@@ -4,33 +4,32 @@ using UnityEngine;
 using RPG.InventoryControl;
 using RPG.UI.Dragging;
 using RPG.UI.InGame;
+using RPG.Control;
+using RPG.Core;
 
 namespace RPG.UI.InventoryControl
 {
 
     public class OtherPlayerCharacterSlotUI : MonoBehaviour,  IItemHolder, IDragContainer<InventoryItem>
     {
-        // Start is called before the first frame update
-        void Start()
-        {
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-
-        public void AddItems(InventoryItem item, int number, int numberOfUses)
+        public bool AddItems(InventoryItem item, int number, int numberOfUses)
         {
             GameObject playerCharacter = GetComponent<PlayerCharacterUI>().PlayerCharacterGameObject;
             Inventory playerCharacterInventory = playerCharacter.GetComponent<Inventory>();
-            if (playerCharacterInventory == null) return;
+            if (playerCharacterInventory == null) return false;
 
-            playerCharacterInventory.AddToFirstEmptySlot(item, number, numberOfUses);
+            if(!IsCloseEnoughToGiveItem(playerCharacter)) return false;
 
+            return playerCharacterInventory.AddToFirstEmptySlot(item, number, numberOfUses);
+
+        }
+
+        private bool IsCloseEnoughToGiveItem(GameObject playerCharacter)
+        {
+            GameObject inventorySource =  PlayerSelector.GetFirstSelectedPlayer();
+            float distance = Vector3.Distance(playerCharacter.transform.position, inventorySource.transform.position);
+            return (distance < ParameterControl.GetFloatValue("MaxDistanceToGiveItem"));
         }
 
         public InventoryItem GetItem()

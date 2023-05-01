@@ -88,6 +88,7 @@ namespace RPG.UI.Dragging
 
         private bool AttemptSimpleTransfer(IDragDestination<T> destination)
         {
+            Debug.Log("DragItem AttemptSimpleTransfer");
             var draggingItem = dragSource.GetItem();
             var draggingNumber = dragSource.GetNumber();
             var draggingRemainingUses = dragSource.GetNumberOfUses();
@@ -97,8 +98,10 @@ namespace RPG.UI.Dragging
 
             if (toTransfer > 0)
             {
-                dragSource.RemoveItems(toTransfer);
-                destination.AddItems(draggingItem, toTransfer, draggingRemainingUses);
+                if (destination.AddItems(draggingItem, toTransfer, draggingRemainingUses))
+                {
+                    dragSource.RemoveItems(toTransfer);
+                }
                 return false;
             }
 

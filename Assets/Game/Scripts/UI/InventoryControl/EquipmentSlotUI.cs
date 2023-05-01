@@ -29,9 +29,10 @@ namespace RPG.UI.InventoryControl
             playerEquipment.equipmentUpdated -= RedrawUI;
         }
 
-        public void AddItems(InventoryItem item, int number, int numberOfUses)
+        public bool AddItems(InventoryItem item, int number, int numberOfUses)
         {
             playerEquipment.AddItem(equipLocation, (EquipableItem)item, number, numberOfUses);
+            return true;
         }
 
         public InventoryItem GetItem()

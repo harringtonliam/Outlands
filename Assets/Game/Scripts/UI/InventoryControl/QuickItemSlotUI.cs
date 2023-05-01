@@ -32,10 +32,13 @@ namespace RPG.UI.InventoryControl
 
         // PUBLIC
 
-        public void AddItems(InventoryItem item, int number, int numberOfUses)
+        public bool AddItems(InventoryItem item, int number, int numberOfUses)
         {
             store.AddAction(item, index, number, numberOfUses);
+            return true;
         }
+
+        
 
         public InventoryItem GetItem()
         {
@@ -74,6 +77,7 @@ namespace RPG.UI.InventoryControl
         {
             icon.SetItem(GetItem(), GetNumber());
         }
+
     }
 }
 

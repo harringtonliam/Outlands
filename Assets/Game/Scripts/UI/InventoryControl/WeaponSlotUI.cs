@@ -51,9 +51,10 @@ namespace RPG.UI.InventoryControl
         }
         // PUBLIC
 
-        public void AddItems(InventoryItem item, int number, int numberOfUses)
+        public bool AddItems(InventoryItem item, int number, int numberOfUses)
         {
             weaponStore.AddAction(item, index, number, true, numberOfUses);
+            return true;
         }
 
         public InventoryItem GetItem()
@@ -110,10 +111,8 @@ namespace RPG.UI.InventoryControl
 
         private void EquipWeapon()
         {
-            Debug.Log("weaponequiped");
             weaponStore.SetActiveWeapon(index);
         }
-
     }
 }
 

@@ -22,7 +22,7 @@ namespace RPG.UI.InventoryControl
         }
 
 
-        public void AddItems(InventoryItem item, int number, int numberOfUses)
+        public bool AddItems(InventoryItem item, int number, int numberOfUses)
         {
             if (scenePickups != null)
             {
@@ -31,6 +31,8 @@ namespace RPG.UI.InventoryControl
                 Pickup newPickup = item.SpawnPickup(dropPosition, number, numberOfUses);
                 newPickup.transform.parent = scenePickups.transform;
             }
+
+            return true;
         }
 
         public InventoryItem GetItem()
@@ -57,7 +59,6 @@ namespace RPG.UI.InventoryControl
         {
             
         }
-
 
     }
 }
