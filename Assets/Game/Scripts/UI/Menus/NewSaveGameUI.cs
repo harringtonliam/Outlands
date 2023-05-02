@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RPG.SceneManagement;
+using TMPro;
 
 
 namespace RPG.UI.Menus
 {
     public class NewSaveGameUI : MonoBehaviour
     {
-        [SerializeField] InputField savedGameNameInput = null;
+        [SerializeField] TMP_InputField savedGameNameInput = null;
 
         public void SaveGame()
         {

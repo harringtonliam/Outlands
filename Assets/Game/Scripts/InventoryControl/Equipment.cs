@@ -157,9 +157,19 @@ namespace RPG.InventoryControl
             for (int i = 0; i < equippedItems.Length; i++)
             {
                 equippedItemsForSerialization[i].equipLocation = equippedItems[i].equipLocation;
-                equippedItemsForSerialization[i].itemID = equippedItems[i].equipableItem.ItemID;
-                equippedItemsForSerialization[i].number = equippedItems[i].number;
-                equippedItemsForSerialization[i].remainingUses = equippedItems[i].remainingUses;
+                if (equippedItems[i].equipableItem != null)
+                {
+                    equippedItemsForSerialization[i].itemID = equippedItems[i].equipableItem.ItemID;
+                    equippedItemsForSerialization[i].number = equippedItems[i].number;
+                    equippedItemsForSerialization[i].remainingUses = equippedItems[i].remainingUses;
+                }
+                else
+                {
+                    equippedItemsForSerialization[i].itemID = string.Empty;
+                    equippedItemsForSerialization[i].number = 0;
+                    equippedItemsForSerialization[i].remainingUses = 0;
+                }
+
             }
 
             return equippedItemsForSerialization;

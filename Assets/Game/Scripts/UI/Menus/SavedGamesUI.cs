@@ -29,6 +29,7 @@ namespace RPG.UI.Menus
 
         public void Redraw()
         {
+            Debug.Log(" SaveGamesUiRegdraw");
             if (savingWrapper == null) return;
 
             Dictionary<string, DateTime> saveFiles = savingWrapper.ListSaveFiles();
