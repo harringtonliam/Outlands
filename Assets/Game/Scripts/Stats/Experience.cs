@@ -13,12 +13,10 @@ namespace RPG.Stats
         [SerializeField] float experiencePoints = 0;
 
         CharacterSheet characterSheet;
-        GameConsole gameConsole;
 
 
         private void Start()
         {
-            gameConsole = FindObjectOfType<GameConsole>();
             characterSheet = GetComponent<CharacterSheet>();
         }
 
@@ -50,13 +48,12 @@ namespace RPG.Stats
 
         private void WriteToConsole(float experience)
         {
-            if (gameConsole == null) return;
             string characterName = string.Empty;
             if (characterSheet != null)
             {
                 characterName = characterSheet.CharacterName;
             }
-            gameConsole.AddNewLine(characterName + ": gains " + experience.ToString() + " experience points.");
+            GameConsole.AddNewLine(characterName + ": gains " + experience.ToString() + " experience points.");
         }
     }
 }

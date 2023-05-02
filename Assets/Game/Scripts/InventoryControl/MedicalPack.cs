@@ -51,11 +51,7 @@ namespace RPG.InventoryControl
 
         private void WriteToConsole(string textToWrite)
         {
-            GameConsole gameConsole = FindObjectOfType<GameConsole>();
-            if (gameConsole == null) return;
-
-            gameConsole.AddNewLine(textToWrite);
-
+            GameConsole.AddNewLine(textToWrite);
         }
 
         private void PlayFx()

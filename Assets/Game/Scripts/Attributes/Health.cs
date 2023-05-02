@@ -17,7 +17,6 @@ namespace RPG.Attributes
         public event Action healthUpdated;
         public event Action deathUpdated;
 
-        GameConsole gameConsole;
         CharacterSheet characterSheet;
         string characterName;
 
@@ -36,7 +35,6 @@ namespace RPG.Attributes
 
         void Start()
         {
-            gameConsole = FindObjectOfType<GameConsole>();
             characterSheet = GetComponent<CharacterSheet>();
             if (characterSheet != null)
             {
@@ -186,16 +184,14 @@ namespace RPG.Attributes
 
         private void WriteDamageToConsole(float damage)
         {
-            if (gameConsole == null) return;
-                gameConsole.AddNewLine(characterName + " takes " + damage.ToString() + " damage.");
+                GameConsole.AddNewLine(characterName + " takes " + damage.ToString() + " damage.");
         }
 
 
 
         private void WriteDeathToConsole()
         {
-            if (gameConsole == null) return;
-            gameConsole.AddNewLine(characterName + " Death!");
+            GameConsole.AddNewLine(characterName + " Death!");
         }
 
         private void BaseStats_onLevelUp()

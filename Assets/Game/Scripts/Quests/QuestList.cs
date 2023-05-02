@@ -13,7 +13,6 @@ namespace RPG.Quests
     {
         List<QuestStatus> statuses;
 
-        GameConsole gameConsole;
 
         public event Action onListUpdated;
 
@@ -23,9 +22,6 @@ namespace RPG.Quests
             {
                 statuses = new List<QuestStatus>();
             }
-
-            gameConsole = FindObjectOfType<GameConsole>();
-           
         }
 
         public IEnumerable<QuestStatus> GetStatuses()
@@ -119,8 +115,7 @@ namespace RPG.Quests
 
         private void WriteToConsole(string textToWrite)
         {
-            if (gameConsole == null) return;
-            gameConsole.AddNewLine(textToWrite);
+            GameConsole.AddNewLine(textToWrite);
 
         }
 

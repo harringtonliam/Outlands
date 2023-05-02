@@ -25,7 +25,6 @@ namespace RPG.Combat
         Weapon currentWeapon;
         WeaponStore weaponStore;
         AmmunitionStore ammoStore;
-        GameConsole gameConsole;
         CharacterSheet characterSheet;
         CharacterSkillRecord characterSkillRecord;
         CharacterAbilities characterAbilities;
@@ -53,10 +52,6 @@ namespace RPG.Combat
             characterSheet = GetComponent<CharacterSheet>();
             characterSkillRecord = GetComponent<CharacterSkillRecord>();
             characterAbilities = GetComponent<CharacterAbilities>();
-            //TODO: find a way to remove FindObject Of type
-            gameConsole = FindObjectOfType<GameConsole>();
-
-
         }
 
 
@@ -469,13 +464,12 @@ namespace RPG.Combat
 
         private void WriteToConsole(string consoleText)
         {
-            if (gameConsole == null) return;
             string characterName = string.Empty;
             if (characterSheet != null)
             {
                 characterName = characterSheet.CharacterName;
             }
-            gameConsole.AddNewLine(characterName + ": " + consoleText);
+            GameConsole.AddNewLine(characterName + ": " + consoleText);
         }
 
         public void Attack(GameObject combatTarget)

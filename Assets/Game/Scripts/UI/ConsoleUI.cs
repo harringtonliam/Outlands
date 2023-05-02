@@ -18,11 +18,9 @@ namespace RPG.UI
 
         GameConsole console;
 
-        // Start is called before the first frame update
         void Start()
         {
-            console = FindObjectOfType<GameConsole>();
-            console.onLineAdded += UpdateGUI;
+            GameConsole.onLineAdded += UpdateGUI;
 
             ResetGUI();
         }
@@ -33,7 +31,7 @@ namespace RPG.UI
         {
             if (console != null)
             {
-                console.onLineAdded -= UpdateGUI;
+                GameConsole.onLineAdded -= UpdateGUI;
             }
 
         }
@@ -42,7 +40,7 @@ namespace RPG.UI
         {
             GameObject consoleLineUI = Instantiate(consoleLinePrefab, transform);
             CheckNumberOfLines();
-            string newText = console.GetLastLine();
+            string newText = GameConsole.GetLastLine();
             consoleLineUI.GetComponent<ConsoleLineUI>().SetText(newText);
 
             ScrollToLastLIne();
@@ -52,9 +50,9 @@ namespace RPG.UI
 
         private void CheckNumberOfLines()
         {
-            if(transform.childCount > console.MaxLineCount)
+            if(transform.childCount > GameConsole.MaxLineCount)
             {
-                int numberOfLinesToRemove = transform.childCount - console.MaxLineCount;
+                int numberOfLinesToRemove = transform.childCount - GameConsole.MaxLineCount;
                 for (int i = 0; i < numberOfLinesToRemove; i++)
                 {
                     Destroy(transform.GetChild(i).gameObject);
@@ -65,12 +63,12 @@ namespace RPG.UI
 
         private void ResetGUI()
         {
-            foreach (string consoleLine in console.GetAllLines())
+            foreach (string consoleLine in GameConsole.GetAllLines())
             {
                 GameObject consoleLineUI = Instantiate(consoleLinePrefab, transform);
                 consoleLineUI.GetComponent<ConsoleLineUI>().SetText(consoleLine);
             }
-            ScrollToLastLIne();
+            //ScrollToLastLIne();
         }
 
         private void ScrollToLastLIne()

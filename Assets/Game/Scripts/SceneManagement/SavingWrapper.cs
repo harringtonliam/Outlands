@@ -16,11 +16,8 @@ namespace RPG.SceneManagement
 
         public event Action onSaveUpated;
 
-        GameConsole gameConsole;
-
-        private void Start()
+         private void Start()
         {
-            gameConsole = FindObjectOfType<GameConsole>();
         }
 
         private IEnumerator LoadLastScene(string savedGame)
@@ -111,8 +108,7 @@ namespace RPG.SceneManagement
 
         private void WriteToConsole(string textToWrite)
         {
-            if (gameConsole == null) return;
-            gameConsole.AddNewLine(textToWrite);
+            GameConsole.AddNewLine(textToWrite);
         }
     }
 

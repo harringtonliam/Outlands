@@ -21,7 +21,7 @@ namespace RPG.UI
         // Start is called before the first frame update
         void Start()
         {
-            uiCanvas.SetActive(false);
+            uiCanvas.SetActive(keepOpen);
         }
 
         // Update is called once per frame

@@ -12,22 +12,34 @@ namespace RPG.Core
 
         List<string> consoleLines;
 
-        public event Action onLineAdded;
+        private static GameConsole _instance;
 
-        public int MaxLineCount
+        public static event Action onLineAdded;
+
+        public static int MaxLineCount
         {
-            get { return maxLineCount; }
+            get { return _instance.maxLineCount; }
         }
 
         private void Awake()
         {
-            consoleLines = new List<string>();
+            Debug.Log("game console awake");
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _instance = this;
+                consoleLines = new List<string>();
+            }
+            
         }
 
-        public void AddNewLine (string newLine)
+        public static void AddNewLine (string newLine)
         {
-            consoleLines.Add(newLine);
-            RemoveLine();
+            _instance.consoleLines.Add(newLine);
+            _instance.RemoveLine();
             if (onLineAdded != null)
             {
                 onLineAdded();
@@ -35,11 +47,11 @@ namespace RPG.Core
 
         }
 
-        public string GetLastLine()
+        public static string GetLastLine()
         {
-            if (consoleLines.Count > 0)
+            if (_instance.consoleLines.Count > 0)
             {
-                return consoleLines.Last();
+                return _instance.consoleLines.Last();
             }
             else
             {
@@ -48,9 +60,9 @@ namespace RPG.Core
             
         }
 
-        public List<string> GetAllLines()
+        public static List<string> GetAllLines()
         {
-            return consoleLines;
+            return _instance.consoleLines;
         }
 
         private void RemoveLine()
@@ -63,8 +75,7 @@ namespace RPG.Core
                 }
                 catch (Exception)
                 {
-
-                    Debug.Log("GameConsole - failed ot remove first time");
+                    Debug.LogError("GameConsole - failed ot remove first time");
                 }
 
             }

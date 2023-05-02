@@ -23,7 +23,6 @@ namespace RPG.DialogueControl
 
         string conversantName;
         Sprite conversantPortrait;
-        GameConsole gameConsole = null;
 
         bool dialogStarted;
 
@@ -44,8 +43,6 @@ namespace RPG.DialogueControl
 
         private void Start()
         {
-            gameConsole = FindObjectOfType<GameConsole>();
-
             CharacterSheet characterSheet = GetComponent<CharacterSheet>();
             if (characterSheet == null)
             {
@@ -280,7 +277,6 @@ namespace RPG.DialogueControl
 
         private void WriteToConsole(DialogueNode node)
         {
-            if (gameConsole == null) return;
             string speaker;
             if (node.IsPlayerSpeaking)
             {
@@ -290,7 +286,7 @@ namespace RPG.DialogueControl
             {
                 speaker = GetCurrentConversantName();
             }
-            gameConsole.AddNewLine(speaker + ": " + node.DialogueText);
+            GameConsole.AddNewLine(speaker + ": " + node.DialogueText);
         }
 
         private bool GetIsInRange()

@@ -19,7 +19,6 @@ namespace RPG.Stats
 
         int currentLevel = 0;
         Experience experience;
-        GameConsole gameConsole;
         CharacterSheet characterSheet;
 
         public CharacterClass CharacterClass
@@ -41,7 +40,6 @@ namespace RPG.Stats
         private void Start()
         {
             currentLevel = CalculateLevel();
-            gameConsole = FindObjectOfType<GameConsole>();
             characterSheet = GetComponent<CharacterSheet>();
         }
 
@@ -156,13 +154,12 @@ namespace RPG.Stats
 
         private void WriteToConsole(string textToWrite)
         {
-            if (gameConsole == null) return;
             string name = string.Empty;
             if (characterSheet != null)
             {
                 name = characterSheet.CharacterName;
             }
-            gameConsole.AddNewLine(name + ": " + textToWrite);
+            GameConsole.AddNewLine(name + ": " + textToWrite);
         }
 
 

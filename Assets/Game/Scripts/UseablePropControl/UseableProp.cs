@@ -53,12 +53,10 @@ namespace RPG.UseablePropControl
 
 
         UseablePropLink useablePropLink;
-        GameConsole gameConsole;
 
         private void Start()
         {
             useablePropLink = FindObjectOfType<UseablePropLink>();
-            gameConsole = FindObjectOfType<GameConsole>();
         }
 
         public CursorType GetCursorType()
@@ -120,9 +118,7 @@ namespace RPG.UseablePropControl
 
         private void WriteToConsole(string textToWrite)
         {
-            if (gameConsole == null) return;
-
-            gameConsole.AddNewLine(textToWrite.Replace("\n", " "));
+            GameConsole.AddNewLine(textToWrite.Replace("\n", " "));
         }
 
     }
