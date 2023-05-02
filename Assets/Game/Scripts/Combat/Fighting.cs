@@ -224,10 +224,14 @@ namespace RPG.Combat
                 return false;
             }
 
-            //reduce ammo in slot by 1
-            ammoStore.RemoveItems(ammoStoreSlot, 1);
-            return true;
+            if (ammoStore.GetNumberOfUses(ammoStoreSlot) < 1)
+            {
+                WriteToConsole("Out Of Ammunition");
+                return false;
+            }
 
+            ammoStore.UseAmmunition(ammoStoreSlot, 1);
+            return true;
         }
 
         private bool CheckLineOfSight()

@@ -7,11 +7,11 @@ namespace RPG.Combat
     public enum AmmunitionType
     {
             None,
-            GrenadeLauncher,
-            Flamethrower,
-            Pistol,
-            Rifle,
-            Shotgun
+            SEUClip,
+            SEUPack,
+            Bullet,
+            Gyrojet,
+            Grenade
     }
 }
 

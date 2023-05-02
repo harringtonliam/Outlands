@@ -10,36 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be251821316fed84a97e38991fa8f1a2, type: 3}
-  m_Name: SonicSword
+  m_Name: Vibroknife
   m_EditorClassIdentifier: 
-  itemID: 4e238a74-4bfd-4fb3-a4cf-a542301f3a50
-  displayName: Sonic Sword
-  description: 'Sonic Sword
-
-'
-  icon: {fileID: 21300000, guid: b480aba7dc1c4b94bb16aeed4a4b4cc8, type: 3}
-  pickup: {fileID: 0}
+  itemID: db17d14e-44bb-421b-9191-0739d805cf68
+  displayName: Vibroknife
+  description: Vibroknife
+  icon: {fileID: 21300000, guid: 0841ad4d93b12d8429ad6f7d18d75b40, type: 3}
+  pickup: {fileID: 8822870477362308269, guid: 82b53bc7c31e95d4184a19c71366e972, type: 3}
   isStackable: 0
-  maxNumberInStack: 1
+  maxNumberInStack: 20
   mass: 1
   itemHasUses: 0
   numberOfUses: 1
   itemDestroyedWhenCompletelyUsed: 0
   allowedEquipLocation: 3
   isNightVisionEnabled: 0
-  weaponOverrideController: {fileID: 22100000, guid: 86544503d1bd28745be129dba4cb15da,
+  weaponOverrideController: {fileID: 22100000, guid: f07b0fe1a1c304e4396bf77e79e1b51b,
     type: 2}
-  equipedPrefab: {fileID: 7622007455297462716, guid: f8f6429f45152174fae6878998e5913a,
+  equipedPrefab: {fileID: 7622007455297462716, guid: 39297162401a4084998d2c94f7b44863,
     type: 3}
   ammunitionType: 1
   weaponDamageDice: 10
-  weaponDamageDiceNumber: 5
+  weaponDamageDiceNumber: 2
   weaponDamageAdditiveBonus: 0
-  weaponToHitBonus: 15
+  weaponToHitBonus: 5
   weaponRange: 2
   isRightHanded: 1
   isRangedWeapon: 0
   addPunchingDamage: 0
   projectile: {fileID: 0}
-  defense: 3
+  defense: 1
   weaponSkill: 2

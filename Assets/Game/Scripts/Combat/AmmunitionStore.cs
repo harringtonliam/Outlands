@@ -105,6 +105,39 @@ namespace RPG.Combat
             }
         }
 
+        public void ReduceUses(int index, int number)
+        {
+            if (dockedItems.Length > index)
+            {
+                dockedItems[index].remainingUses -= number;
+                if (dockedItems[index].remainingUses <= 0 && dockedItems[index].ammunition.ItemDestroyedWhenCompletelyUsed)
+                {
+                    dockedItems[index].ammunition = null;
+                    dockedItems[index].number = 0;
+                    dockedItems[index].remainingUses = 0;
+                }
+                if (storeUpdated != null)
+                {
+                    storeUpdated();
+                }
+            }
+        }
+
+        public void UseAmmunition(int index, int number)
+        {
+            if (dockedItems.Length > index)
+            {
+                if (dockedItems[index].ammunition.ItemHasUses)
+                {
+                    ReduceUses(index, number);
+                }
+                else
+                {
+                    RemoveItems(index, number);
+                }
+            }
+        }
+
         public int MaxAcceptable(InventoryItem item, int index)
         {
             var actionItem = item as Ammunition;

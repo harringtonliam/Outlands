@@ -75,7 +75,16 @@ namespace RPG.UI.InventoryControl
 
         void UpdateIcon()
         {
-            icon.SetItem(GetItem(), GetNumber());
+            int numberToDisplay = 0;
+            if (GetItem() != null && GetItem().ItemHasUses)
+            {
+                numberToDisplay = GetNumberOfUses();
+            }
+            else
+            {
+                numberToDisplay = GetNumber();
+            }
+            icon.SetItem(GetItem(), numberToDisplay);
         }
 
     }
