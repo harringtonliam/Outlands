@@ -7,9 +7,24 @@ namespace RPG.UI
 {
     public class QuitGameButtonUI : MonoBehaviour
     {
+        [SerializeField] string quitGameText = "Do you want to quit the current game?";
+
         public void QuitGame()
         {
-            SceneManager.LoadScene(0);
+            StartCoroutine(ShowQuitGameConfirmationDialog());
+        }
+
+        IEnumerator ShowQuitGameConfirmationDialog()
+        {
+            YesNoDialogUI.SetupDialog(quitGameText);
+
+            while (YesNoDialogUI.result == YesNoDialogUI.NONE)
+                yield return null;
+
+            if (YesNoDialogUI.result == YesNoDialogUI.YES)
+            {
+                SceneManager.LoadScene(0);
+            }
         }
 
     }

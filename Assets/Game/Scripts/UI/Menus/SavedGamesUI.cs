@@ -10,15 +10,10 @@ namespace RPG.UI.Menus
     public class SavedGamesUI : MonoBehaviour
     {
         [SerializeField] SaveGameUI loadGameGamePrefab = null;
+        [SerializeField] ShowHideUI parentUIToggle;
 
         SavingWrapper savingWrapper = null;
 
-        private void Awake()
-        {
-
-        }
-
-        // Start is called before the first frame update
         void Start()
         {
             savingWrapper = FindObjectOfType<SavingWrapper>();
@@ -29,7 +24,6 @@ namespace RPG.UI.Menus
 
         public void Redraw()
         {
-            Debug.Log(" SaveGamesUiRegdraw");
             if (savingWrapper == null) return;
 
             Dictionary<string, DateTime> saveFiles = savingWrapper.ListSaveFiles();
@@ -44,7 +38,7 @@ namespace RPG.UI.Menus
                 foreach (var saveFile in saveFiles)
                 {
                     var savedGameGameUI = Instantiate(loadGameGamePrefab, transform);
-                    savedGameGameUI.Setup(saveFile.Key, saveFile.Value.ToString());
+                    savedGameGameUI.Setup(saveFile.Key, saveFile.Value.ToString(), parentUIToggle);
                 }
             }
             catch (Exception)

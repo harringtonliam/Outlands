@@ -14,10 +14,13 @@ namespace RPG.UI.Menus
         [SerializeField] string saveGameConfirmationText = "Do you want to overwrite this saved game?";
         [SerializeField] string deleteGameConfirmationText = "Do you want to delete this saved game?";
 
-        public void Setup(string savedGameName, string savedGameTime)
+        private ShowHideUI saveGameUIToClose;
+
+        public void Setup(string savedGameName, string savedGameTime, ShowHideUI parentUI)
         {
             savedGameNameText.text = savedGameName;
             savedGameTimeText.text = savedGameTime;
+            saveGameUIToClose = parentUI;
         }
 
 
@@ -28,7 +31,7 @@ namespace RPG.UI.Menus
 
         public void DeleteGame()
         {
-            FindObjectOfType<SavingWrapper>().Delete(savedGameNameText.text);
+            StartCoroutine(ShowDeleteConfirmationDialog());
         }
 
         public void LoadGame()
@@ -39,8 +42,6 @@ namespace RPG.UI.Menus
 
         IEnumerator ShowSaveConfirmationDialog()
         {
-            Debug.Log("ShowSaveConfirmationDialog");
-
             YesNoDialogUI.SetupDialog(saveGameConfirmationText);
 
             while (YesNoDialogUI.result == YesNoDialogUI.NONE)
@@ -50,6 +51,25 @@ namespace RPG.UI.Menus
             {
                 Debug.Log("Yes");
                 FindObjectOfType<SavingWrapper>().Save(savedGameNameText.text);
+                saveGameUIToClose.ToggleUI();
+            }
+            else
+            {
+                Debug.Log("No");
+            }
+        }
+
+        IEnumerator ShowDeleteConfirmationDialog()
+        {
+            YesNoDialogUI.SetupDialog(deleteGameConfirmationText);
+
+            while (YesNoDialogUI.result == YesNoDialogUI.NONE) 
+                yield return null;
+
+            if (YesNoDialogUI.result == YesNoDialogUI.YES)
+            {
+                Debug.Log("Yes");
+                FindObjectOfType<SavingWrapper>().Delete(savedGameNameText.text);
             }
             else
             {

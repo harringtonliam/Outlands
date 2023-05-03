@@ -1252,6 +1252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadGameGamePrefab: {fileID: 3386036873773595578, guid: 040793cdcca8dfc439dbcf3f5e97acd0,
     type: 3}
+  parentUIToggle: {fileID: 6773113076810163996}
 --- !u!114 &7299593407991950743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2105,7 +2106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toogleKey: 27
   uiCanvas: {fileID: 3351267796272168311}
-  pauseGameOnOpen: 0
+  pauseGameOnOpen: 1
   keepOpen: 0
 --- !u!1001 &5957892524410990769
 PrefabInstance:

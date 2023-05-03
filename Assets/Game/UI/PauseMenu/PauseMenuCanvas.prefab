@@ -174,10 +174,10 @@ RectTransform:
   m_Father: {fileID: 4926044988154036601}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -175}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &418235382232297571
 CanvasRenderer:
@@ -525,10 +525,10 @@ RectTransform:
   m_Father: {fileID: 4926044988154036601}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -300}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4070861914561726980
 CanvasRenderer:
@@ -947,10 +947,10 @@ RectTransform:
   m_Father: {fileID: 4926044988154036601}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -50}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1466923417641355772
 CanvasRenderer:
@@ -1148,7 +1148,7 @@ GameObject:
   - component: {fileID: 6097122448726393162}
   - component: {fileID: 2068949299336941768}
   - component: {fileID: 2237650911803510323}
-  - component: {fileID: 1307703032397786441}
+  - component: {fileID: 8616935218291303696}
   m_Layer: 5
   m_Name: QuitGameButton
   m_TagString: Untagged
@@ -1172,10 +1172,10 @@ RectTransform:
   m_Father: {fileID: 4926044988154036601}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -425}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6097122448726393162
 CanvasRenderer:
@@ -1259,9 +1259,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1307703032397786441}
-        m_TargetAssemblyTypeName: RPG.UI.GameButtonUI, Assembly-CSharp
-        m_MethodName: ButtonClicked
+      - m_Target: {fileID: 8616935218291303696}
+        m_TargetAssemblyTypeName: RPG.UI.QuitGameButtonUI, Assembly-CSharp
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1271,7 +1271,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1307703032397786441
+--- !u!114 &8616935218291303696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1280,10 +1280,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8261418279173825517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc74fde3ae9d4404b83db98cfd2f0967, type: 3}
+  m_Script: {fileID: 11500000, guid: fceaf5e37c1bd3040baa16bfe41d1d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiToShow: {fileID: 0}
+  quitGameText: Do you want to quit the current game?
 --- !u!1 &8625778632498250106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,7 +1420,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &5513525204648746840
 MonoBehaviour:
@@ -1476,7 +1476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toogleKey: 27
   uiCanvas: {fileID: 9103593991363164906}
-  pauseGameOnOpen: 0
+  pauseGameOnOpen: 1
   keepOpen: 0
 --- !u!1 &9103593991363164906
 GameObject:
@@ -1493,7 +1493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7607807505542920749
 RectTransform:
   m_ObjectHideFlags: 0
