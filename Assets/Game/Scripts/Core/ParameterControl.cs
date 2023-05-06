@@ -15,7 +15,6 @@ namespace RPG.Core
 
         void Awake()
         {
-            Debug.Log("Game ParameterControl awake");
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);

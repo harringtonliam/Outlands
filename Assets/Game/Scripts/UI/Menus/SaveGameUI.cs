@@ -13,14 +13,17 @@ namespace RPG.UI.Menus
         [SerializeField] TextMeshProUGUI savedGameTimeText = null;
         [SerializeField] string saveGameConfirmationText = "Do you want to overwrite this saved game?";
         [SerializeField] string deleteGameConfirmationText = "Do you want to delete this saved game?";
+        [SerializeField] string loadGameConfirmationText = "Do you want to Load this game?";
 
         private ShowHideUI saveGameUIToClose;
+        private SavingWrapper savingWrapper;
 
-        public void Setup(string savedGameName, string savedGameTime, ShowHideUI parentUI)
+        public void Setup(string savedGameName, string savedGameTime, ShowHideUI parentUI, SavingWrapper wrapper)
         {
             savedGameNameText.text = savedGameName;
             savedGameTimeText.text = savedGameTime;
             saveGameUIToClose = parentUI;
+            savingWrapper = wrapper;
         }
 
 
@@ -36,8 +39,7 @@ namespace RPG.UI.Menus
 
         public void LoadGame()
         {
-            FindObjectOfType<SavingWrapper>().LoadSavedGame(savedGameNameText.text);
-
+            StartCoroutine(ShowLoadConfirmationDialogBox());
         }
 
         IEnumerator ShowSaveConfirmationDialog()
@@ -49,13 +51,8 @@ namespace RPG.UI.Menus
 
             if (YesNoDialogUI.result == YesNoDialogUI.YES)
             {
-                Debug.Log("Yes");
-                FindObjectOfType<SavingWrapper>().Save(savedGameNameText.text);
+                savingWrapper.Save(savedGameNameText.text);
                 saveGameUIToClose.ToggleUI();
-            }
-            else
-            {
-                Debug.Log("No");
             }
         }
 
@@ -68,12 +65,20 @@ namespace RPG.UI.Menus
 
             if (YesNoDialogUI.result == YesNoDialogUI.YES)
             {
-                Debug.Log("Yes");
-                FindObjectOfType<SavingWrapper>().Delete(savedGameNameText.text);
+                savingWrapper.Delete(savedGameNameText.text);
             }
-            else
+        }
+
+        IEnumerator ShowLoadConfirmationDialogBox()
+        {
+            YesNoDialogUI.SetupDialog(loadGameConfirmationText);
+
+            while (YesNoDialogUI.result == YesNoDialogUI.NONE)
+                yield return null;
+
+            if (YesNoDialogUI.result == YesNoDialogUI.YES)
             {
-                Debug.Log("No");
+                savingWrapper.LoadSavedGame(savedGameNameText.text);
             }
         }
 

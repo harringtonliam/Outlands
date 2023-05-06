@@ -23,7 +23,6 @@ namespace RPG.Core
 
         private void Awake()
         {
-            Debug.Log("game console awake");
             if (_instance != null && _instance != this)
             {
                 Destroy(this.gameObject);

@@ -23,16 +23,32 @@ namespace RPG.CameraControl
         private Vector3 targetFollowOffset;
         private CinemachineTransposer cinemachineTransposer;
 
+        private static CameraController _instance;
+
+        public static CameraController Instance { get { return _instance; } }
+
         Transform playerToFollow;
+
+        private void Awake()
+        {
+            {
+                if (_instance != null && _instance != this)
+                {
+                    Debug.LogError("There is more than one Camera Controller");
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    _instance = this;
+                }
+            }
+        }
 
         private void Start()
         {
             cinemachineTransposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             targetFollowOffset = cinemachineTransposer.m_FollowOffset;
-
         }
-
-
 
         // Update is called once per frame
         void Update()

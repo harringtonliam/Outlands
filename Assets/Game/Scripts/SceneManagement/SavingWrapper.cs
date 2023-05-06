@@ -15,15 +15,16 @@ namespace RPG.SceneManagement
         const string quickSaveFile = "quicksave";
 
         public event Action onSaveUpated;
+        Fader fader;
 
          private void Start()
         {
+            fader = FindObjectOfType<Fader>();
         }
 
         private IEnumerator LoadLastScene(string savedGame)
         {
             yield return  GetComponent<SavingSystem>().LoadLastScene(savedGame);
-            Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
             yield return fader.FadeIn(fadeTime); ;
         }
@@ -31,15 +32,12 @@ namespace RPG.SceneManagement
 
         public void LoadSavedGame(string savedGame)
         {
-
             StartCoroutine(LoadLastScene(savedGame));
-            WriteToConsole("Game loaded from save: " + savedGame);
         }
 
 
         public void Load()
         {
-
             GetComponent<SavingSystem>().Load(defaultSaveFile);  
         }
 

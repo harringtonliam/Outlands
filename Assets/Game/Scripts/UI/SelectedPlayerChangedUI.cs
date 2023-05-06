@@ -35,7 +35,6 @@ namespace RPG.UI
 
         private void ChangeOfSelectedPlayer()
         {
-            Debug.Log("Change of selected player");
             foreach (var selectedPlayerBasedUI in selectedPlayerBasedUIs)
             {
                 selectedPlayerBasedUI.SelectedPlayerChanged();

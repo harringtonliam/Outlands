@@ -11,15 +11,13 @@ namespace RPG.UI.Menus
     {
         [SerializeField] SaveGameUI loadGameGamePrefab = null;
         [SerializeField] ShowHideUI parentUIToggle;
+        [SerializeField] SavingWrapper savingWrapper = null;
 
-        SavingWrapper savingWrapper = null;
 
         void Start()
         {
-            savingWrapper = FindObjectOfType<SavingWrapper>();
             savingWrapper.onSaveUpated += Redraw;
             Redraw();
-
         }
 
         public void Redraw()
@@ -38,12 +36,11 @@ namespace RPG.UI.Menus
                 foreach (var saveFile in saveFiles)
                 {
                     var savedGameGameUI = Instantiate(loadGameGamePrefab, transform);
-                    savedGameGameUI.Setup(saveFile.Key, saveFile.Value.ToString(), parentUIToggle);
+                    savedGameGameUI.Setup(saveFile.Key, saveFile.Value.ToString(), parentUIToggle, savingWrapper);
                 }
             }
             catch (Exception)
             {
-
                 Debug.Log("Unable to update SaveGameUI");
             }
 

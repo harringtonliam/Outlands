@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using RPG.CameraControl;
 
 namespace RPG.Control
 {
@@ -105,11 +106,9 @@ namespace RPG.Control
 
         public void HandleActivation(PlayerSelector playerSelector)
         {
-            //TODO: Find a way of not needing find object by type;
-            CameraControl.CameraController cameraController = FindObjectOfType<CameraControl.CameraController>();
-            if (cameraController.IsFurtherThanMaxDistanceFromPlayer(playerSelector.gameObject.transform.position))
+            if (CameraController.Instance.IsFurtherThanMaxDistanceFromPlayer(playerSelector.gameObject.transform.position))
             {
-                cameraController.SetPlayerToFollow(playerSelector.gameObject.transform);
+                CameraController.Instance.SetPlayerToFollow(playerSelector.gameObject.transform);
             }
         }
     }
