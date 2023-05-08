@@ -10,6 +10,7 @@ namespace RPG.Attributes
         [SerializeField] string characterName = "No Name";
         [SerializeField] string rank = "No Rank";
         [SerializeField] Sprite portrait = null;
+        [SerializeField] bool isMainPlayerCharacter = false;
 
 
         public string CharacterName { get { return characterName; } }
@@ -17,17 +18,8 @@ namespace RPG.Attributes
 
         public string Rank { get { return rank; } }
 
-        // Start is called before the first frame update
-        void Start()
-        {
+        public bool IsMainPlayerCharacter { get { return isMainPlayerCharacter; } }
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }
 

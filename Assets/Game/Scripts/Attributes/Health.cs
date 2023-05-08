@@ -97,7 +97,7 @@ namespace RPG.Attributes
 
             Debug.Log(String.Format(logMessage, defense.ToString(), damage,   damageReducedBy, calculatedDamage));
 
-            currentStamina = Mathf.Max(currentStamina - calculatedDamage, 0);
+            currentStamina = currentStamina - calculatedDamage;
             if (damage > 0)
             {
                 WriteDamageToConsole(calculatedDamage);
@@ -116,10 +116,6 @@ namespace RPG.Attributes
             {
                 takeDamage.Invoke(damage);
             }
-
-            
-            
-
         }
 
 
@@ -148,6 +144,7 @@ namespace RPG.Attributes
 
         public void Die()
         {
+            Debug.Log("HEalth die");
             if (isDead) return;
             onDie.Invoke();
             if (deathUpdated != null)
@@ -169,6 +166,13 @@ namespace RPG.Attributes
             if (actionScheduler != null)
             {
                 actionScheduler.CancelCurrentAction();
+            }
+
+
+            Debug.Log("HEalth die  end the game");
+            if (characterSheet.IsMainPlayerCharacter && gameObject.tag == "Player")
+            {
+                GameOver.Instance.EndTheGame();
             }
         }
 
