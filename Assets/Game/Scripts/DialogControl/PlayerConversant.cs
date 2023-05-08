@@ -83,7 +83,10 @@ namespace RPG.DialogueControl
             currentNode = rootNodes[0];
             WriteToConsole(currentNode);
             TriggerEnterAction();
-            onConversationUpdated();
+            if (onConversationUpdated != null)
+            {
+                onConversationUpdated();
+            }
         }
 
         public void StartDialogue(AIConversant newConverstant, Dialogue newDialogue)

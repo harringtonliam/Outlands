@@ -173,6 +173,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1228236291626311021}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-7445778366236844273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90e968aec811b24a9614fcccd3a8349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conversationRange: 2
 --- !u!114 &-3253184935281890186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +208,18 @@ MonoBehaviour:
   - actionItem: {fileID: 0}
     number: 0
     remainingUses: 0
+--- !u!114 &-616701263362468168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00f37a5580e0cc4599f7f082c9762f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-201061947758525408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +419,19 @@ MonoBehaviour:
   - ammunition: {fileID: 0}
     number: 0
     remainingUses: 0
+--- !u!114 &-7691771770822416557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276940032594803481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7579863d78b9044ab4517ae615058f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experiencePoints: 0
 --- !u!4 &4343573665051652465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3264242603453066268, guid: eedd23ba60ea2734997be47a6b5657b8,

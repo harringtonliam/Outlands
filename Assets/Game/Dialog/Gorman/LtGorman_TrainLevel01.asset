@@ -1,0 +1,715 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8845899383112483203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: c4c8bc29-bb8b-4f76-a302-cb54fefc33ef
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: "Yes assessment.  We\u2019ve been ordered to conduct a series of
+    exercises to assess the effectiveness of our training.  You've been chosen to
+    participate."
+  children:
+  - a02e81f1-ef08-4554-b89f-d7ddfba91991
+  - 7f1cb2f3-58e2-4dd4-abe6-6482453378e1
+  - 724cdc71-f430-4b0e-9406-5832770e9e48
+  rect:
+    serializedVersion: 2
+    x: 500
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-7210141432663213607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 9d4db09a-b48f-401e-a5ab-14f260783e9c
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: Your opponents will be training dummies, so nothing too difficult. 
+    When you are ready take the equipment from the crate behind  and proceed through
+    the door.  Work your way through the test area to the other side.  2nd Lt Enoch
+    will be waiting for you there.
+  children:
+  - 76f1738e-c10f-4fba-ab88-6b2c9a98f812
+  rect:
+    serializedVersion: 2
+    x: 2338
+    y: 289
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-7120596493510453906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: dace702f-d480-4ce4-b6d9-19f228273fe5
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: "Good to see you're not worried.  Specifically you\u2019ll be tested
+    on hand-to-hand combat with a knife.  Remember knives don't run out of bullets."
+  children:
+  - 9d4db09a-b48f-401e-a5ab-14f260783e9c
+  rect:
+    serializedVersion: 2
+    x: 2021
+    y: 293
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-6475222140777675048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 17a6fbf7-64ad-4a2f-bd3f-bd2796acbb1f
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: "The orders specifically named you.  It appears you\u2019re special."
+  children:
+  - c0f0ad58-7549-426a-86b9-d7b5e63eb51d
+  rect:
+    serializedVersion: 2
+    x: 1000
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-5569824458409878826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: ab5578a9-3353-46e7-8934-49093e235a6a
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: Hand to hand combat?
+  children:
+  - f94121a6-eadf-4408-bb37-828652607bac
+  rect:
+    serializedVersion: 2
+    x: 1740
+    y: 166
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-4167133373084720502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: b5e80f10-1eb3-4bc4-9254-78dad3d25c7f
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: Good. The first test will assess your ability in hand to hand combat. 
+    Be aware this will be a "live fire" exercise.
+  children:
+  - ab5578a9-3353-46e7-8934-49093e235a6a
+  - 88e3d2a3-0c15-4f00-9b3c-782d08aa0cfe
+  - e50b6167-220a-4548-8fb4-f2b827af172d
+  rect:
+    serializedVersion: 2
+    x: 1474
+    y: 305
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-4138959148595650837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: c0f0ad58-7549-426a-86b9-d7b5e63eb51d
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: Yes Sir
+  children:
+  - b353a698-2f44-466f-8cb3-af5315a9a2b6
+  rect:
+    serializedVersion: 2
+    x: 1250
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-3756935979141410379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: a02e81f1-ef08-4554-b89f-d7ddfba91991
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: Why me Sir?
+  children:
+  - 17a6fbf7-64ad-4a2f-bd3f-bd2796acbb1f
+  rect:
+    serializedVersion: 2
+    x: 750
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-3285778613652867472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 99b46e1e-782f-46b8-86b2-9fdafd3365c7
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: "Don\u2019t worry I\u2019m sure the medics can patch you up afterwards. 
+    Specifically you\u2019ll be tested on hand-to-hand combat with a knife.  Remember
+    knives don't run out of bullets."
+  children:
+  - 9d4db09a-b48f-401e-a5ab-14f260783e9c
+  rect:
+    serializedVersion: 2
+    x: 2023
+    y: 453
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-2876462615030005228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: c6aeae7d-25d8-4b14-9fd7-9467ba58fbcf
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: Assessment Lieutenant?
+  children:
+  - c4c8bc29-bb8b-4f76-a302-cb54fefc33ef
+  rect:
+    serializedVersion: 2
+    x: 250
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &-2789647556490572250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 9519fd2c-a48a-4bc4-ac1c-90b3a31b3d47
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: "Don\u2019t dawdle Private.  Go through the door and get started."
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 13
+    y: 262
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and:
+    - or:
+      - predicate: 0
+        parameters:
+        - Training Mission 1
+        negate: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095a95c4ffea4644ba71ebbf36814ac5, type: 3}
+  m_Name: LtGorman_TrainLevel01
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 6804048714922093376}
+  - {fileID: -2876462615030005228}
+  - {fileID: 4336166446669437626}
+  - {fileID: -8845899383112483203}
+  - {fileID: -3756935979141410379}
+  - {fileID: 6264592916989113910}
+  - {fileID: 4170791478952973191}
+  - {fileID: -6475222140777675048}
+  - {fileID: -4138959148595650837}
+  - {fileID: 9007319567829849491}
+  - {fileID: -4167133373084720502}
+  - {fileID: -5569824458409878826}
+  - {fileID: 4703718073134921895}
+  - {fileID: 6254460934346527776}
+  - {fileID: 6412799515840741569}
+  - {fileID: -7120596493510453906}
+  - {fileID: -3285778613652867472}
+  - {fileID: -2789647556490572250}
+  - {fileID: -7210141432663213607}
+  - {fileID: 1784975562463526367}
+  - {fileID: 7628702087011371418}
+  newNodeOffSet: {x: 250, y: 0}
+--- !u!114 &1784975562463526367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 76f1738e-c10f-4fba-ab88-6b2c9a98f812
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: Understood Lieutenant.
+  children:
+  - 515f8b8a-24c4-47e6-9a4d-b2b0ec91067a
+  rect:
+    serializedVersion: 2
+    x: 2588
+    y: 289
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &4170791478952973191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 724cdc71-f430-4b0e-9406-5832770e9e48
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: I'm ready Sir!
+  children:
+  - b5e80f10-1eb3-4bc4-9254-78dad3d25c7f
+  rect:
+    serializedVersion: 2
+    x: 763
+    y: 269
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &4336166446669437626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 9f8cdfb6-8bf8-440d-bad8-d07a4e80e992
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: Yes Lieutenant!
+  children:
+  - b5e80f10-1eb3-4bc4-9254-78dad3d25c7f
+  rect:
+    serializedVersion: 2
+    x: 255
+    y: 137
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &4703718073134921895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 88e3d2a3-0c15-4f00-9b3c-782d08aa0cfe
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: There's a surprise, all our exercises are live fire.
+  children:
+  - dace702f-d480-4ce4-b6d9-19f228273fe5
+  rect:
+    serializedVersion: 2
+    x: 1746
+    y: 279
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &6254460934346527776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: e50b6167-220a-4548-8fb4-f2b827af172d
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: Live fire?  You mean I could get hurt?
+  children:
+  - 99b46e1e-782f-46b8-86b2-9fdafd3365c7
+  - f94121a6-eadf-4408-bb37-828652607bac
+  rect:
+    serializedVersion: 2
+    x: 1741
+    y: 454
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &6264592916989113910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 7f1cb2f3-58e2-4dd4-abe6-6482453378e1
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  dialogueText: With your permission Sir, what kind of test?
+  children:
+  - b353a698-2f44-466f-8cb3-af5315a9a2b6
+  rect:
+    serializedVersion: 2
+    x: 751
+    y: 132
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &6412799515840741569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: f94121a6-eadf-4408-bb37-828652607bac
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: Specifically hand-to-hand combat with a knife.  Remember knives don't
+    run out of bullets.
+  children:
+  - 9d4db09a-b48f-401e-a5ab-14f260783e9c
+  rect:
+    serializedVersion: 2
+    x: 2015
+    y: 129
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &6804048714922093376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 2ff9d941-1061-47db-818c-4e3d7203ab06
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: Good Morning Private Kimberly.  Are you ready for the assessment?
+  children:
+  - c6aeae7d-25d8-4b14-9fd7-9467ba58fbcf
+  - 9f8cdfb6-8bf8-440d-bad8-d07a4e80e992
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and:
+    - or:
+      - predicate: 0
+        parameters:
+        - Training Mission 1
+        negate: 1
+--- !u!114 &7628702087011371418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: 515f8b8a-24c4-47e6-9a4d-b2b0ec91067a
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: Get started then.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 2838
+    y: 289
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 1
+  onExitQuest: {fileID: 11400000, guid: 2628b1dd89937d2439b146a471b74ee5, type: 2}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
+--- !u!114 &9007319567829849491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e3078929ffd704c9b58cf7f967ae98, type: 3}
+  m_Name: b353a698-2f44-466f-8cb3-af5315a9a2b6
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  dialogueText: The first test will assess your ability in hand to hand combat. 
+    Be aware this will be a "live fire" exercise.
+  children:
+  - ab5578a9-3353-46e7-8934-49093e235a6a
+  - 88e3d2a3-0c15-4f00-9b3c-782d08aa0cfe
+  - e50b6167-220a-4548-8fb4-f2b827af172d
+  rect:
+    serializedVersion: 2
+    x: 1475
+    y: 183
+    width: 200
+    height: 100
+  onEnterAction: 0
+  onEnterQuest: {fileID: 0}
+  onExitAction: 0
+  onExitQuest: {fileID: 0}
+  onEnterQuestObjective: 
+  onExitQuestObjective: 
+  onTriggerDialogueWithTag: 
+  condition:
+    and: []
