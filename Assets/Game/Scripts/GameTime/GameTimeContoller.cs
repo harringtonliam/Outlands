@@ -47,7 +47,7 @@ namespace RPG.GameTime
         public int CurrentSystemDay {  get { return currentSystemDay; } }
         public int CurrentSystemYear { get {  return currentSystemYear; } }
 
-
+ 
 
         // Start is called before the first frame update
         void Start()

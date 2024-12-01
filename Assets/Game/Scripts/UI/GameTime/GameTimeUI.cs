@@ -39,10 +39,10 @@ namespace RPG.UI.GameTime
         private void DisplayGameTime()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Hour: " + gameTimeContoller.CurrentLocalHour);
-            sb.AppendLine("Day: "  + gameTimeContoller.CurrentLocalDayOfMonth);
-            sb.AppendLine("Month: " + gameTimeContoller.CurrentLocalMonth);
-            sb.AppendLine("Year: " + gameTimeContoller.CurrentLocalYear);
+            sb.AppendLine(gameTimeContoller.CurrentLocalHour.ToString() + " hours");
+            sb.AppendLine(gameTimeContoller.GetCurrentDayOfWeek());
+            sb.AppendLine(gameTimeContoller.CurrentLocalDayOfMonth + " " + gameTimeContoller.GetCurrentMonth());
+            sb.AppendLine(gameTimeContoller.CurrentLocalYear.ToString());
             gameTimetext.text = sb.ToString();
         }
 
