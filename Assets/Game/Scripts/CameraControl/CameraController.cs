@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using Unity.Cinemachine;
 using RPG.Core;
 using RPG.Control;
 
@@ -17,11 +17,11 @@ namespace RPG.CameraControl
         [SerializeField] float maxFollowYOffset = 15f;
         [SerializeField] float zoomIncreaseAmount = 1f;
         [SerializeField] float maxDistanceFromSelectedPlayer = 10f;
-        [SerializeField] CinemachineVirtualCamera virtualCamera;
+        [SerializeField] CinemachineCamera virtualCamera;
 
 
         private Vector3 targetFollowOffset;
-        private CinemachineTransposer cinemachineTransposer;
+        private CinemachineFollow cinemachineTransposer;
 
         private static CameraController _instance;
 
@@ -46,8 +46,8 @@ namespace RPG.CameraControl
 
         private void Start()
         {
-            cinemachineTransposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-            targetFollowOffset = cinemachineTransposer.m_FollowOffset;
+            cinemachineTransposer = virtualCamera.GetComponent<CinemachineFollow>();
+            targetFollowOffset = cinemachineTransposer.FollowOffset;
         }
 
         // Update is called once per frame
@@ -95,7 +95,7 @@ namespace RPG.CameraControl
         {
             targetFollowOffset.y += InputManager.Instance.GetCameraZoomAmount() * zoomIncreaseAmount;
             targetFollowOffset.y = Mathf.Clamp(targetFollowOffset.y, minFollowYOffset, maxFollowYOffset);
-            cinemachineTransposer.m_FollowOffset = Vector3.Lerp(cinemachineTransposer.m_FollowOffset, targetFollowOffset, Time.deltaTime * zoomSpeed);
+            cinemachineTransposer.FollowOffset = Vector3.Lerp(cinemachineTransposer.FollowOffset, targetFollowOffset, Time.deltaTime * zoomSpeed);
         }
 
         private void HandleRotation()
