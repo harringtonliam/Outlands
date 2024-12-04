@@ -69,8 +69,8 @@ namespace RPG.GameTime
         {
             timeSinceStartOfHour += Time.deltaTime;
             timeSinceTimeUpdate += Time.deltaTime;
-            CheckForTimeUpdate();
             CheckForStartOfHour();
+            CheckForTimeUpdate();
         }
 
         public string GetCurrentDayOfWeek()

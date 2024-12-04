@@ -17,6 +17,26 @@ namespace RPG.GameTime
             public int noonSunAngle;
         }
 
+        public SunDirectionData GetDataForMonth(int month)
+        {
+            if (month >= sunDirectionDatas.Length || month < 0)
+            {
+                month = 0;
+            }
+            return sunDirectionDatas[month];
+        }
+
+        public int GetLenghtOfDayForMonth(int month) 
+        {
+            if (month >= sunDirectionDatas.Length || month < 0)
+            {
+                month = 0;
+            }
+            return sunDirectionDatas[month].sunSetHour - sunDirectionDatas[month].sunRiseHour;
+        }
+
+        
+
     }
 }
 
