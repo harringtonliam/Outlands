@@ -15,6 +15,7 @@ namespace RPG.GameTime
             public int sunRiseHour;
             public int sunSetHour;
             public int noonSunAngle;
+            public int sunriseAzimuth;
         }
 
         public SunDirectionData GetDataForMonth(int month)

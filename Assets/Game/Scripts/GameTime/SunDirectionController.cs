@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using UnityEngine;
 
 namespace RPG.GameTime
@@ -10,9 +12,7 @@ namespace RPG.GameTime
         [SerializeField] Light sunDirectionalLight;
         [SerializeField] SunDirectionConfig sunDirectionConfig;
         
-        [SerializeField] float sunRotationOffset = -90f;
         [SerializeField] float maxRotation = 359f;
-        [SerializeField] float zRotation = -20f;
 
         GameTimeContoller gameTimeContoller;
 
@@ -36,16 +36,37 @@ namespace RPG.GameTime
 
             float noonSunAngle = sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).noonSunAngle;
             float newXRotation = (sunRotationMultiplier * noonSunAngle);
+
+            float sunriseAzimuth = sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunriseAzimuth;
+
+            float azimuthFraction = (180f - sunriseAzimuth) / maxHoursFromNoon;
+
+            float currentAzimuth = (azimuthFraction * (currentHour - sunRiseHour)) + sunriseAzimuth;
+
+            float newYRotation = ConvertAzimuthToRotation(currentAzimuth);
+
             Debug.Log("noonSunAngle=" + noonSunAngle + " sunRotationMultiplier=" + sunRotationMultiplier + " timefromNoon=" + Mathf.Abs(12 - currentHour) + " maxHoursFromNoon=" + maxHoursFromNoon + " hourscomptomaxhours=" + (maxHoursFromNoon - Mathf.Abs(12 - currentHour)));
 
             if (newXRotation >= maxRotation)
             {
                 newXRotation = 0f;
             }
-            Vector3 sunRotation = new Vector3(newXRotation, 0f, zRotation);
-            sunDirectionalLight.transform.eulerAngles = sunRotation;
+
+            sunDirectionalLight.transform.rotation = Quaternion.Euler(newXRotation, newYRotation, 0f);
         }
 
+        private float ConvertAzimuthToRotation(float currentAzimuth)
+        {
+            if (currentAzimuth >= 180f) 
+            {
+                return currentAzimuth - 180f;
+            }
+            else
+            {
+                return 360f + currentAzimuth - 180f;
+            }
+            
+        }
     }
 }
 
