@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7579488793128758112}
   - component: {fileID: 859018481376999232}
   - component: {fileID: 1550061943387843103}
+  - component: {fileID: 2159422314660925026}
   m_Layer: 0
   m_Name: GameTime
   m_TagString: Untagged
@@ -66,7 +67,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sunDirectionalLight: {fileID: 0}
-  sunRotationMultiplier: 15
-  sunRotationOffset: -90
+  sunDirectionConfig: {fileID: 0}
   maxRotation: 359
-  zRotation: -20
+--- !u!114 &2159422314660925026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706482711683747219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb6661d07765d147b49741ad647c56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 0}
+  sunriseHour: 6
+  sunsetHour: 18
+  dayTimeIntensity: 1
+  dayTimeShadowStrenght: 1
+  nightTimeIntensity: 0.1
+  nightTimeShadowStrenght: 0.1
+  dayTimeEnvironmnetLightingIntensityMultiplier: 1
+  nighTimeEnvironmnetLightingIntensityMultiplier: 0.05
+  duskFraction: 0.5

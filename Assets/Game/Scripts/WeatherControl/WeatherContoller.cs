@@ -16,7 +16,7 @@ namespace RPG.WeatherControl
         [SerializeField] Light[] lightSources;
 
 
-        int currentWeatherDurationHours = 1;
+        int currentWeatherDurationHours = 0;
         int currentWeatherHourSoFar = 10;
         Weathers currentWeather;
 
@@ -73,12 +73,12 @@ namespace RPG.WeatherControl
 
         private void SetWeatherEffect(Weathers weather)
         {
-            float newLightIntensityPercentage = weatherDescriptions.GetWeatherEffect(weather).LightIntesityPercentage;
-            for (int i = 0; i < lightSources.Length; i++)
-            {
-                lightSources[i].intensity = lightSourceStartIntensities[i] * (newLightIntensityPercentage/100);
-                lightSources[i].shadowStrength = weatherDescriptions.GetWeatherEffect(weather).LightShadowStrenght;
-            }
+            //float newLightIntensityPercentage = weatherDescriptions.GetWeatherEffect(weather).LightIntesityPercentage;
+            //for (int i = 0; i < lightSources.Length; i++)
+            //{
+            //    lightSources[i].intensity = lightSourceStartIntensities[i] * (newLightIntensityPercentage/100);
+            //    lightSources[i].shadowStrength = weatherDescriptions.GetWeatherEffect(weather).LightShadowStrenght;
+            //}
         }
     }
 }

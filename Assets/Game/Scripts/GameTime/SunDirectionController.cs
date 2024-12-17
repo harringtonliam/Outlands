@@ -23,6 +23,25 @@ namespace RPG.GameTime
             gameTimeContoller.timeUpdate += CalculateSunDirection;
         }
 
+        public bool IsDayTime()
+        {
+            if (gameTimeContoller == null) return false;
+            if (gameTimeContoller.CurrentLocalHour < sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunRiseHour) return false;
+            if (gameTimeContoller.CurrentLocalHour > sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunSetHour) return false;
+            return true;
+        }
+
+        public bool IsDawnOrDusk()
+        {
+            if (gameTimeContoller == null) return false;
+            if (Mathf.Abs(gameTimeContoller.CurrentLocalHour - sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunRiseHour) <= 1) return true;
+            if (Mathf.Abs(gameTimeContoller.CurrentLocalHour - sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunSetHour) <= 1) return true;
+            return false;
+        }
+
+ 
+        public Light SunDirectionalLight { get {  return sunDirectionalLight; } }
+
 
         private void CalculateSunDirection()
         {
