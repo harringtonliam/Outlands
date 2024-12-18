@@ -14,6 +14,7 @@ namespace RPG.GameTime
         [SerializeField] int startDayInMonth = 1;
         [SerializeField] LocalTimeConfiguration localTimeConfiguration;
         [SerializeField] SystemTimeConfiguration systemTimeConfiguration;
+        
 
 
         public event Action timeUpdate;
@@ -90,6 +91,10 @@ namespace RPG.GameTime
             return exactHour;
         }
 
+        public Seasons GetCurrentSeason()
+        {
+            return localTimeConfiguration.GetSeason(GetCurrentMonth());
+        }
 
         private void CheckForTimeUpdate()
         {

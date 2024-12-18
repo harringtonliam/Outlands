@@ -19,8 +19,6 @@ namespace RPG.WeatherControl
         int currentWeatherHourSoFar = 10;
         Weathers currentWeather;
 
-        float[] lightSourceStartIntensities;
-
         public event Action weatherHasChanged;
 
         public Weathers CurrentWeather {  get { return currentWeather; } }
@@ -32,6 +30,10 @@ namespace RPG.WeatherControl
             GenerateWeather();
         }
 
+        public WeatherEffect GetCurrentWeatherEffect()
+        {
+            return weatherDescriptions.GetWeatherEffect(currentWeather);
+        }
 
         private void GenerateWeather()
         {

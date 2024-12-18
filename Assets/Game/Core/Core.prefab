@@ -406,6 +406,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameTime
       objectReference: {fileID: 0}
+    - target: {fileID: 2159422314660925026, guid: 54ef1adef87438746b71cce1035d603b,
+        type: 3}
+      propertyPath: weatherContoller
+      value: 
+      objectReference: {fileID: 2848063941972809819}
     - target: {fileID: 7579488793128758112, guid: 54ef1adef87438746b71cce1035d603b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -637,6 +642,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6223522229965245032}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2848063941972809819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8203376464514519603, guid: 2c884a3ffee15d94590f86b9bde72757,
+    type: 3}
+  m_PrefabInstance: {fileID: 6223522229965245032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac4b593beb0aee4a8c9a7767d5d159d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6693002627716180200
 PrefabInstance:
   m_ObjectHideFlags: 0

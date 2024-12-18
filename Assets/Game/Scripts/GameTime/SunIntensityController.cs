@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using RPG.WeatherControl;
+using System.IO;
 
 namespace  RPG.GameTime
 {
@@ -69,24 +70,24 @@ namespace  RPG.GameTime
         private void SetDawnOrDuskProperties()
         {
             Debug.Log("SETTING DAWNDUSK TIME");
-            sun.intensity = dayTimeIntensity * duskFraction;
-            //sun.shadowStrength = dayTimeShadowStrenght * duskFraction;
+            sun.intensity = dayTimeIntensity * duskFraction * GetWeatherLightIntensityAdjustment();
+            sun.shadowStrength = GetWeatherShadowStrenght();
             RenderSettings.ambientIntensity = dayTimeEnvironmnetLightingIntensityMultiplier * duskFraction;
         }
 
         private void SetNightTimeProperties()
         {
             Debug.Log("SETTING NIGHT TIME");
-            sun.intensity = nightTimeIntensity;
-            //sun.shadowStrength = nightTimeShadowStrenght;
+            sun.intensity = nightTimeIntensity * GetWeatherLightIntensityAdjustment();
+            sun.shadowStrength = GetWeatherShadowStrenght();
             RenderSettings.ambientIntensity = nighTimeEnvironmnetLightingIntensityMultiplier;
         }
 
         private void SetDayTimeProperties()
         {
             Debug.Log("SETTING DAY TIME");
-            sun.intensity = dayTimeIntensity;
-            //sun.shadowStrength = dayTimeShadowStrenght;
+            sun.intensity = dayTimeIntensity * GetWeatherLightIntensityAdjustment();
+            sun.shadowStrength = GetWeatherShadowStrenght();
             RenderSettings.ambientIntensity = dayTimeEnvironmnetLightingIntensityMultiplier;
         }
 
@@ -95,9 +96,16 @@ namespace  RPG.GameTime
             SetSunProperties();
         }
 
-        private  float GetWeatherIntensityAdjustment()
+        private  float GetWeatherLightIntensityAdjustment()
         {
-            return 1f;
+            var currentWeatherEffect =  weatherContoller.GetCurrentWeatherEffect();
+            return currentWeatherEffect.LightIntesityPercentage / 100f;
+        }
+
+        private float GetWeatherShadowStrenght()
+        {
+            var currentWeatherEffect = weatherContoller.GetCurrentWeatherEffect();
+            return currentWeatherEffect.LightShadowStrenght;
         }
 
 
