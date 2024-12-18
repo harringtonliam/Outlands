@@ -13,7 +13,6 @@ namespace RPG.WeatherControl
         [SerializeField] GameTimeContoller gameTimeContoller;
         [SerializeField] WeatherTable weatherTable;
         [SerializeField] WeatherDescriptions weatherDescriptions;
-        [SerializeField] Light[] lightSources;
 
 
         int currentWeatherDurationHours = 0;
@@ -29,19 +28,10 @@ namespace RPG.WeatherControl
         // Start is called before the first frame update
         void Start()
         {
-            StoreStartLightSOurceIntensities();
             gameTimeContoller.hourHasPassed += GenerateWeather;
             GenerateWeather();
         }
 
-        private void StoreStartLightSOurceIntensities()
-        {
-            lightSourceStartIntensities = new float[lightSources.Length];
-            for (int i = 0; i < lightSources.Length; i++)
-            {
-                lightSourceStartIntensities[i] = lightSources[i].intensity;
-            }
-        }
 
         private void GenerateWeather()
         {
@@ -49,13 +39,12 @@ namespace RPG.WeatherControl
             if (NewWeatherNeeded())
             {
                 int randomWeatherDiceRoll = Dice.RollDice(100, 1);
-                Weathers newWeather = weatherTable.GetWeather(gameTimeContoller.CurrentLocalMonth, randomWeatherDiceRoll);
-                currentWeatherDurationHours = Dice.RollDice(4, 1);
-                Debug.Log("Generate Weather " + newWeather + " for hours: " + currentWeatherDurationHours);
+                Weathers newWeather = weatherTable.GetWeather(gameTimeContoller.GetCurrentMonth(), randomWeatherDiceRoll);
+                currentWeatherDurationHours = Mathf.Clamp(Dice.RollDice(4, 1), 1, weatherDescriptions.GetWeatherEffect(newWeather).MaxDuration);
+                Debug.Log("Generate Weather " + newWeather + " for hours: " + currentWeatherDurationHours + " dice rolle was " + randomWeatherDiceRoll + " month " + gameTimeContoller.GetCurrentMonth());
                 currentWeatherHourSoFar = 0;
                 currentWeather = newWeather;
-                SetWeatherEffect(newWeather);
-                if (weatherHasChanged!= null)
+                 if (weatherHasChanged!= null)
                 {
                     weatherHasChanged();
                 }
@@ -71,15 +60,6 @@ namespace RPG.WeatherControl
             return false;
         }
 
-        private void SetWeatherEffect(Weathers weather)
-        {
-            //float newLightIntensityPercentage = weatherDescriptions.GetWeatherEffect(weather).LightIntesityPercentage;
-            //for (int i = 0; i < lightSources.Length; i++)
-            //{
-            //    lightSources[i].intensity = lightSourceStartIntensities[i] * (newLightIntensityPercentage/100);
-            //    lightSources[i].shadowStrength = weatherDescriptions.GetWeatherEffect(weather).LightShadowStrenght;
-            //}
-        }
     }
 }
 

@@ -10,7 +10,8 @@ namespace RPG.WeatherControl
         DarkCloud,
         LightRain,
         Rain,
-        HeavyRain
+        HeavyRain,
+        Storm
     }
 }
 

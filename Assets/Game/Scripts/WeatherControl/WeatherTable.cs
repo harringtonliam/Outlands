@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.GameTime;
+using static RPG.WeatherControl.WeatherTable;
 
 namespace RPG.WeatherControl
 {
@@ -11,11 +12,11 @@ namespace RPG.WeatherControl
         [SerializeField] MonthWeather[] monthWeathers;
         [SerializeField] Weathers defaaultWeather;
 
-        public Weathers GetWeather(int month, int diceRoll)
+        public Weathers GetWeather(string month, int diceRoll)
         {
-            foreach (var monthWeather in monthWeathers)
+            foreach(var monthWeather in monthWeathers)
             {
-                if (monthWeather.Month == month)
+                if(monthWeather.Month == month)
                 {
                     foreach (var randomWeather in monthWeather.RandomWeathers)
                     {
@@ -25,7 +26,10 @@ namespace RPG.WeatherControl
                         }
                     }
                 }
+
             }
+
+            
             return defaaultWeather;
         }
 
@@ -54,10 +58,10 @@ namespace RPG.WeatherControl
         [System.Serializable]
         public class MonthWeather
         {
-            [SerializeField] int month;
+            [SerializeField] string  month;
             [SerializeField] RandomWeather[] randomWeathers;
 
-            public int Month {  get { return month; } }
+            public string Month {  get { return month; } }
             public RandomWeather[] RandomWeathers { get { return randomWeathers; } }
         }
 

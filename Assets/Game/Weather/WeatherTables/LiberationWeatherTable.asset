@@ -13,43 +13,313 @@ MonoBehaviour:
   m_Name: LiberationWeatherTable
   m_EditorClassIdentifier: 
   monthWeathers:
-  - month: 4
+  - month: Early Spring
     randomWeathers:
-    - weather: 4
+    - weather: 0
       chanceRangeStart: 0
-      chanceRangeEnd: 30
-    - weather: 4
-      chanceRangeStart: 31
+      chanceRangeEnd: 10
+    - weather: 1
+      chanceRangeStart: 11
       chanceRangeEnd: 40
-    - weather: 4
+    - weather: 2
       chanceRangeStart: 41
       chanceRangeEnd: 50
-    - weather: 4
+    - weather: 3
       chanceRangeStart: 51
       chanceRangeEnd: 60
     - weather: 4
       chanceRangeStart: 61
+      chanceRangeEnd: 75
+    - weather: 5
+      chanceRangeStart: 76
+      chanceRangeEnd: 85
+    - weather: 6
+      chanceRangeStart: 86
+      chanceRangeEnd: 97
+    - weather: 6
+      chanceRangeStart: 71
+      chanceRangeEnd: 75
+  - month: Mid Spring
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 10
+    - weather: 1
+      chanceRangeStart: 11
+      chanceRangeEnd: 50
+    - weather: 2
+      chanceRangeStart: 51
+      chanceRangeEnd: 60
+    - weather: 3
+      chanceRangeStart: 61
+      chanceRangeEnd: 70
+    - weather: 4
+      chanceRangeStart: 71
+      chanceRangeEnd: 80
+    - weather: 6
+      chanceRangeStart: 81
+      chanceRangeEnd: 90
+    - weather: 7
+      chanceRangeStart: 91
+      chanceRangeEnd: 100
+  - month: Late Spring
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 10
+    - weather: 1
+      chanceRangeStart: 11
+      chanceRangeEnd: 65
+    - weather: 2
+      chanceRangeStart: 66
+      chanceRangeEnd: 75
+    - weather: 3
+      chanceRangeStart: 76
+      chanceRangeEnd: 80
+    - weather: 4
+      chanceRangeStart: 81
+      chanceRangeEnd: 90
+    - weather: 5
+      chanceRangeStart: 91
+      chanceRangeEnd: 95
+    - weather: 6
+      chanceRangeStart: 96
+      chanceRangeEnd: 98
+    - weather: 6
+      chanceRangeStart: 0
+      chanceRangeEnd: 0
+  - month: Early Summer
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 20
+    - weather: 1
+      chanceRangeStart: 21
+      chanceRangeEnd: 60
+    - weather: 2
+      chanceRangeStart: 61
+      chanceRangeEnd: 75
+    - weather: 3
+      chanceRangeStart: 76
+      chanceRangeEnd: 80
+    - weather: 4
+      chanceRangeStart: 81
+      chanceRangeEnd: 90
+    - weather: 5
+      chanceRangeStart: 91
+      chanceRangeEnd: 95
+    - weather: 6
+      chanceRangeStart: 96
+      chanceRangeEnd: 98
+    - weather: 7
+      chanceRangeStart: 99
+      chanceRangeEnd: 100
+  - month: High Summer
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 25
+    - weather: 1
+      chanceRangeStart: 26
+      chanceRangeEnd: 65
+    - weather: 2
+      chanceRangeStart: 66
+      chanceRangeEnd: 80
+    - weather: 3
+      chanceRangeStart: 81
+      chanceRangeEnd: 85
+    - weather: 4
+      chanceRangeStart: 86
+      chanceRangeEnd: 95
+    - weather: 5
+      chanceRangeStart: 96
+      chanceRangeEnd: 97
+    - weather: 6
+      chanceRangeStart: 98
       chanceRangeEnd: 99
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
-  - month: 0
-    randomWeathers: []
+    - weather: 7
+      chanceRangeStart: 100
+      chanceRangeEnd: 100
+  - month: End Summer
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 20
+    - weather: 1
+      chanceRangeStart: 21
+      chanceRangeEnd: 50
+    - weather: 2
+      chanceRangeStart: 51
+      chanceRangeEnd: 60
+    - weather: 3
+      chanceRangeStart: 61
+      chanceRangeEnd: 65
+    - weather: 4
+      chanceRangeStart: 66
+      chanceRangeEnd: 80
+    - weather: 5
+      chanceRangeStart: 81
+      chanceRangeEnd: 90
+    - weather: 6
+      chanceRangeStart: 91
+      chanceRangeEnd: 95
+    - weather: 7
+      chanceRangeStart: 96
+      chanceRangeEnd: 100
+  - month: Early Autumn
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 10
+    - weather: 1
+      chanceRangeStart: 11
+      chanceRangeEnd: 40
+    - weather: 2
+      chanceRangeStart: 41
+      chanceRangeEnd: 60
+    - weather: 3
+      chanceRangeStart: 61
+      chanceRangeEnd: 70
+    - weather: 4
+      chanceRangeStart: 71
+      chanceRangeEnd: 80
+    - weather: 5
+      chanceRangeStart: 81
+      chanceRangeEnd: 95
+    - weather: 6
+      chanceRangeStart: 96
+      chanceRangeEnd: 98
+    - weather: 7
+      chanceRangeStart: 99
+      chanceRangeEnd: 100
+  - month: Mid Autumn
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 9
+    - weather: 1
+      chanceRangeStart: 10
+      chanceRangeEnd: 40
+    - weather: 2
+      chanceRangeStart: 41
+      chanceRangeEnd: 45
+    - weather: 3
+      chanceRangeStart: 46
+      chanceRangeEnd: 60
+    - weather: 4
+      chanceRangeStart: 61
+      chanceRangeEnd: 70
+    - weather: 5
+      chanceRangeStart: 71
+      chanceRangeEnd: 90
+    - weather: 6
+      chanceRangeStart: 91
+      chanceRangeEnd: 98
+    - weather: 7
+      chanceRangeStart: 99
+      chanceRangeEnd: 100
+  - month: Late Autumn
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 5
+    - weather: 1
+      chanceRangeStart: 6
+      chanceRangeEnd: 35
+    - weather: 2
+      chanceRangeStart: 36
+      chanceRangeEnd: 45
+    - weather: 3
+      chanceRangeStart: 46
+      chanceRangeEnd: 55
+    - weather: 4
+      chanceRangeStart: 55
+      chanceRangeEnd: 80
+    - weather: 5
+      chanceRangeStart: 81
+      chanceRangeEnd: 95
+    - weather: 6
+      chanceRangeStart: 96
+      chanceRangeEnd: 98
+    - weather: 7
+      chanceRangeStart: 99
+      chanceRangeEnd: 100
+  - month: Early Winter
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 5
+    - weather: 1
+      chanceRangeStart: 6
+      chanceRangeEnd: 30
+    - weather: 2
+      chanceRangeStart: 61
+      chanceRangeEnd: 40
+    - weather: 3
+      chanceRangeStart: 41
+      chanceRangeEnd: 60
+    - weather: 4
+      chanceRangeStart: 61
+      chanceRangeEnd: 80
+    - weather: 5
+      chanceRangeStart: 81
+      chanceRangeEnd: 90
+    - weather: 6
+      chanceRangeStart: 91
+      chanceRangeEnd: 97
+    - weather: 7
+      chanceRangeStart: 98
+      chanceRangeEnd: 100
+  - month: Deep Winter
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 5
+    - weather: 1
+      chanceRangeStart: 6
+      chanceRangeEnd: 25
+    - weather: 2
+      chanceRangeStart: 26
+      chanceRangeEnd: 40
+    - weather: 3
+      chanceRangeStart: 41
+      chanceRangeEnd: 60
+    - weather: 4
+      chanceRangeStart: 61
+      chanceRangeEnd: 75
+    - weather: 5
+      chanceRangeStart: 76
+      chanceRangeEnd: 90
+    - weather: 6
+      chanceRangeStart: 91
+      chanceRangeEnd: 96
+    - weather: 7
+      chanceRangeStart: 97
+      chanceRangeEnd: 100
+  - month: End Winter
+    randomWeathers:
+    - weather: 0
+      chanceRangeStart: 0
+      chanceRangeEnd: 5
+    - weather: 1
+      chanceRangeStart: 6
+      chanceRangeEnd: 30
+    - weather: 2
+      chanceRangeStart: 31
+      chanceRangeEnd: 40
+    - weather: 3
+      chanceRangeStart: 41
+      chanceRangeEnd: 50
+    - weather: 4
+      chanceRangeStart: 51
+      chanceRangeEnd: 70
+    - weather: 5
+      chanceRangeStart: 71
+      chanceRangeEnd: 85
+    - weather: 6
+      chanceRangeStart: 86
+      chanceRangeEnd: 95
+    - weather: 7
+      chanceRangeStart: 96
+      chanceRangeEnd: 100
   defaaultWeather: 1

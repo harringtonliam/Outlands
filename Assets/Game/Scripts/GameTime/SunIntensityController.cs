@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using RPG.WeatherControl;
 
 namespace  RPG.GameTime
 {
     public class SunIntensityController : MonoBehaviour
     {
-
+        [SerializeField] WeatherContoller weatherContoller;
         [SerializeField] float dayTimeIntensity = 1f;
         [SerializeField] float dayTimeShadowStrenght = 1f;
         [SerializeField] float nightTimeIntensity = 0.1f;
@@ -29,9 +30,24 @@ namespace  RPG.GameTime
             gameTimeController = GetComponent<GameTimeContoller>();
             sunDirectionController = GetComponent<SunDirectionController>();
             gameTimeController.hourHasPassed += SetSunProperties;
+            weatherContoller.weatherHasChanged += ApplyWeatherEffects;
             sun = sunDirectionController.SunDirectionalLight;
         }
-        
+
+        private void OnDisable()
+        {
+            try
+            {
+                gameTimeController.hourHasPassed -= SetSunProperties;
+                weatherContoller.weatherHasChanged -= ApplyWeatherEffects;
+
+            } catch(Exception e)
+            {
+                Debug.Log("SunIntensityController " + e.ToString());
+            }
+
+        }
+
         private void SetSunProperties()
         {
             if(sunDirectionController.IsDawnOrDusk())
@@ -72,6 +88,16 @@ namespace  RPG.GameTime
             sun.intensity = dayTimeIntensity;
             //sun.shadowStrength = dayTimeShadowStrenght;
             RenderSettings.ambientIntensity = dayTimeEnvironmnetLightingIntensityMultiplier;
+        }
+
+        private void ApplyWeatherEffects()
+        {
+            SetSunProperties();
+        }
+
+        private  float GetWeatherIntensityAdjustment()
+        {
+            return 1f;
         }
 
 
