@@ -22,6 +22,7 @@ namespace RPG.Environment
         {
             gameTimeContoller = FindFirstObjectByType<GameTimeContoller>();
             gameTimeContoller.monthHasPassed += UpdatePlant;
+            UpdatePlant();
         }
 
         private void OnDisable()

@@ -114,7 +114,7 @@ namespace RPG.Control
             return false;
         }
 
-        private Vector3 CalculateFormationTarget(Vector3 target , int playerIndex)
+        public Vector3 CalculateFormationTarget(Vector3 target , int playerIndex)
         {
             if (defaultFormation != null)
             {

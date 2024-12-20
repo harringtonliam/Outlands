@@ -28,20 +28,21 @@ namespace RPG.WeatherControl
 
             if (weatherContoller != null)
             {
-                weatherContoller.weatherHasChanged += SetVFX;
+                weatherContoller.weatherHasChanged += SetSFX;
             }
+            SetSFX();
         }
 
         private void Update()
         {
-            if (Mathf.Abs(storedPositionY - transform.position.y) > 20)
-            {
-                storedPositionY = transform.position.y;
-                SetVFX();
-            }
+            //if (Mathf.Abs(storedPositionY - transform.position.y) > 20)
+            //{
+            //    storedPositionY = transform.position.y;
+            //    SetSFX();
+            //}
         }
 
-        public void SetVFX()
+        public void SetSFX()
         {
             foreach (var weatherVFX in weatherSFXes)
             {

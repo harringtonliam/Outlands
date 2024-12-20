@@ -6,6 +6,7 @@ using RPG.Core;
 using RPG.Movement;
 using System;
 using RPG.Attributes;
+using RPG.Buildings;
 
 namespace RPG.Control
 {
@@ -22,6 +23,8 @@ namespace RPG.Control
         [SerializeField] float patrolSpeedFraction = 0.2f;
         [SerializeField] float shoutDistance = 5f;
         [SerializeField] GameObject combatTargetGameObject;
+        [SerializeField] GameObject destination;
+        [SerializeField] HouseSettings homeHouse;
 
         Mover mover;
         Vector3 guardPosition;
@@ -61,8 +64,12 @@ namespace RPG.Control
             if (InteractWithCombat()) return;
             if (InteractWithSuspicsion()) return;
             if (InteractWithPatrolPath()) return;
+            if (InteractWithDestination()) return;
+            if (InteractWithHomeHouse()) return;
             if (InteractWithGuardPosition()) return;
         }
+
+
 
         public void Aggrevate()
         {
@@ -119,6 +126,19 @@ namespace RPG.Control
 
         }
 
+        private bool AtPosition(Vector3 positionToCheck)
+        {
+            float distanceToPosition = Vector3.Distance(transform.position, GetCurrentWaypoint());
+            if (distanceToPosition <= waypointTolerance)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void CycleWaypoint()
         {
             currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
@@ -142,6 +162,38 @@ namespace RPG.Control
             {
                 return false;
             }
+        }
+
+        private bool InteractWithDestination()
+        {
+            if(destination == null) return false;
+            if(!AtPosition(destination.transform.position))
+            {
+                ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
+                actionSchduler.CancelCurrentAction();
+            }
+            else
+            {
+                mover.StartMovementAction(destination.transform.position, patrolSpeedFraction);
+            }
+
+            return true;
+        }
+
+        private bool InteractWithHomeHouse()
+        {
+            if (homeHouse == null) return false;
+            var positionToGoTo = homeHouse.DayTimeDestinations[0];
+            if(AtPosition(positionToGoTo.transform.position))
+            {
+                ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
+                actionSchduler.CancelCurrentAction();
+            }
+            else
+            {
+                mover.StartMovementAction(positionToGoTo.transform.position, patrolSpeedFraction);
+            }
+            return true;
         }
 
         private bool InteractWithGuardPosition()
