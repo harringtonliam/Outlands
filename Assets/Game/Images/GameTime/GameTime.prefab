@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 859018481376999232}
   - component: {fileID: 1550061943387843103}
   - component: {fileID: 2159422314660925026}
+  - component: {fileID: 7638782669927503681}
   m_Layer: 0
   m_Name: GameTime
   m_TagString: Untagged
@@ -81,9 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb6661d07765d147b49741ad647c56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sun: {fileID: 0}
-  sunriseHour: 6
-  sunsetHour: 18
+  weatherContoller: {fileID: 0}
   dayTimeIntensity: 1
   dayTimeShadowStrenght: 1
   nightTimeIntensity: 0.1
@@ -91,3 +90,20 @@ MonoBehaviour:
   dayTimeEnvironmnetLightingIntensityMultiplier: 1
   nighTimeEnvironmnetLightingIntensityMultiplier: 0.05
   duskFraction: 0.5
+--- !u!114 &7638782669927503681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706482711683747219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e1f1d02bf2d1ac458bba86c6e4d2700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moon: {fileID: 0}
+  monthsVisible: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
+  dayVisibleFrom: 10
+  dayVisibleTo: 18
+  maxIntensity: 0.1

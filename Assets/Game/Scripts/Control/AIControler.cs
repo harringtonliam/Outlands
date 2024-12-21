@@ -128,7 +128,7 @@ namespace RPG.Control
 
         private bool AtPosition(Vector3 positionToCheck)
         {
-            float distanceToPosition = Vector3.Distance(transform.position, GetCurrentWaypoint());
+            float distanceToPosition = Vector3.Distance(transform.position, positionToCheck);
             if (distanceToPosition <= waypointTolerance)
             {
                 return true;
@@ -167,10 +167,10 @@ namespace RPG.Control
         private bool InteractWithDestination()
         {
             if(destination == null) return false;
-            if(!AtPosition(destination.transform.position))
+            if(AtPosition(destination.transform.position))
             {
-                ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
-                actionSchduler.CancelCurrentAction();
+                //ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
+                //actionSchduler.CancelCurrentAction();
             }
             else
             {
@@ -186,8 +186,8 @@ namespace RPG.Control
             var positionToGoTo = homeHouse.DayTimeDestinations[0];
             if(AtPosition(positionToGoTo.transform.position))
             {
-                ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
-                actionSchduler.CancelCurrentAction();
+                //ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
+                //actionSchduler.CancelCurrentAction();
             }
             else
             {

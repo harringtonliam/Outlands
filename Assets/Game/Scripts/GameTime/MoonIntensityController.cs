@@ -6,7 +6,7 @@ namespace RPG.GameTime
 {
     public class MoonIntensityController : MonoBehaviour
     {
-        [SerializeField] GameTimeContoller gameTimeContoller;
+
         [SerializeField] Light moon;
         [SerializeField] int[] monthsVisible;
         [SerializeField] int dayVisibleFrom = 10;
@@ -14,9 +14,12 @@ namespace RPG.GameTime
         [SerializeField] float maxIntensity = 0.1f;
 
 
+        GameTimeContoller gameTimeContoller;
+
         // Start is called before the first frame update
         void Start()
         {
+            gameTimeContoller = GetComponent<GameTimeContoller>();
             gameTimeContoller.dayHasPassed += SetMoonIntensity;
         }
 
