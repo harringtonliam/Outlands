@@ -19,8 +19,6 @@ namespace RPG.WeatherControl
             SetLighting();
         }
 
-
-
         // Update is called once per frame
         void Update()
         {
