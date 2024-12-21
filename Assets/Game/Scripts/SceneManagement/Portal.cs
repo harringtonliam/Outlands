@@ -36,11 +36,11 @@ namespace RPG.SceneManagement
         private IEnumerator Transition()
         {
             DontDestroyOnLoad(gameObject);
-            Fader fader = FindObjectOfType<Fader>();
+            Fader fader = FindFirstObjectByType<Fader>();
             yield return fader.FadeOut(fadeTime);
 
 
-            SavingWrapper saveingWrapper = FindObjectOfType<SavingWrapper>();
+            SavingWrapper saveingWrapper = FindFirstObjectByType<SavingWrapper>();
             DisablePlayerControl();  //player on old scene
             saveingWrapper.AutoSave();
 
@@ -68,7 +68,7 @@ namespace RPG.SceneManagement
 
         private Portal GetOtherPortal()
         {
-           foreach(Portal portal in   FindObjectsOfType<Portal>())
+           foreach(Portal portal in   FindObjectsByType<Portal>(FindObjectsSortMode.None))
            {
                 if (portal == this) continue;
                  if (portal.destinationIdentifier != destinationIdentifier) continue;

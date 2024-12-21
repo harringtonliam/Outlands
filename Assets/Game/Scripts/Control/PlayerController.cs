@@ -50,7 +50,7 @@ namespace RPG.Control
 
         public void PlayerDead()
         {
-            GameOver gameOver = FindObjectOfType<GameOver>();
+            GameOver gameOver = FindFirstObjectByType<GameOver>();
             if (gameOver!= null)
             {
                 gameOver.GameOverActions();

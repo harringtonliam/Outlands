@@ -35,11 +35,11 @@ namespace RPG.WeatherControl
 
         private void Update()
         {
-            //if (Mathf.Abs(storedPositionY - transform.position.y) > 20)
-            //{
-            //    storedPositionY = transform.position.y;
-            //    SetSFX();
-            //}
+            if (Mathf.Abs(storedPositionY - transform.position.y) > 20)
+            {
+                storedPositionY = transform.position.y;
+                SetSFX();
+            }
         }
 
         public void SetSFX()

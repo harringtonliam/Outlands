@@ -16,7 +16,7 @@ namespace RPG.UI.SceneManagement
 
         public void LoadStartScenee()
         {
-            FindObjectOfType<SavingWrapper>().DeleteDefaultSaveFile();
+            FindFirstObjectByType<SavingWrapper>().DeleteDefaultSaveFile();
             SceneManager.LoadScene(startSceneIndex);
         }
 

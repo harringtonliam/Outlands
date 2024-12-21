@@ -11,7 +11,7 @@ namespace RPG.UI.Information
         // Start is called before the first frame update
         void Start()
         {
-            PlayerCharacter playerCharacter = FindObjectOfType<PlayerCharacter>();
+            PlayerCharacter playerCharacter = FindFirstObjectByType<PlayerCharacter>();
             GetComponent<PlayerCharacterUI>().SetUp(playerCharacter.PlayerCharacterGameObjects[0]);
         }
     }

@@ -11,7 +11,7 @@ namespace RPG.Quests
 
         public void GiveQuest()
         {
-            QuestList questList = FindObjectOfType<QuestList>();
+            QuestList questList = FindFirstObjectByType<QuestList>();
             if (questList == null) return;
             questList.AddQuest(quest);
         }

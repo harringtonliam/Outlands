@@ -9,7 +9,7 @@ public class QuickSaveButtonUI : MonoBehaviour
 
     private void Start()
     {
-        savingWrapper = FindObjectOfType<SavingWrapper>();
+        savingWrapper = FindFirstObjectByType<SavingWrapper>();
     }
 
 

@@ -12,9 +12,7 @@ namespace  RPG.GameTime
     {
         [SerializeField] WeatherContoller weatherContoller;
         [SerializeField] float dayTimeIntensity = 1f;
-        [SerializeField] float dayTimeShadowStrenght = 1f;
         [SerializeField] float nightTimeIntensity = 0.1f;
-        [SerializeField] float nightTimeShadowStrenght = 0.1f;
         [SerializeField] float dayTimeEnvironmnetLightingIntensityMultiplier = 1f;
         [SerializeField] float nighTimeEnvironmnetLightingIntensityMultiplier = 0.05f;
         [SerializeField] float duskFraction = 0.5f;

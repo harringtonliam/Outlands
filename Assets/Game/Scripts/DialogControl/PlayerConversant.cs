@@ -250,14 +250,14 @@ namespace RPG.DialogueControl
 
         private void TriggerAction(Quest quest)
         {
-            QuestList questList = FindObjectOfType<QuestList>();
+            QuestList questList = FindFirstObjectByType<QuestList>();
             if (questList == null) return;            
             questList.AddQuest(quest);
         }
 
         private void TriggerAction(Quest quest, string questObjective)
         {
-            QuestList questList = FindObjectOfType<QuestList>();
+            QuestList questList = FindFirstObjectByType<QuestList>();
             if (questList == null) return;
             questList.CompleteQuestObjective(quest, questObjective);
         }

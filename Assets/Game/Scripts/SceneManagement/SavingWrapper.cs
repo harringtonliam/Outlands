@@ -19,7 +19,7 @@ namespace RPG.SceneManagement
 
          private void Start()
         {
-            fader = FindObjectOfType<Fader>();
+            fader = FindFirstObjectByType<Fader>();
         }
 
         private IEnumerator LoadLastScene(string savedGame)

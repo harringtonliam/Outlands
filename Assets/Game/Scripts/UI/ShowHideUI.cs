@@ -49,7 +49,7 @@ namespace RPG.UI
 
         private void PauseOrResume()
         {
-            PlayPause playPause = FindObjectOfType<PlayPause>();
+            PlayPause playPause = FindFirstObjectByType<PlayPause>();
             if( playPause == null) return;
             if (pauseGameOnOpen)
             {

@@ -12,7 +12,7 @@ namespace RPG.UI
 
         public void ButtonClicked()
         {
-            ShowHideUI[] allshowHides = FindObjectsOfType<ShowHideUI>();
+            ShowHideUI[] allshowHides = FindObjectsByType<ShowHideUI>(FindObjectsSortMode.None);
             for (int i = 0; i < allshowHides.Length; i++)
             {
                 if (allshowHides[i] != uiToShow)

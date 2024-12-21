@@ -36,7 +36,7 @@ namespace RPG.InventoryControl
             if (slotFoundOk)
             {
                 Destroy(gameObject);
-                ScenePickups scenePickups = FindObjectOfType<ScenePickups>();
+                ScenePickups scenePickups = FindFirstObjectByType<ScenePickups>();
                 if (scenePickups != null)
                 {
                     scenePickups.RemoveItem(this.inventoryItem, this.numberOfItems, this.transform.position);

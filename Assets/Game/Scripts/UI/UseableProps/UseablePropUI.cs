@@ -25,7 +25,7 @@ namespace RPG.UI.UseableProps
         // Start is called before the first frame update
         void Start()
         {
-            usablePropLink = FindObjectOfType<UseablePropLink>();
+            usablePropLink = FindFirstObjectByType<UseablePropLink>();
             usablePropLink.onDisplayUseablePropUI += ShowDisplay;
             closeButton.onClick.AddListener(Close);
             activateButton.onClick.AddListener(ActivateButtonClick);

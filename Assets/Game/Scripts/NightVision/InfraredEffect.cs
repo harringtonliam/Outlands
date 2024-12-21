@@ -16,7 +16,7 @@ namespace RPG.NightVision
 
         private void Awake()
         {
-            inGameSettings = FindObjectOfType<NightVisionSettings>();
+            inGameSettings = FindFirstObjectByType<NightVisionSettings>();
         }
 
         private void OnEnable()

@@ -17,7 +17,7 @@ namespace RPG.UI.InventoryControl
 
         void Start()
         {
-            scenePickups = FindObjectOfType<ScenePickups>();
+            scenePickups = FindFirstObjectByType<ScenePickups>();
             player = GameObject.FindWithTag("Player");
         }
 

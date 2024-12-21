@@ -13,7 +13,7 @@ public class CharacterTorch : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        torchSettings = FindObjectOfType<TorchSettings>();
+        torchSettings = FindFirstObjectByType<TorchSettings>();
     }
 
     private void OnEnable()

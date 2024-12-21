@@ -56,7 +56,7 @@ namespace RPG.UseablePropControl
 
         private void Start()
         {
-            useablePropLink = FindObjectOfType<UseablePropLink>();
+            useablePropLink = FindFirstObjectByType<UseablePropLink>();
         }
 
         public CursorType GetCursorType()

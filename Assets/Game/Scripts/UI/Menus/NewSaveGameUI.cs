@@ -14,7 +14,7 @@ namespace RPG.UI.Menus
 
         public void SaveGame()
         {
-            FindObjectOfType<SavingWrapper>().Save(savedGameNameInput.text);
+            FindFirstObjectByType<SavingWrapper>().Save(savedGameNameInput.text);
             savedGameNameInput.text = string.Empty;
 
         }

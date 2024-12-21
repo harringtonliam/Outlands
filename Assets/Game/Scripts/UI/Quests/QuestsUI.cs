@@ -24,7 +24,7 @@ namespace RPG.UI.Quests
         // Start is called before the first frame update
         void Start()
         {
-            questList = FindObjectOfType<QuestList>();
+            questList = FindFirstObjectByType<QuestList>();
             BuildQuestList(); 
             SetHeadings();
             questList.onListUpdated += BuildQuestList;

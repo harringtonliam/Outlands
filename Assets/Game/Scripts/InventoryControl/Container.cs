@@ -20,7 +20,7 @@ namespace RPG.InventoryControl
 
         private void Start()
         {
-            containerLink = FindObjectOfType<ContainerLink>();
+            containerLink = FindFirstObjectByType<ContainerLink>();
         }
 
         public CursorType GetCursorType()

@@ -61,7 +61,7 @@ namespace RPG.InventoryControl
         private List<InventoryItemSlot> AddAllPickupsInScene()
         {
             List<InventoryItemSlot> pickupsInScene = new List<InventoryItemSlot>();
-            Pickup[] allpickups = FindObjectsOfType<Pickup>();
+            Pickup[] allpickups = FindObjectsByType<Pickup>(FindObjectsSortMode.None);
             foreach (var pickup in allpickups)
             {
                 InventoryItemSlot inventoryItemSlot;
