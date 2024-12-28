@@ -20,6 +20,7 @@ namespace RPG.CameraControl
         [SerializeField] CinemachineCamera virtualCamera;
 
 
+
         private Vector3 targetFollowOffset;
         private CinemachineFollow cinemachineTransposer;
 

@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5853452883996378681}
   - component: {fileID: 5853452883996378686}
+  - component: {fileID: 3274743360612604282}
+  - component: {fileID: 3853264094600540342}
+  - component: {fileID: 4045041098492783355}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -24,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5853452883996378680}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5853452883996378686
 MonoBehaviour:
@@ -44,4 +47,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489bbf8e61e3bfd4e85164c16fb9c964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 10
   rotationSpeed: 50
+  rotationFactor: 50
+  zoomSpeed: 5
+  minFollowYOffset: 2
+  maxFollowYOffset: 15
+  zoomIncreaseAmount: 1
+  maxDistanceFromSelectedPlayer: 10
+  virtualCamera: {fileID: 0}
+--- !u!114 &3274743360612604282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853452883996378680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43a29913600ba345bb1fcda440265ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weatherVFXes:
+  - weather: 4
+    vfx: {fileID: 0}
+  - weather: 5
+    vfx: {fileID: 0}
+  - weather: 6
+    vfx: {fileID: 0}
+  - weather: 7
+    vfx: {fileID: 0}
+  weatherContoller: {fileID: 0}
+  WeatherEffectsOn: 1
+--- !u!114 &3853264094600540342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853452883996378680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f92d74bc7ddc45148985d2888c346a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weatherSFXes:
+  - weather: 4
+    sfx: {fileID: 0}
+  - weather: 5
+    sfx: {fileID: 0}
+  - weather: 6
+    sfx: {fileID: 0}
+  - weather: 7
+    sfx: {fileID: 0}
+  - weather: 3
+    sfx: {fileID: 0}
+  weatherContoller: {fileID: 0}
+  WeatherEffectsOn: 1
+--- !u!114 &4045041098492783355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853452883996378680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c85047694c1e747848b949856811ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interiorLoactionHeight: -50

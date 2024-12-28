@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Environment;
 
 namespace RPG.WeatherControl
 {
@@ -9,10 +10,10 @@ namespace RPG.WeatherControl
         [SerializeField] WeatherVFX[] weatherVFXes;
         [SerializeField] WeatherContoller weatherContoller;
         [SerializeField] bool WeatherEffectsOn = true;
-        [SerializeField] float interiorLoactionHeight = -50f;
 
 
-        private float storedPositionY;
+
+        CameraEnvironmentController cameraEnvironmentController;
 
         [System.Serializable]
         public struct WeatherVFX
@@ -24,22 +25,30 @@ namespace RPG.WeatherControl
         // Start is called before the first frame update
         void Start()
         {
-            storedPositionY = transform.position.y;
+            cameraEnvironmentController = GetComponent<CameraEnvironmentController>();
 
             if (weatherContoller != null)
             {
                 weatherContoller.weatherHasChanged += SetVFX;
             }
+
+            cameraEnvironmentController.onCameraMovedIndoorsOrOutDoors += SetVFX;
         }
 
-        private void Update()
+        private void OnDisable()
         {
-            if (Mathf.Abs(storedPositionY - transform.position.y) > 20)
+            try
             {
-                storedPositionY = transform.position.y;
-                SetVFX();
-            }    
+                cameraEnvironmentController.onCameraMovedIndoorsOrOutDoors -= SetVFX;
+            }
+            catch (System.Exception e)
+            {
+
+                Debug.Log(System.String.Format("CamereWeatherVFX {0}" , e.Message));
+            }
         }
+
+
 
         public void SetVFX()
         {
@@ -61,14 +70,12 @@ namespace RPG.WeatherControl
 
         private bool IsInteriorLocation()
         {
-            if(transform.position.y <= interiorLoactionHeight)
-            {
-                return true;
-            }
-            return false;
+            return cameraEnvironmentController.IsCameraAtInteriorLocation();
         }
     }
 
 }
+
+
 
 

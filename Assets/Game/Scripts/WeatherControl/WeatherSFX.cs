@@ -1,5 +1,7 @@
 using RPG.WeatherControl;
 using UnityEngine;
+using System;
+using RPG.Environment;
 
 namespace RPG.WeatherControl
 {
@@ -9,10 +11,10 @@ namespace RPG.WeatherControl
         [SerializeField] WeatherSoundFX[] weatherSFXes;
         [SerializeField] WeatherContoller weatherContoller;
         [SerializeField] bool WeatherEffectsOn = true;
-        [SerializeField] float interiorLoactionHeight = -50f;
 
 
-        private float storedPositionY;
+
+        CameraEnvironmentController cameraEnvironmentController;
 
         [System.Serializable]
         public struct WeatherSoundFX
@@ -24,23 +26,32 @@ namespace RPG.WeatherControl
         // Start is called before the first frame update
         void Start()
         {
-            storedPositionY = transform.position.y;
+
 
             if (weatherContoller != null)
             {
                 weatherContoller.weatherHasChanged += SetSFX;
             }
+
+            cameraEnvironmentController = GetComponent<CameraEnvironmentController>();
+            cameraEnvironmentController.onCameraMovedIndoorsOrOutDoors += SetSFX;
+
             SetSFX();
         }
 
-        private void Update()
+        private void OnDisable()
         {
-            if (Mathf.Abs(storedPositionY - transform.position.y) > 20)
+            try
             {
-                storedPositionY = transform.position.y;
-                SetSFX();
+                cameraEnvironmentController.onCameraMovedIndoorsOrOutDoors -= SetSFX;
+            }
+            catch (Exception e)
+            {
+
+                Debug.Log(System.String.Format("WeatherSFX {0}", e.Message));
             }
         }
+
 
         public void SetSFX()
         {
@@ -62,11 +73,7 @@ namespace RPG.WeatherControl
 
         private bool IsInteriorLocation()
         {
-            if (transform.position.y <= interiorLoactionHeight)
-            {
-                return true;
-            }
-            return false;
+            return cameraEnvironmentController.IsCameraAtInteriorLocation();
         }
     }
 }
