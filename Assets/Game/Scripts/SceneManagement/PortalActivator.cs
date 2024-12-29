@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Control;
 
 
 namespace RPG.SceneManagement
@@ -39,6 +40,7 @@ namespace RPG.SceneManagement
         private void PortalBehaviour()
         {
             targetPortal.ActivatePortal(gameObject);
+            Cancel();
         }
 
         public void StartPortalActivation(GameObject portal)
@@ -55,7 +57,17 @@ namespace RPG.SceneManagement
 
         private bool GetIsInRange()
         {
-            return activateRange >= Vector3.Distance(targetPortal.transform.position, transform.position);
+            //All selected players mush be in range
+            var players = PlayerSelector.GetAllSelectedPlayers();
+            foreach(var player in players )
+            {
+                if (activateRange <= Vector3.Distance(targetPortal.transform.position, player.transform.position))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -30,7 +30,17 @@ namespace RPG.Core
             
         }
 
+        public bool TryToOpenDoor()
+        {
+            if (isLocked)
+            {
+                return false;
+            }
 
+            closing = false;
+            opening = true;
+            return true;
+        }
 
         private void OnTriggerEnter(Collider other)
         {

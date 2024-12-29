@@ -17,11 +17,18 @@ namespace RPG.SceneManagement
         [SerializeField] InScenePortal destinationPortal;
         [SerializeField] bool playerUsablePortal = true;
 
+        Door door;
+
+        private void Start()
+        {
+            door = GetComponent<Door>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
            if (other.tag == "Player")
             {
-                StartCoroutine(Transition(other.gameObject));
+                //StartCoroutine(Transition(other.gameObject));
             }
            else
             {
@@ -39,6 +46,10 @@ namespace RPG.SceneManagement
 
             if(portalActivator.GetComponent<PlayerController>() != null)
             {
+                if(door != null && !door.TryToOpenDoor())
+                {
+                    return;
+                }
                 StartCoroutine(Transition(portalActivator));
             }
             else
@@ -50,6 +61,7 @@ namespace RPG.SceneManagement
 
         private IEnumerator Transition(GameObject portalActivator)
         {
+            yield return new WaitForSeconds(2f); ;
             Fader fader = FindFirstObjectByType<Fader>();
             yield return fader.FadeOut(fadeTime);
 
@@ -160,10 +172,20 @@ namespace RPG.SceneManagement
 
         public void HandleActivation(PlayerSelector playerController)
         {
-            PortalActivator portalActivator = playerController.transform.GetComponent<PortalActivator>();
-            if (portalActivator != null)
+            //PortalActivator portalActivator = playerController.transform.GetComponent<PortalActivator>();
+            //if (portalActivator != null)
+            //{
+            //    portalActivator.StartPortalActivation(gameObject);
+            //}
+
+            var allSelectedPlayers = PlayerSelector.GetAllSelectedPlayers();
+            foreach ( var player in allSelectedPlayers )
             {
-                portalActivator.StartPortalActivation(gameObject);
+                PortalActivator portalActivator = player.GetComponent<PortalActivator>();
+                if ( portalActivator != null )
+                {
+                    portalActivator.StartPortalActivation(gameObject);
+                }
             }
         }
 
