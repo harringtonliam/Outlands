@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace RPG.Core
 {
@@ -15,6 +16,11 @@ namespace RPG.Core
 
         bool opening = false;
         bool closing = false;
+
+        public event Action OnDoorOpen;
+        public event Action OnDoorClose;
+
+
 
 
         private void Update()
@@ -40,6 +46,12 @@ namespace RPG.Core
             closing = false;
             opening = true;
             return true;
+        }
+
+        public bool IsDoorOpen()
+        {
+            float distanceToOpen = Vector3.Distance(door.position, openPosition.position);
+            return Mathf.Approximately(distanceToOpen, 0f);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -73,16 +85,18 @@ namespace RPG.Core
             if (Mathf.Approximately(distanceToClosed, 0f))
             {
                 closing = false;
+                RaiseOnDoorClose();
             }
         }
 
         private void OpenDoor()
         {
             door.position = Vector3.MoveTowards(door.position, openPosition.position, doorSpeed * Time.deltaTime);
-            float distanceToClosed = Vector3.Distance(door.position, openPosition.position);
-            if (Mathf.Approximately(distanceToClosed, 0f))
+            float distanceToOpen = Vector3.Distance(door.position, openPosition.position);
+            if (Mathf.Approximately(distanceToOpen, 0f))
             {
                 opening = false;
+                RaiseOnDoorOpen();
             }
         }
 
@@ -94,6 +108,16 @@ namespace RPG.Core
         public void UnLock()
         {
             isLocked = false;
+        }
+
+        private void RaiseOnDoorOpen()
+        {
+            if(OnDoorOpen != null) OnDoorOpen();
+        }
+
+        private void RaiseOnDoorClose()
+        {
+            if (OnDoorClose != null) OnDoorClose();
         }
     }
 

@@ -71,16 +71,32 @@ namespace RPG.Control
                 IRaycastable[] raycastables = hit.collider.gameObject.GetComponents<IRaycastable>();
                 foreach (var raycastable in raycastables)
                 {
-                    if (raycastable.HandleRaycast(selectedPlayer) != RaycastableReturnValue.NoAction)
+                    var returnValue = raycastable.HandleRaycast(selectedPlayer);
+                    if (returnValue != RaycastableReturnValue.NoAction)
                     {
                         SetCursorType(raycastable.GetCursorType());
                         if (InputManager.Instance.IsMouseButtonDown())
                         {
-                            selectedPlayer = PlayerSelector.GetFirstSelectedPlayer().GetComponent<PlayerSelector>();
-                            raycastable.HandleActivation(selectedPlayer);
+                            if(returnValue == RaycastableReturnValue.FirstPlayerCharacter)
+                            {
+                                selectedPlayer = PlayerSelector.GetFirstSelectedPlayer().GetComponent<PlayerSelector>();
+                                raycastable.HandleActivation(selectedPlayer);
+                            }
+                            else if(returnValue == RaycastableReturnValue.AllPlayerCharacters)
+                            {
+                                Debug.Log("InteractWithComponent doing AllPlayerCharacters " + PlayerSelector.GetAllSelectedPlayers().Count);
+                                foreach (var player in PlayerSelector.GetAllSelectedPlayers())
+                                {
+                                    Debug.Log("InteractWithComponent activating " + player.gameObject.name);
+                                    var playerSelector = player.GetComponent<PlayerSelector>();
+                                    raycastable.HandleActivation(playerSelector);
+                                }
+                            }
+
                         }
                         return true;
                     }
+
                 }
             }
             return false;

@@ -236,5 +236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48f8d399c07558d4381fe50623321055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayTimeDestinations: []
-  nightTimeDestinations: []
+  dayTimeDestinations:
+  - {fileID: 8733399320191822792}
+  - {fileID: 120250970334359469}
+  nightTimeDestinations:
+  - {fileID: 6906710308765897322}
+  - {fileID: 4876666158316428974}
+  nightTimeStartHour: 23
+  dayTimeStartHour: 7

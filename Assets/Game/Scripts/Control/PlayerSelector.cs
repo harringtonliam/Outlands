@@ -12,10 +12,13 @@ namespace RPG.Control
 
         [SerializeField] Transform selectedVisual;
         [SerializeField] bool startSelected = false;
+        [SerializeField] int index;
 
         private bool isSelected;
 
         public bool IsSelected { get { return isSelected; } }
+
+        public int Index {  get { return index; } }
 
         public event Action selectedUpdated;
 

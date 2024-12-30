@@ -184,6 +184,11 @@ namespace RPG.Control
         {
             if (homeHouse == null) return false;
             var positionToGoTo = homeHouse.DayTimeDestinations[0];
+            if (homeHouse.IsNightTime())
+            {
+                positionToGoTo = homeHouse.NightTimeDestinations[0];
+            }
+
             if(AtPosition(positionToGoTo.transform.position))
             {
                 //ActionScheduler actionSchduler = GetComponent<ActionScheduler>();

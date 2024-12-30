@@ -19,21 +19,39 @@ namespace RPG.SceneManagement
 
         Door door;
 
+        GameObject _portalActivator;
+        bool isWaitingForDoorToOpen = false;
+
         private void Start()
         {
             door = GetComponent<Door>();
+            if (door != null )
+            {
+                door.OnDoorOpen += Door_OnDoorOpen;
+            }
+        }
+
+        private void OnDisable()
+        {
+            try
+            {
+                if ( door != null )
+                {
+                    door.OnDoorOpen -= Door_OnDoorOpen;
+                }
+            }
+            catch (Exception e)
+            {
+
+                Debug.Log("InSceenPortal exception " + e.Message);
+            }
+
         }
 
         private void OnTriggerEnter(Collider other)
         {
-           if (other.tag == "Player")
-            {
-                //StartCoroutine(Transition(other.gameObject));
-            }
-           else
-            {
-                UpdatePortalActivator(other.gameObject);
-            }
+            if (other.tag == "Player") return;
+            UpdatePortalActivator(other.gameObject);
         }
 
 
@@ -46,11 +64,17 @@ namespace RPG.SceneManagement
 
             if(portalActivator.GetComponent<PlayerController>() != null)
             {
-                if(door != null && !door.TryToOpenDoor())
+                if(door != null && !door.IsDoorOpen() && !door.TryToOpenDoor())
                 {
+                    GameConsole.AddNewLine("Door is locked");
                     return;
                 }
-                StartCoroutine(Transition(portalActivator));
+                else if(door != null && !door.IsDoorOpen())
+                {
+                    WaitForDoorToOpen();
+                    return;
+                }
+                Transition(portalActivator);
             }
             else
             {
@@ -58,53 +82,49 @@ namespace RPG.SceneManagement
             }
         }
 
-
-        private IEnumerator Transition(GameObject portalActivator)
+        private void WaitForDoorToOpen()
         {
-            yield return new WaitForSeconds(2f); ;
-            Fader fader = FindFirstObjectByType<Fader>();
-            yield return fader.FadeOut(fadeTime);
+            isWaitingForDoorToOpen = true;
+        }
 
-            SavingWrapper saveingWrapper = FindFirstObjectByType<SavingWrapper>();
-            DisablePlayerControl();
+        private void Transition(GameObject portalActivator)
+        {
             UpdatePortalActivator(portalActivator);
+            var playerSelector = portalActivator.GetComponent<PlayerSelector>();
+            if(playerSelector.IsSelected) 
+            {
+                PositionTheCamera(playerSelector);
+            }
 
-            yield return fader.FadeIn(fadeTime);
-
-            TransitionOtherSelectedPlayers(portalActivator);
-
-            EnablePlayerControl();
-            PositionTheCamera(portalActivator);
         }
 
-        private void TransitionOtherSelectedPlayers(GameObject portalActivator)
+        //TODO remove this
+        //private void TransitionOtherSelectedPlayers(GameObject portalActivator)
+        //{
+        //    try
+        //    {
+        //        var allSelectedPlayers = PlayerSelector.GetAllSelectedPlayers();
+        //        int i = 1; 
+
+        //        foreach(var player in allSelectedPlayers)
+        //        {
+        //            if (player.gameObject != portalActivator  && player.GetComponent<NavMeshAgent>() != null)
+        //            {
+        //                UpdateOtherPlayer(player, i);
+        //                i++;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.Log("InScenePortal TransitionOtherSelectedPlayers " + ex.Message);
+        //    }
+        //}
+
+        private void PositionTheCamera(PlayerSelector playerSelector)
         {
             try
-            {
-                var allSelectedPlayers = PlayerSelector.GetAllSelectedPlayers();
-                int i = 1; 
-
-                foreach(var player in allSelectedPlayers)
-                {
-                    if (player.gameObject != portalActivator  && player.GetComponent<NavMeshAgent>() != null)
-                    {
-                        UpdateOtherPlayer(player, i);
-                        i++;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.Log("InScenePortal TransitionOtherSelectedPlayers " + ex.Message);
-            }
-        }
-
-        private void PositionTheCamera(GameObject portalActivator)
-        {
-            try
-            {
-                PlayerSelector playerSelector = portalActivator.GetComponent<PlayerSelector>();
-                if (playerSelector == null) return;
+            { 
                 playerSelector.HandleActivation(playerSelector);
             } 
             catch (Exception ex)
@@ -115,40 +135,63 @@ namespace RPG.SceneManagement
 
         private void UpdatePortalActivator(GameObject portalActivator)
         {
-            portalActivator.GetComponent<NavMeshAgent>().Warp(destinationPortal.spawnPoint.position);
+            var mouseController = FindFirstObjectByType<MouseController>();
+            var offsetDestination = destinationPortal.spawnPoint.position;
+            var playerSelector = portalActivator.GetComponent<PlayerSelector>();
+            if (mouseController != null  && playerSelector != null && playerSelector.Index > -1)
+            {
+                offsetDestination = mouseController.CalculateFormationTarget(destinationPortal.spawnPoint.position, playerSelector.Index);
+            }
+
+            portalActivator.GetComponent<NavMeshAgent>().Warp(offsetDestination);
             portalActivator.transform.rotation = destinationPortal.spawnPoint.rotation;
         }
 
-        private void UpdateOtherPlayer(GameObject otherPlayer, int index)
+        //private void UpdateOtherPlayer(GameObject otherPlayer, int index)
+        //{
+        //    //TODO:  Need to consider where the formations are kept so we don't need to find the mouse controller
+        //    var mouseController = FindFirstObjectByType<MouseController>();
+        //    if (mouseController == null) return;
+        //    var offsetDestination = mouseController.CalculateFormationTarget(destinationPortal.spawnPoint.position, index);
+        //    otherPlayer.GetComponent<NavMeshAgent>().Warp(offsetDestination);
+        //    otherPlayer.transform.rotation = destinationPortal.spawnPoint.rotation;
+
+        //}
+
+
+        //private void DisablePlayerControl()
+        //{
+        //    GameObject player = GameObject.FindWithTag("Player");
+        //    player.GetComponent<ActionScheduler>().CancelCurrentAction();
+        //    player.GetComponent<PlayerController>().enabled = false;
+        //}
+
+        //private void EnablePlayerControl()
+        //{
+        //    try
+        //    {
+        //        GameObject player = GameObject.FindWithTag("Player");
+        //        player.GetComponent<PlayerController>().enabled = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.Log("InScenePortal EnablePlayerController " + ex.Message);
+        //    }
+        //}
+
+        private void Door_OnDoorOpen()
         {
-            //TODO:  Need to consider where the formations are kept so we don't need to find the mouse controller
-            var mouseController = FindFirstObjectByType<MouseController>();
-            if (mouseController == null) return;
-            var offsetDestination = mouseController.CalculateFormationTarget(destinationPortal.spawnPoint.position, index);
-            otherPlayer.GetComponent<NavMeshAgent>().Warp(offsetDestination);
-            otherPlayer.transform.rotation = destinationPortal.spawnPoint.rotation;
-
-        }
-
-
-        private void DisablePlayerControl()
-        {
-            GameObject player = GameObject.FindWithTag("Player");
-            player.GetComponent<ActionScheduler>().CancelCurrentAction();
-            player.GetComponent<PlayerController>().enabled = false;
-        }
-
-        private void EnablePlayerControl()
-        {
-            try
+            if(!isWaitingForDoorToOpen) { return; }
+            isWaitingForDoorToOpen = false;
+            var portalActivators = FindObjectsByType<PortalActivator>(FindObjectsSortMode.None);
+            foreach(var portalActivator in portalActivators)
             {
-                GameObject player = GameObject.FindWithTag("Player");
-                player.GetComponent<PlayerController>().enabled = true;
+                if(portalActivator.GetIsInRange(transform.position))
+                {
+                    Transition(portalActivator.gameObject);
+                }
             }
-            catch (Exception ex)
-            {
-                Debug.Log("InScenePortal EnablePlayerController " + ex.Message);
-            }
+
         }
 
         public CursorType GetCursorType()
@@ -159,33 +202,15 @@ namespace RPG.SceneManagement
         public RaycastableReturnValue HandleRaycast(PlayerSelector playerController)
         {
             if (!playerUsablePortal) return RaycastableReturnValue.NoAction;
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    PortalActivator portalActivator = playerController.transform.GetComponent<PortalActivator>();
-            //    if (portalActivator != null)
-            //    {
-            //        portalActivator.StartPortalActivation(gameObject);
-            //    }
-            //}
             return RaycastableReturnValue.AllPlayerCharacters;
         }
 
         public void HandleActivation(PlayerSelector playerController)
         {
-            //PortalActivator portalActivator = playerController.transform.GetComponent<PortalActivator>();
-            //if (portalActivator != null)
-            //{
-            //    portalActivator.StartPortalActivation(gameObject);
-            //}
-
-            var allSelectedPlayers = PlayerSelector.GetAllSelectedPlayers();
-            foreach ( var player in allSelectedPlayers )
+            PortalActivator portalActivator = playerController.GetComponent<PortalActivator>();
+            if (portalActivator != null)
             {
-                PortalActivator portalActivator = player.GetComponent<PortalActivator>();
-                if ( portalActivator != null )
-                {
-                    portalActivator.StartPortalActivation(gameObject);
-                }
+                portalActivator.StartPortalActivation(gameObject);
             }
         }
 

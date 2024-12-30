@@ -13,7 +13,7 @@ namespace RPG.SceneManagement
     {
         [SerializeField] float activateRange = 1f;
 
-        InScenePortal targetPortal;
+        [SerializeField] InScenePortal targetPortal;
 
 
         // Update is called once per frame
@@ -26,7 +26,7 @@ namespace RPG.SceneManagement
                 mover.MoveTo(targetPortal.transform.position, 1f); ;
                 if (GetIsInRange())
                 {
-                    mover.Cancel();
+                    //mover.Cancel();
                     PortalBehaviour();
                 }
             }
@@ -47,27 +47,23 @@ namespace RPG.SceneManagement
         {
             GetComponent<ActionScheduler>().StartAction(this);
             targetPortal = portal.GetComponent<InScenePortal>(); ;
+
         }
 
         public void Cancel()
         {
             targetPortal = null;
-            GetComponent<Mover>().Cancel();
+            //GetComponent<Mover>().Cancel();
         }
 
-        private bool GetIsInRange()
+        public bool GetIsInRange(Vector3 targetPortalPosition)
         {
-            //All selected players mush be in range
-            var players = PlayerSelector.GetAllSelectedPlayers();
-            foreach(var player in players )
-            {
-                if (activateRange <= Vector3.Distance(targetPortal.transform.position, player.transform.position))
-                {
-                    return false;
-                }
-            }
+            return activateRange >= Vector3.Distance(targetPortalPosition, transform.position);
+        }
 
-            return true;
+        private  bool GetIsInRange()
+        {
+            return activateRange >= Vector3.Distance(targetPortal.transform.position, transform.position);
         }
     }
 }

@@ -1343,6 +1343,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8880718615050649501, guid: 6765039382baf06439d5229aa49a9bb3,
+        type: 3}
+      propertyPath: isLocked
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1435,6 +1440,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedicVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 1183312292309373604, guid: f81ed01761d25ae4dab7e9d3dbb833e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2165494422772169044, guid: f81ed01761d25ae4dab7e9d3dbb833e7,
         type: 3}
       propertyPath: uniqueIdentifier
@@ -1519,6 +1529,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1757093869}
     m_Modifications:
+    - target: {fileID: 3163634179414609245, guid: a707e7d1a5cf6364db58303a916e976b,
+        type: 3}
+      propertyPath: targetPortal
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5187398827370720028, guid: a707e7d1a5cf6364db58303a916e976b,
         type: 3}
       propertyPath: uniqueIdentifier
@@ -1532,7 +1547,7 @@ PrefabInstance:
     - target: {fileID: 6387987649341803140, guid: a707e7d1a5cf6364db58303a916e976b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 6387987649341803140, guid: a707e7d1a5cf6364db58303a916e976b,
         type: 3}
@@ -1804,6 +1819,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1757093869}
     m_Modifications:
+    - target: {fileID: 3163634179414609245, guid: 5d0ecc72cd43eff40acf999f1b6866bf,
+        type: 3}
+      propertyPath: targetPortal
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5187398827370720028, guid: 5d0ecc72cd43eff40acf999f1b6866bf,
         type: 3}
       propertyPath: uniqueIdentifier
@@ -1817,7 +1837,7 @@ PrefabInstance:
     - target: {fileID: 6387987649341803140, guid: 5d0ecc72cd43eff40acf999f1b6866bf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.25
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 6387987649341803140, guid: 5d0ecc72cd43eff40acf999f1b6866bf,
         type: 3}
