@@ -24,16 +24,34 @@ namespace RPG.Movement
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
+            health.deathUpdated += SetNavMeshAgent;
+            SetNavMeshAgent();
+        }
+
+        private void OnDisable()
+        {
+            try
+            {
+                health.deathUpdated -= SetNavMeshAgent;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("Movement Ondisable " + ex.Message);
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-
-            navMeshAgent.enabled = !health.IsDead;
             UpdateAnimator();
-
         }
+
+        private void SetNavMeshAgent()
+        {
+            navMeshAgent.enabled = !health.IsDead;
+        }
+
+
 
         private void UpdateAnimator()
         {
@@ -98,7 +116,10 @@ namespace RPG.Movement
 
         public void Cancel()
         {
-            navMeshAgent.isStopped = true;
+            if(navMeshAgent.enabled)
+            {
+                navMeshAgent.isStopped = true;
+            }
         }
 
 

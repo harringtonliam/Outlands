@@ -42,7 +42,9 @@ namespace RPG.Control
             if (targetFurniture.IsOccupied) return;
 
             isActionHappening = true;
+            Debug.Log("OccupyFurniture disabling navmeshagent");
             GetComponent<NavMeshAgent>().enabled = false;
+            Debug.Log("OccupyFurniture navmeshagent =" + GetComponent<NavMeshAgent>().enabled.ToString());
             standPosition = transform.position;
             transform.position = targetFurniture.OccupiedTransform.position;
             transform.rotation = targetFurniture.OccupiedTransform.rotation;
