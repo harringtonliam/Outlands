@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RPG.Combat;
-using RPG.Core;
-using RPG.Movement;
-using System;
 using RPG.Attributes;
 using RPG.Buildings;
+using RPG.Combat;
+using RPG.Core;
+using RPG.FurnitureControl;
+using RPG.Movement;
+using System;
+using UnityEngine;
 
 namespace RPG.Control
 {
@@ -32,6 +31,7 @@ namespace RPG.Control
         float timeSinceAggrevated = Mathf.Infinity;
         float timeAtWaypoint = Mathf.Infinity;
         int currentWaypointIndex = 0;
+        FurnitureController furnitureController;
 
         public AIRelationship AIRelationship
         {
@@ -50,7 +50,9 @@ namespace RPG.Control
         // Start is called before the first frame update
         void Start()
         {
-              guardPosition = transform.position;
+            furnitureController = GetComponent<FurnitureController>();
+
+            guardPosition = transform.position;
         }
 
         // Update is called once per frame
@@ -104,6 +106,14 @@ namespace RPG.Control
                 CycleWaypoint();
             }
 
+            if (currentWaypointIndex < 0)
+            {
+                patrolPath = null;
+                return false;
+            }
+
+            GetOffFurnitureIfNeeded();
+
             if (timeAtWaypoint > waypointPauseTime)
             {
                 mover.StartMovementAction(GetCurrentWaypoint(), patrolSpeedFraction);
@@ -139,6 +149,32 @@ namespace RPG.Control
             }
         }
 
+        private bool IsDestiationFurniture(Transform destination)
+        {
+            if (destination == null) return false;
+
+            if (destination.GetComponent<Furniture>() != null)
+            {
+                return true;
+            }
+            if (destination.parent != null && destination.parent.GetComponent<Furniture>() != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void GetOffFurnitureIfNeeded()
+        {
+            if (furnitureController.IsOnFurniture)
+            {
+                furnitureController.GetOffFurniture();
+            }
+        }
+
         private void CycleWaypoint()
         {
             currentWaypointIndex = patrolPath.GetNextIndex(currentWaypointIndex);
@@ -167,13 +203,20 @@ namespace RPG.Control
         private bool InteractWithDestination()
         {
             if(destination == null) return false;
-            if(AtPosition(destination.transform.position))
+
+            if (InteractWithFurniture(destination))
+            {
+                return true;
+            }
+
+            if (AtPosition(destination.transform.position))
             {
                 //ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
                 //actionSchduler.CancelCurrentAction();
             }
             else
             {
+                GetOffFurnitureIfNeeded();
                 mover.StartMovementAction(destination.transform.position, patrolSpeedFraction);
             }
 
@@ -189,20 +232,35 @@ namespace RPG.Control
                 positionToGoTo = homeHouse.NightTimeDestinations[0];
             }
 
-            if(AtPosition(positionToGoTo.transform.position))
+
+            if (AtPosition(positionToGoTo.transform.position))
             {
-                //ActionScheduler actionSchduler = GetComponent<ActionScheduler>();
-                //actionSchduler.CancelCurrentAction();
+                bool isItFurniture = InteractWithFurniture(positionToGoTo);
             }
             else
             {
+                GetOffFurnitureIfNeeded();
                 mover.StartMovementAction(positionToGoTo.transform.position, patrolSpeedFraction);
             }
             return true;
         }
 
+        private bool InteractWithFurniture(GameObject destination)
+        {
+            if (!AtPosition(destination.transform.position)) return false;
+            if(!IsDestiationFurniture(destination.transform)) return false;
+            if(furnitureController.IsInteractingWithFurniture()) return false;
+            var furniture = destination.GetComponent<Furniture>();
+            mover.Cancel();
+            furnitureController.OccupyFurniture(furniture);
+            return true;
+        }
+
         private bool InteractWithGuardPosition()
         {
+
+            GetOffFurnitureIfNeeded();
+
             mover.StartMovementAction(guardPosition, patrolSpeedFraction);
             return true;
         }
@@ -218,6 +276,7 @@ namespace RPG.Control
             }
             if (IsAggrevated() && fighter.CanAttack(combatTargetGameObject))
             {
+                GetOffFurnitureIfNeeded();
                 timeSinceLastSawPlayer = 0;
                 fighter.Attack(combatTargetGameObject);
                 AggrevateNearbyEnemies();

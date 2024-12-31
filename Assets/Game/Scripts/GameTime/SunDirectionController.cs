@@ -64,7 +64,7 @@ namespace RPG.GameTime
 
             float newYRotation = ConvertAzimuthToRotation(currentAzimuth);
 
-            Debug.Log("noonSunAngle=" + noonSunAngle + " sunRotationMultiplier=" + sunRotationMultiplier + " timefromNoon=" + Mathf.Abs(12 - currentHour) + " maxHoursFromNoon=" + maxHoursFromNoon + " hourscomptomaxhours=" + (maxHoursFromNoon - Mathf.Abs(12 - currentHour)));
+            //Debug.Log("noonSunAngle=" + noonSunAngle + " sunRotationMultiplier=" + sunRotationMultiplier + " timefromNoon=" + Mathf.Abs(12 - currentHour) + " maxHoursFromNoon=" + maxHoursFromNoon + " hourscomptomaxhours=" + (maxHoursFromNoon - Mathf.Abs(12 - currentHour)));
 
             if (newXRotation >= maxRotation)
             {

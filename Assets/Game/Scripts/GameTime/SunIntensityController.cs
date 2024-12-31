@@ -67,7 +67,7 @@ namespace  RPG.GameTime
 
         private void SetDawnOrDuskProperties()
         {
-            Debug.Log("SETTING DAWNDUSK TIME");
+            //Debug.Log("SETTING DAWNDUSK TIME");
             sun.intensity = dayTimeIntensity * duskFraction * GetWeatherLightIntensityAdjustment();
             sun.shadowStrength = GetWeatherShadowStrenght();
             RenderSettings.ambientIntensity = dayTimeEnvironmnetLightingIntensityMultiplier * duskFraction;
@@ -75,7 +75,6 @@ namespace  RPG.GameTime
 
         private void SetNightTimeProperties()
         {
-            Debug.Log("SETTING NIGHT TIME");
             sun.intensity = nightTimeIntensity * GetWeatherLightIntensityAdjustment();
             sun.shadowStrength = GetWeatherShadowStrenght();
             RenderSettings.ambientIntensity = nighTimeEnvironmnetLightingIntensityMultiplier;
@@ -83,7 +82,6 @@ namespace  RPG.GameTime
 
         private void SetDayTimeProperties()
         {
-            Debug.Log("SETTING DAY TIME");
             sun.intensity = dayTimeIntensity * GetWeatherLightIntensityAdjustment();
             sun.shadowStrength = GetWeatherShadowStrenght();
             RenderSettings.ambientIntensity = dayTimeEnvironmnetLightingIntensityMultiplier;

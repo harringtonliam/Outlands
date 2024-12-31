@@ -11,8 +11,6 @@ namespace RPG.SceneManagement
 {
     public class InScenePortal : MonoBehaviour, IRaycastable
     {
-        [SerializeField] float fadeTime = 1f;
-
         [SerializeField] Transform spawnPoint;
         [SerializeField] InScenePortal destinationPortal;
         [SerializeField] bool playerUsablePortal = true;
