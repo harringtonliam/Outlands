@@ -4,6 +4,7 @@ using RPG.Combat;
 using RPG.Core;
 using RPG.FurnitureControl;
 using RPG.Movement;
+using RPG.GameTime;
 using System;
 using UnityEngine;
 
@@ -23,15 +24,23 @@ namespace RPG.Control
         [SerializeField] float shoutDistance = 5f;
         [SerializeField] GameObject combatTargetGameObject;
         [SerializeField] GameObject destination;
+        [SerializeField] GameObject defaultWorkDestintation;
+        [SerializeField] int startHourOfWorkDay = 9;
+        [SerializeField] int endHourOfWorkDay = 18;
         [SerializeField] HouseSettings homeHouse;
+        [SerializeField] int homeHouseIndex = 0;
+        
 
         Mover mover;
         Vector3 guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceAggrevated = Mathf.Infinity;
         float timeAtWaypoint = Mathf.Infinity;
+        float timeWithDestination = Mathf.Infinity;
         int currentWaypointIndex = 0;
         FurnitureController furnitureController;
+        GameTimeContoller gameTimeController;
+
 
         public AIRelationship AIRelationship
         {
@@ -50,6 +59,8 @@ namespace RPG.Control
         // Start is called before the first frame update
         void Start()
         {
+            gameTimeController = FindFirstObjectByType<GameTimeContoller>();
+
             furnitureController = GetComponent<FurnitureController>();
 
             guardPosition = transform.position;
@@ -60,6 +71,9 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer += Time.deltaTime;
             timeSinceAggrevated += Time.deltaTime;
+            timeWithDestination += Time.deltaTime;
+
+
 
             if (GetComponent<Health>().IsDead) return;
 
@@ -67,6 +81,7 @@ namespace RPG.Control
             if (InteractWithSuspicsion()) return;
             if (InteractWithPatrolPath()) return;
             if (InteractWithDestination()) return;
+            if (InteractWithWorkDestination()) return;
             if (InteractWithHomeHouse()) return;
             if (InteractWithGuardPosition()) return;
         }
@@ -87,6 +102,11 @@ namespace RPG.Control
         {
             patrolPath = newPatrolPath;
             currentWaypointIndex = 0;
+        }
+
+        public void SetDesitination(GameObject newDesitination)
+        {
+            destination = newDesitination;
         }
 
         public void SetCombatTarget(GameObject target)
@@ -138,8 +158,13 @@ namespace RPG.Control
 
         private bool AtPosition(Vector3 positionToCheck)
         {
+            return AtPosition(positionToCheck, waypointTolerance);
+        }
+
+        private bool AtPosition(Vector3 positionToCheck, float positionTolerance)
+        {
             float distanceToPosition = Vector3.Distance(transform.position, positionToCheck);
-            if (distanceToPosition <= waypointTolerance)
+            if (distanceToPosition <= positionTolerance)
             {
                 return true;
             }
@@ -223,13 +248,48 @@ namespace RPG.Control
             return true;
         }
 
+        private bool InteractWithWorkDestination()
+        {
+            if(defaultWorkDestintation == null) { return false; }
+            if (gameTimeController.CurrentLocalHour < startHourOfWorkDay || gameTimeController.CurrentLocalHour >= endHourOfWorkDay) return false;
+            var objectToGoTo = defaultWorkDestintation;
+            var positionToGoTo = objectToGoTo.transform.position;
+            var positionTolerance = waypointTolerance;
+
+            DestinationSettings destinationSettings = defaultWorkDestintation.GetComponent<DestinationSettings>();
+            if (destinationSettings != null)
+            {
+                positionTolerance = destinationSettings.DistanceTolerance;
+                if (timeWithDestination >= destinationSettings.RandomDestiationLifeTime)
+                {
+                    timeWithDestination = 0f;
+                    var destinationInfo = destinationSettings.GetDestinationPosition();
+                    objectToGoTo = destinationInfo.destinationInfoObject;
+                    positionToGoTo = destinationInfo.destinattionInfoPostition;
+                }
+            }
+
+
+            if (AtPosition(positionToGoTo, positionTolerance))
+            {
+                bool isItFurniture = InteractWithFurniture(objectToGoTo);
+            }
+            else
+            {
+                GetOffFurnitureIfNeeded();
+                mover.StartMovementAction(positionToGoTo, patrolSpeedFraction);
+            }
+
+            return true;
+        }
+
         private bool InteractWithHomeHouse()
         {
             if (homeHouse == null) return false;
-            var positionToGoTo = homeHouse.DayTimeDestinations[0];
+            var positionToGoTo = homeHouse.DayTimeDestinations[homeHouseIndex];
             if (homeHouse.IsNightTime())
             {
-                positionToGoTo = homeHouse.NightTimeDestinations[0];
+                positionToGoTo = homeHouse.NightTimeDestinations[homeHouseIndex];
             }
 
 
@@ -245,8 +305,11 @@ namespace RPG.Control
             return true;
         }
 
+        
+
         private bool InteractWithFurniture(GameObject destination)
         {
+            if(destination == null) return false;
             if (!AtPosition(destination.transform.position)) return false;
             if(!IsDestiationFurniture(destination.transform)) return false;
             if(furnitureController.IsInteractingWithFurniture()) return false;
