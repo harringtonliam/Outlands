@@ -8,7 +8,8 @@ namespace RPG.Buildings
         [SerializeField] float distanceTolerance = 1f;
         [SerializeField] bool generateRandomDestination = false;
         [SerializeField] float randomDestinationLifeTime = 60f;
-        [SerializeField] float randomDestinationRange = 5f;
+        [SerializeField] float randomDestinationXRange = 5f;
+        [SerializeField] float randomDestinationZRange = 5f;
 
 
         public float RandomDestiationLifeTime { get { return randomDestinationLifeTime; } }
@@ -17,7 +18,7 @@ namespace RPG.Buildings
         public struct DestintationInfo
         {
             public GameObject destinationInfoObject;
-            public Vector2 destinattionInfoPostition;
+            public Vector3 destinattionInfoPostition;
         }    
 
 
@@ -35,13 +36,21 @@ namespace RPG.Buildings
                 return destintationInfo;
             }
 
-            float xOffSet = Random.Range(randomDestinationRange * -1, randomDestinationRange);
-            float zOffSet = Random.Range(randomDestinationRange * -1, randomDestinationRange);
+            float xOffSet = Random.Range(randomDestinationXRange * -1, randomDestinationXRange);
+            float zOffSet = Random.Range(randomDestinationZRange * -1, randomDestinationZRange);
+            Debug.Log("Destination settings " + xOffSet + " zOffset=" + zOffSet);
             var postionOffset = new Vector3(xOffSet, 0, zOffSet);
 
             destintationInfo.destinattionInfoPostition = transform.position + postionOffset;
+            Debug.Log("Destination settings result " + destintationInfo.destinattionInfoPostition.x + " " + destintationInfo.destinattionInfoPostition.z);
 
             return destintationInfo;
+        }
+
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(transform.position, new Vector3(randomDestinationXRange,1f, randomDestinationZRange));
         }
 
     }

@@ -40,6 +40,7 @@ namespace RPG.Control
         int currentWaypointIndex = 0;
         FurnitureController furnitureController;
         GameTimeContoller gameTimeController;
+        DestinationSettings.DestintationInfo cachedDestinationInfo;
 
 
         public AIRelationship AIRelationship
@@ -252,8 +253,8 @@ namespace RPG.Control
         {
             if(defaultWorkDestintation == null) { return false; }
             if (gameTimeController.CurrentLocalHour < startHourOfWorkDay || gameTimeController.CurrentLocalHour >= endHourOfWorkDay) return false;
-            var objectToGoTo = defaultWorkDestintation;
-            var positionToGoTo = objectToGoTo.transform.position;
+            GameObject objectToGoTo = defaultWorkDestintation;
+            Vector3 positionToGoTo = objectToGoTo.transform.position;
             var positionTolerance = waypointTolerance;
 
             DestinationSettings destinationSettings = defaultWorkDestintation.GetComponent<DestinationSettings>();
@@ -263,13 +264,14 @@ namespace RPG.Control
                 if (timeWithDestination >= destinationSettings.RandomDestiationLifeTime)
                 {
                     timeWithDestination = 0f;
-                    var destinationInfo = destinationSettings.GetDestinationPosition();
-                    objectToGoTo = destinationInfo.destinationInfoObject;
-                    positionToGoTo = destinationInfo.destinattionInfoPostition;
+                    cachedDestinationInfo = destinationSettings.GetDestinationPosition();
                 }
+                objectToGoTo = cachedDestinationInfo.destinationInfoObject;
+                positionToGoTo = cachedDestinationInfo.destinattionInfoPostition;
             }
+      
 
-
+            //Debug.Log("positionToGoTo  " + gameObject.name + " " + positionToGoTo.x + " " + positionToGoTo.z);
             if (AtPosition(positionToGoTo, positionTolerance))
             {
                 bool isItFurniture = InteractWithFurniture(objectToGoTo);
