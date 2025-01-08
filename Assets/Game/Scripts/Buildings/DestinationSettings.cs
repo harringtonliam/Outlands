@@ -32,9 +32,21 @@ namespace RPG.Buildings
 
             if (!generateRandomDestination)
             {
+                destintationInfo.destinationInfoObject = gameObject;
                 destintationInfo.destinattionInfoPostition = transform.position;
                 return destintationInfo;
             }
+
+            DestinationSettingsArray destinationSettingsArray = GetComponent<DestinationSettingsArray>();
+            if (destinationSettingsArray != null && destinationSettingsArray.DestiationObjects.Length > 0)
+            {
+                destintationInfo = GetDestinationFromArray(destinationSettingsArray);
+                Debug.Log("Get destination Postion from array " + destintationInfo.destinationInfoObject.name);    
+                return destintationInfo;
+            }
+
+
+
 
             float xOffSet = Random.Range(randomDestinationXRange * -1, randomDestinationXRange);
             float zOffSet = Random.Range(randomDestinationZRange * -1, randomDestinationZRange);
@@ -44,6 +56,14 @@ namespace RPG.Buildings
             destintationInfo.destinattionInfoPostition = transform.position + postionOffset;
             Debug.Log("Destination settings result " + destintationInfo.destinattionInfoPostition.x + " " + destintationInfo.destinattionInfoPostition.z);
 
+            return destintationInfo;
+        }
+
+        private DestintationInfo GetDestinationFromArray(DestinationSettingsArray destinationSettingsArray)
+        {
+            DestintationInfo destintationInfo = new DestintationInfo();
+            destintationInfo.destinationInfoObject = destinationSettingsArray.GetRandomDestinationObject();
+            destintationInfo.destinattionInfoPostition = destintationInfo.destinationInfoObject.transform.position;
             return destintationInfo;
         }
 
