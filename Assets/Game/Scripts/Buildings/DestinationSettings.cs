@@ -7,7 +7,7 @@ namespace RPG.Buildings
     {
         [SerializeField] float distanceTolerance = 1f;
         [SerializeField] bool generateRandomDestination = false;
-        [SerializeField] float randomDestinationLifeTime = 60f;
+        [SerializeField] float randomDestinationLifeTime = 40f;
         [SerializeField] float randomDestinationXRange = 5f;
         [SerializeField] float randomDestinationZRange = 5f;
 

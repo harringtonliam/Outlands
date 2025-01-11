@@ -7,6 +7,7 @@ using RPG.Movement;
 using RPG.GameTime;
 using System;
 using UnityEngine;
+using System.Collections;
 
 namespace RPG.Control
 {
@@ -267,11 +268,25 @@ namespace RPG.Control
             if (AtPosition(positionToGoTo, positionTolerance))
             {
                 bool isItFurniture = InteractWithFurniture(objectToGoTo);
+                if(!isItFurniture)
+                {
+                    StartCoroutine(RotateToFaceDestination());
+                }
             }
             else
             {
                 GetOffFurnitureIfNeeded();
                 mover.StartMovementAction(positionToGoTo, patrolSpeedFraction);
+            }
+        }
+
+        private IEnumerator RotateToFaceDestination()
+        {
+            yield return new WaitForSeconds(1f);
+            if (cachedDestinationInfo.destinationInfoObject != null)
+            {
+                mover.Cancel();
+                this.transform.rotation = cachedDestinationInfo.destinationInfoObject.transform.rotation;
             }
         }
 

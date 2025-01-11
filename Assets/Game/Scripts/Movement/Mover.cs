@@ -116,8 +116,9 @@ namespace RPG.Movement
 
         public void Cancel()
         {
-            if(navMeshAgent.enabled)
+            if(navMeshAgent.enabled  && !navMeshAgent.isStopped)
             {
+                //navMeshAgent.velocity = Vector3.zero;
                 navMeshAgent.isStopped = true;
             }
         }
