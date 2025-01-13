@@ -43,6 +43,7 @@ namespace RPG.Movement
         // Update is called once per frame
         void Update()
         {
+
             UpdateAnimator();
         }
 
@@ -118,7 +119,6 @@ namespace RPG.Movement
         {
             if(navMeshAgent.enabled  && !navMeshAgent.isStopped)
             {
-                //navMeshAgent.velocity = Vector3.zero;
                 navMeshAgent.isStopped = true;
             }
         }

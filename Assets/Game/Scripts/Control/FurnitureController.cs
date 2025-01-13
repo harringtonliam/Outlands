@@ -24,10 +24,13 @@ namespace RPG.Control
         public bool IsActionHappening { get { return isActionHappening; } }
         public float ChairPositionTolerance { get { return furinturePositionTolerance; } }
 
+        private Animator animator;
+  
 
         private void Start()
         {
             colliderController = GetComponent<ColliderController>();
+            animator = GetComponent<Animator>();
         }
 
         public bool IsInteractingWithFurniture()
@@ -71,7 +74,16 @@ namespace RPG.Control
             currentcurrentFurniture.MakeFurnitureOccuiped(false);
             GetComponent<NavMeshAgent>().enabled = true;
             isActionHappening = false;
+
         }
+
+
+        private bool IsAnimationStateLocomotion()
+        {
+            return animator.GetCurrentAnimatorStateInfo(0).IsName("Locomotion");
+        }
+
+        
 
 
     }

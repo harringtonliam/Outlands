@@ -32,17 +32,17 @@ namespace RPG.Control
         [SerializeField] int homeHouseIndex = 0;
         
 
-        Mover mover;
-        Vector3 guardPosition;
-        float timeSinceLastSawPlayer = Mathf.Infinity;
-        float timeSinceAggrevated = Mathf.Infinity;
-        float timeAtWaypoint = Mathf.Infinity;
-        float timeWithDestination = Mathf.Infinity;
-        int currentWaypointIndex = 0;
-        FurnitureController furnitureController;
-        GameTimeContoller gameTimeController;
-        DestinationSettings.DestintationInfo cachedDestinationInfo;
-
+        private Mover mover;
+        private Vector3 guardPosition;
+        private float timeSinceLastSawPlayer = Mathf.Infinity;
+        private float timeSinceAggrevated = Mathf.Infinity;
+        private float timeAtWaypoint = Mathf.Infinity;
+        private float timeWithDestination = Mathf.Infinity;
+        private int currentWaypointIndex = 0;
+        private FurnitureController furnitureController;
+        private GameTimeContoller gameTimeController;
+        private DestinationSettings.DestintationInfo cachedDestinationInfo;
+        private bool isAlreadyAtDesitination = false;
 
         public AIRelationship AIRelationship
         {
@@ -66,6 +66,8 @@ namespace RPG.Control
             furnitureController = GetComponent<FurnitureController>();
 
             guardPosition = transform.position;
+
+            isAlreadyAtDesitination = false;
         }
 
         // Update is called once per frame
@@ -256,6 +258,7 @@ namespace RPG.Control
                 positionTolerance = destinationSettings.DistanceTolerance;
                 if (timeWithDestination >= destinationSettings.RandomDestiationLifeTime)
                 {
+                    isAlreadyAtDesitination = false;
                     timeWithDestination = 0f;
                     cachedDestinationInfo = destinationSettings.GetDestinationPosition();
                 }
@@ -267,6 +270,11 @@ namespace RPG.Control
             //Debug.Log("positionToGoTo  " + gameObject.name + " " + positionToGoTo.x + " " + positionToGoTo.z);
             if (AtPosition(positionToGoTo, positionTolerance))
             {
+                if(!isAlreadyAtDesitination)
+                {
+                    timeWithDestination = 0f;
+                    isAlreadyAtDesitination = true;
+                }
                 bool isItFurniture = InteractWithFurniture(objectToGoTo);
                 if(!isItFurniture)
                 {
