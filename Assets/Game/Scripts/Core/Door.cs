@@ -20,7 +20,10 @@ namespace RPG.Core
         public event Action OnDoorOpen;
         public event Action OnDoorClose;
 
-
+        private void Start()
+        {
+            closing = true;
+        }
 
 
         private void Update()
@@ -80,6 +83,7 @@ namespace RPG.Core
 
         private void CloseDoor()
         {
+            if (closedPosition == null) { return; }
             door.position = Vector3.MoveTowards(door.position, closedPosition.position, doorSpeed * Time.deltaTime);
             float distanceToClosed = Vector3.Distance(door.position, closedPosition.position);
             if (Mathf.Approximately(distanceToClosed, 0f))

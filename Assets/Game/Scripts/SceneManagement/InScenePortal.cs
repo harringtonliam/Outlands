@@ -48,8 +48,8 @@ namespace RPG.SceneManagement
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Player") return;
-            UpdatePortalActivator(other.gameObject);
+            //if (other.tag == "Player") return;
+            //UpdatePortalActivator(other.gameObject);
         }
 
 
@@ -131,7 +131,7 @@ namespace RPG.SceneManagement
             }
         }
 
-        private void UpdatePortalActivator(GameObject portalActivator)
+        public void UpdatePortalActivator(GameObject portalActivator)
         {
             var mouseController = FindFirstObjectByType<MouseController>();
             var offsetDestination = destinationPortal.spawnPoint.position;
