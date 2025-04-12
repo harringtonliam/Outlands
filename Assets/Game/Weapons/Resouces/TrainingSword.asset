@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be251821316fed84a97e38991fa8f1a2, type: 3}
-  m_Name: Sword
+  m_Name: TrainingSword
   m_EditorClassIdentifier: 
-  itemID: db46379a-9c82-4398-9bea-6f30797eeaa5
-  displayName: Sword
-  description: Sword
-  icon: {fileID: 21300000, guid: fe300e96d254a8a47876ead239ee197b, type: 3}
-  pickup: {fileID: 8822870477362308269, guid: c300428406d285547818a3f7eade3e3e, type: 3}
+  itemID: 172cb65d-2f67-413c-b34e-99aca7739e17
+  displayName: Training Sword
+  description: A training sword used for weapons practice
+  icon: {fileID: 0}
+  pickup: {fileID: 8822870477362308269, guid: 1cd30dba855eea94a98b23ebf2ee244b, type: 3}
   isStackable: 0
   maxNumberInStack: 1
   mass: 2
@@ -25,9 +25,9 @@ MonoBehaviour:
   itemDestroyedWhenCompletelyUsed: 0
   allowedEquipLocation: 3
   isNightVisionEnabled: 0
-  weaponOverrideController: {fileID: 22100000, guid: 5616076f418e9494ab61b1221f1c1861,
+  weaponOverrideController: {fileID: 22100000, guid: 53a2d6ef5d7e6d943a1df7dd7436834d,
     type: 2}
-  equipedPrefab: {fileID: 7622007455297462716, guid: a25d7bd923ba1f041ae846b4428d2ee7,
+  equipedPrefab: {fileID: 7622007455297462716, guid: c2cb970d9d4226243882058d29d9762e,
     type: 3}
   ammunitionType: 0
   weaponDamageDice: 10
