@@ -9,20 +9,13 @@ namespace RPG.CameraControl
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] float moveSpeed = 10f;
-        [SerializeField] float rotationSpeed = 100f;
-        [SerializeField] float rotationFactor = 50f;
-        [SerializeField] float zoomSpeed = 5f;
-        [SerializeField] float minFollowYOffset = 2f;
-        [SerializeField] float maxFollowYOffset = 15f;
-        [SerializeField] float zoomIncreaseAmount = 1f;
-        [SerializeField] float maxDistanceFromSelectedPlayer = 10f;
-        [SerializeField] CinemachineCamera virtualCamera;
+        [SerializeField] CinemachineCamera cinemachineCamera;
+        [SerializeField] CameraConfig cameraConfig;
 
 
-
-        private Vector3 targetFollowOffset;
-        private CinemachineFollow cinemachineTransposer;
+        private Vector3 startingFollowOffset;
+        private CinemachineFollow cinemachineFollow;
+        private Rigidbody rigidbody;
 
         private static CameraController _instance;
 
@@ -43,18 +36,24 @@ namespace RPG.CameraControl
                     _instance = this;
                 }
             }
+
+            if (!cinemachineCamera.TryGetComponent(out cinemachineFollow))
+            {
+                Debug.LogError("Cinemachine Camera did not have a CineMachineFollow. Zoom functionality will not work!");
+            }
+            startingFollowOffset = cinemachineFollow.FollowOffset;
+            if (!TryGetComponent<Rigidbody>(out rigidbody))
+            {
+                Debug.LogError("Cinemachine Camera did not have a RigidBody. Move functionality will not work!");
+            };
         }
 
-        private void Start()
-        {
-            cinemachineTransposer = virtualCamera.GetComponent<CinemachineFollow>();
-            targetFollowOffset = cinemachineTransposer.FollowOffset;
-        }
+
 
         // Update is called once per frame
         void Update()
         {
-            HandleMovement();
+            HandlePanning();
 
             HandleRotation();
 
@@ -70,48 +69,38 @@ namespace RPG.CameraControl
 
         public void MoveCamera(Vector3 moveDirection)
         {
-            float currentDistanceFromSelectedPlayer = Vector3.Distance(PlayerSelector.GetFirstSelectedPlayer().transform.position, transform.position);
 
             Vector3 moveVector = transform.forward * moveDirection.y + transform.right * moveDirection.x;
-            float newDistanceFromSelectedPlayer = Vector3.Distance(PlayerSelector.GetFirstSelectedPlayer().transform.position, transform.position + moveVector);
 
-            if ((currentDistanceFromSelectedPlayer >= maxDistanceFromSelectedPlayer)  && (newDistanceFromSelectedPlayer > currentDistanceFromSelectedPlayer))
-            {
-                return;
-            }
+            moveVector = moveVector * cameraConfig.PanSpeed;// * Time.deltaTime;
+            rigidbody.linearVelocity = new Vector3(moveVector.x, moveVector.y, 0);
 
-            transform.position += moveVector * moveSpeed * Time.deltaTime;
         }
 
-        public bool IsFurtherThanMaxDistanceFromPlayer(Vector3 playerPosition)
-        {
-            if (Vector3.Distance(playerPosition, transform.position) >= maxDistanceFromSelectedPlayer)
-            {
-                return true;
-            }
-            return false;
-        }
 
         private void HandleZoom()
         {
-            targetFollowOffset.y += InputManager.Instance.GetCameraZoomAmount() * zoomIncreaseAmount;
-            targetFollowOffset.y = Mathf.Clamp(targetFollowOffset.y, minFollowYOffset, maxFollowYOffset);
-            cinemachineTransposer.FollowOffset = Vector3.Lerp(cinemachineTransposer.FollowOffset, targetFollowOffset, Time.deltaTime * zoomSpeed);
+            startingFollowOffset.y += InputManager.Instance.GetCameraZoomAmount() * cameraConfig.zoomIncreaseAmount;
+            startingFollowOffset.y = Mathf.Clamp(startingFollowOffset.y, cameraConfig.MinFollowYOffset, cameraConfig.MaxFollowYOffset);
+            cinemachineFollow.FollowOffset = Vector3.Slerp(cinemachineFollow.FollowOffset, startingFollowOffset, Time.deltaTime * cameraConfig.ZoomSpeed);
         }
 
         private void HandleRotation()
         {
             Vector3 rotationVector = new Vector3(0, 0, 0);
 
-            rotationVector.y = InputManager.Instance.GetCameraRoatateAmount() * rotationFactor;
+            rotationVector.y = InputManager.Instance.GetCameraRoatateAmount() * cameraConfig.RotationFactor;
 
-            transform.eulerAngles += rotationVector * rotationSpeed * Time.deltaTime;
+            transform.eulerAngles += rotationVector * cameraConfig.RotationSpeed * Time.deltaTime;
         }
 
-        private void HandleMovement()
+        private void HandlePanning()
         {
-            MoveCamera(InputManager.Instance.GetCameraMoveVector());
+            MoveCamera(InputManager.Instance.GetCameraMoveVector(cameraConfig.EdgePanSize));
         }
+
+
+
     }
 
 

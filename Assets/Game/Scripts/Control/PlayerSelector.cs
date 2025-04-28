@@ -109,10 +109,7 @@ namespace RPG.Control
 
         public void HandleActivation(PlayerSelector playerSelector)
         {
-            if (CameraController.Instance.IsFurtherThanMaxDistanceFromPlayer(playerSelector.gameObject.transform.position))
-            {
-                CameraController.Instance.SetPlayerToFollow(playerSelector.gameObject.transform);
-            }
+            CameraController.Instance.SetPlayerToFollow(playerSelector.gameObject.transform);
         }
     }
 }

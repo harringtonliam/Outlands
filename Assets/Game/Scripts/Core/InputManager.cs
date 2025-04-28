@@ -1,6 +1,8 @@
 //#define USE_NEW_INPUT_SYSTEM 
+using RPG.CameraControl;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,12 +57,12 @@ namespace RPG.Core
 #endif
         }
 
-        public Vector2 GetCameraMoveVector()
+        public Vector2 GetCameraMoveVector(float edgePanSize)
         {
 #if USE_NEW_INPUT_SYSTEM
             return playerInputActions.Player.CameraMovement.ReadValue<Vector2>();
 #else
-            Vector3 inputMoveDir = new Vector3(0, 0, 0);
+            Vector2 inputMoveDir = Vector2.zero;
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -79,9 +81,46 @@ namespace RPG.Core
                 inputMoveDir.x = +1f;
             }
 
+            inputMoveDir = inputMoveDir + GetCameraMouseMoveVector(edgePanSize);
+
             return inputMoveDir;
 #endif
         }
+
+        private Vector2 GetCameraMouseMoveVector(float edgePanSize)
+        {
+            Vector2 inputMoveDir = Vector2.zero;
+
+            Vector2 mousePosition = GetMouseScreenPosition();
+
+            int screenWidth = Screen.width;
+            int screenHeight = Screen.height;
+
+            if (mousePosition.x <= edgePanSize)
+            {
+                inputMoveDir.x = -1f;
+            }
+
+            if (mousePosition.x >= screenWidth - edgePanSize)
+            {
+                inputMoveDir.x = +1f;
+            }
+
+            if (mousePosition.y <= edgePanSize)
+            {
+                inputMoveDir.y = -1f;
+            }
+
+            if (mousePosition.y >= screenHeight - edgePanSize)
+            {
+                inputMoveDir.y = 1f;
+            }
+
+            return inputMoveDir;
+        }
+
+
+
 
         public float GetCameraRoatateAmount()
         {
