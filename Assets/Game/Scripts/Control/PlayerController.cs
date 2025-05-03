@@ -22,6 +22,7 @@ namespace RPG.Control
             public Vector2 hotspot;
         }
 
+
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float raycastRadius = 0.25f;
 
@@ -56,6 +57,7 @@ namespace RPG.Control
                 gameOver.GameOverActions();
             }
         }
+
 
         private void SetCursorType(CursorType cursorType)
         {

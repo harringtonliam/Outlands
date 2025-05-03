@@ -354,8 +354,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2924689946262050305}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5606289, y: -0.000000018508741, z: 0.000000012531029, w: 0.8280672}
-  m_LocalPosition: {x: 4.4633136, y: 26.330603, z: -8.753379}
+  m_LocalRotation: {x: 0.58471036, y: -0.000000036582726, z: 0.000000026367342, w: 0.81124216}
+  m_LocalPosition: {x: 4.4633136, y: 31.330603, z: -8.753379}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1267,11 +1267,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraController
       objectReference: {fileID: 0}
-    - target: {fileID: 5853452883996378680, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 5853452883996378681, guid: fd52a445c4767c144b9595a9c6c06fb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1324,101 +1319,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5853452883996378686, guid: fd52a445c4767c144b9595a9c6c06fb2,
         type: 3}
-      propertyPath: virtualCamera
-      value: 
-      objectReference: {fileID: 3305261147028285223}
-    - target: {fileID: 5853452883996378686, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
-      propertyPath: maxFollowYOffset
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 5853452883996378686, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
-      propertyPath: minFollowYOffset
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5853452883996378686, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
       propertyPath: cinemachineCamera
       value: 
       objectReference: {fileID: 3305261147028285223}
-    - target: {fileID: 5853452883996378686, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
-      propertyPath: cameraConfig.MaxFollowYOffset
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5853452883996378686, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
-      propertyPath: cameraConfig.MinFollowYOffset
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5853452883996378680, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5057867973229034796}
-    - targetCorrespondingSourceObject: {fileID: 5853452883996378680, guid: fd52a445c4767c144b9595a9c6c06fb2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6754330184546930282}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd52a445c4767c144b9595a9c6c06fb2, type: 3}
---- !u!1 &2924689947471716758 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5853452883996378680, guid: fd52a445c4767c144b9595a9c6c06fb2,
-    type: 3}
-  m_PrefabInstance: {fileID: 8767719439088101294}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &5057867973229034796
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2924689947471716758}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!135 &6754330184546930282
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2924689947471716758}
-  m_Material: {fileID: 13400000, guid: 85faf7fb3b72d114e91df3d3fb857cf3, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2924689947471716759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5853452883996378681, guid: fd52a445c4767c144b9595a9c6c06fb2,

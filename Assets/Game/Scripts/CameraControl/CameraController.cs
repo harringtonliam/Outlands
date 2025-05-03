@@ -15,7 +15,6 @@ namespace RPG.CameraControl
 
         private Vector3 startingFollowOffset;
         private CinemachineFollow cinemachineFollow;
-        private Rigidbody rigidbody;
 
         private static CameraController _instance;
 
@@ -42,10 +41,6 @@ namespace RPG.CameraControl
                 Debug.LogError("Cinemachine Camera did not have a CineMachineFollow. Zoom functionality will not work!");
             }
             startingFollowOffset = cinemachineFollow.FollowOffset;
-            if (!TryGetComponent<Rigidbody>(out rigidbody))
-            {
-                Debug.LogError("Cinemachine Camera did not have a RigidBody. Move functionality will not work!");
-            };
         }
 
 
@@ -67,17 +62,6 @@ namespace RPG.CameraControl
             transform.position = playerToFollow.position;
         }
 
-        public void MoveCamera(Vector3 moveDirection)
-        {
-
-            Vector3 moveVector = transform.forward * moveDirection.y + transform.right * moveDirection.x;
-
-            moveVector = moveVector * cameraConfig.PanSpeed;// * Time.deltaTime;
-            rigidbody.linearVelocity = new Vector3(moveVector.x, moveVector.y, 0);
-
-        }
-
-
         private void HandleZoom()
         {
             startingFollowOffset.y += InputManager.Instance.GetCameraZoomAmount() * cameraConfig.zoomIncreaseAmount;
@@ -98,6 +82,19 @@ namespace RPG.CameraControl
         {
             MoveCamera(InputManager.Instance.GetCameraMoveVector(cameraConfig.EdgePanSize));
         }
+
+        public void MoveCamera(Vector2 moveDirection)
+        {
+            Vector3 moveVector = transform.forward * moveDirection.y + transform.right * moveDirection.x;
+
+            transform.position += moveVector * cameraConfig.PanSpeed * Time.deltaTime;
+
+        }
+
+
+
+
+
 
 
 

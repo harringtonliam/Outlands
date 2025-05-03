@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 3274743360612604282}
   - component: {fileID: 3853264094600540342}
   - component: {fileID: 4045041098492783355}
-  m_Layer: 0
+  - component: {fileID: 8875822299563838467}
+  - component: {fileID: 1934789600936754303}
+  m_Layer: 12
   m_Name: CameraController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,15 +49,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489bbf8e61e3bfd4e85164c16fb9c964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotationSpeed: 50
-  rotationFactor: 50
-  zoomSpeed: 5
-  minFollowYOffset: 2
-  maxFollowYOffset: 15
-  zoomIncreaseAmount: 1
-  maxDistanceFromSelectedPlayer: 10
-  virtualCamera: {fileID: 0}
+  cinemachineCamera: {fileID: 0}
+  cameraConfig:
+    <EnableEdgePan>k__BackingField: 1
+    <EdgePanSize>k__BackingField: 50
+    PanSpeed: 10
+    <RotationSpeed>k__BackingField: 1
+    <RotationFactor>k__BackingField: 50
+    <ZoomSpeed>k__BackingField: 1
+    <MinZoomDistance>k__BackingField: 7.5
+    MinFollowYOffset: 10
+    MaxFollowYOffset: 25
+    <zoomIncreaseAmount>k__BackingField: 1
 --- !u!114 &3274743360612604282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,3 +122,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interiorLoactionHeight: -50
+--- !u!54 &8875822299563838467
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853452883996378680}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!135 &1934789600936754303
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853452883996378680}
+  m_Material: {fileID: 13400000, guid: 85faf7fb3b72d114e91df3d3fb857cf3, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

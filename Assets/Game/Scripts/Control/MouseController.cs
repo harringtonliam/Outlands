@@ -44,7 +44,10 @@ namespace RPG.Control
                  playerSelection = InteractWithPlayerSelection(ControlKeyPressed());
             }
             if (InteractWithComponent()) return;
-            if (playerSelection) return;
+            if (playerSelection)
+            {
+                return;
+            }
             if (InteractWithMovement()) return;
 
             SetCursorType(CursorType.None);
@@ -105,29 +108,63 @@ namespace RPG.Control
         private bool InteractWithMovement()
         {
             Vector3 target;
+            Vector3[] offsetTargets = new Vector3[5];
             bool hashit = RaycastNavMesh(out target);
+
             if (hashit)
             {
                 Mover mover = PlayerSelector.GetFirstSelectedPlayer().GetComponent<Mover>();
                 if (!mover.CanMoveTo(target)) return false;
-                if (InputManager.Instance.IsMouseButtonDown())
+                if (InputManager.Instance.IsMouseButtonUp())
                 {
                     int playerIndex = 0;
                     foreach (var player in PlayerSelector.GetAllSelectedPlayers())
                     {
+                        MovementDestinationIndicator destinationIndicator = player.GetComponent<PlayerSelector>().MovementDestinationIndicator;
+                        
+                        destinationIndicator.transform.position = player.transform.position;
+                        destinationIndicator.gameObject.SetActive(false);
+                        var destinationTarget = CalculateFormationTarget(target, playerIndex);
                         Mover playerMover = player.GetComponent<Mover>();
-                        if (playerMover != null && playerMover.CanMoveTo(target))
+                        if (playerMover != null && playerMover.CanMoveTo(destinationTarget))
                         {
-                            Vector3 offSetTarget = CalculateFormationTarget(target, playerIndex);
-                            playerMover.StartMovementAction(offSetTarget, 1f);
+                             playerMover.StartMovementAction(destinationTarget, 1f);
                         }
                         playerIndex++;
                     }
+                }
+                if (InputManager.Instance.IsMouseButtonDown())
+                {
+                    offsetTargets = CalculateMovementTargets(target);
                 }
                 SetCursorType(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private Vector3[] CalculateMovementTargets(Vector3 target)
+        {
+            Vector3[] targets = new Vector3[5];
+            int playerIndex = 0;
+            foreach (var player in PlayerSelector.GetAllSelectedPlayers())
+            {
+                Mover playerMover = player.GetComponent<Mover>();
+                if (playerMover != null && playerMover.CanMoveTo(target))
+                {
+                    targets[playerIndex]= CalculateFormationTarget(target, playerIndex);
+                    var destinationIndicator = player.GetComponent<PlayerSelector>().MovementDestinationIndicator;
+                    if (destinationIndicator != null)
+                    {
+                        destinationIndicator.transform.position = targets[playerIndex];
+                        destinationIndicator.gameObject.SetActive(true);
+                    }
+
+                    //playerMover.StartMovementAction(offSetTarget, 1f);
+                }
+                playerIndex++;
+            }
+            return targets;
         }
 
         public Vector3 CalculateFormationTarget(Vector3 target , int playerIndex)

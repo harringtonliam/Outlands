@@ -13,12 +13,15 @@ namespace RPG.Control
         [SerializeField] Transform selectedVisual;
         [SerializeField] bool startSelected = false;
         [SerializeField] int index;
+        [SerializeField] MovementDestinationIndicator destinationIndicator;
 
         private bool isSelected;
 
         public bool IsSelected { get { return isSelected; } }
 
         public int Index {  get { return index; } }
+
+        public MovementDestinationIndicator MovementDestinationIndicator { get { return destinationIndicator; } }
 
         public event Action selectedUpdated;
 
@@ -55,6 +58,15 @@ namespace RPG.Control
             foreach (var player in players)
             {
                 player.GetComponent<PlayerSelector>().SetSelected(true, true);
+            }
+        }
+
+        public static void DeselectAllPlayerCharacters()
+        {
+            GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in allPlayers)
+            {
+                player.GetComponent<PlayerSelector>().SetSelected(false);
             }
         }
 

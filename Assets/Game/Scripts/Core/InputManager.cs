@@ -54,6 +54,25 @@ namespace RPG.Core
             return playerInputActions.Player.Click.WasPressedThisFrame();
 #else
             return Input.GetMouseButtonDown(0);
+
+#endif
+        }
+
+        public bool IsMouseButtonUp()
+        {
+#if USE_NEW_INPUT_SYSTEM
+            return playerInputActions.Player.Click.WasReleasedThisFrame();
+#else
+            return Input.GetMouseButtonUp(0);
+#endif
+        }
+
+        public bool IsMouseButtonPressed()
+        {
+#if USE_NEW_INPUT_SYSTEM
+            return playerInputActions.Player.Click.isPressed();
+#else
+            return Input.GetMouseButton(0);
 #endif
         }
 
@@ -81,7 +100,7 @@ namespace RPG.Core
                 inputMoveDir.x = +1f;
             }
 
-            inputMoveDir = inputMoveDir + GetCameraMouseMoveVector(edgePanSize);
+            //inputMoveDir = inputMoveDir + GetCameraMouseMoveVector(edgePanSize);
 
             return inputMoveDir;
 #endif
