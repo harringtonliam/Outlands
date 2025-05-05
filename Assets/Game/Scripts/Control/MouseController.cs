@@ -44,18 +44,18 @@ namespace RPG.Control
         {
             if (InteractWithUI()&& !isMouseBeingDragged) return;
 
-            bool playerSelection = false;
-
-            if (InputManager.Instance.IsMouseButtonDown())
-            {
-                 playerSelection = InteractWithPlayerSelection(ControlKeyPressed());
-            }
+            //TODO: THis code testing player selection should not be needed anymore, its all handled in InteractWithComponent since 05/05/2025
+            //bool playerSelection = false;
+            //if (InputManager.Instance.IsMouseButtonDown())
+            //{
+            //     playerSelection = InteractWithPlayerSelection(ControlKeyPressed());
+            //}
             if (InteractWithComponent()) return;
-            if (playerSelection) return;
+            //if (playerSelection) return;
             
             if (InteractWithMovement()) return;
 
-            //SetCursorType(CursorType.None);
+            SetCursorType(CursorType.None);
         }
 
         private bool InteractWithUI()
@@ -68,6 +68,22 @@ namespace RPG.Control
 
   
             return EventSystem.current.IsPointerOverGameObject();
+        }
+
+        private bool InteractWithPlayerSelection(bool controlKeyPressed)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue))
+            {
+                if (raycastHit.transform.TryGetComponent<PlayerSelector>(out PlayerSelector playerSelector))
+                {
+                    selectedPlayer = playerSelector;
+                    selectedPlayer.SetSelected(true, controlKeyPressed);
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool InteractWithComponent()
@@ -87,6 +103,12 @@ namespace RPG.Control
                         {
                             if(returnValue == RaycastableReturnValue.FirstPlayerCharacter)
                             {
+                                if(hit.transform.TryGetComponent<PlayerSelector>(out PlayerSelector playerSelector))
+                                {
+                                    selectedPlayer = playerSelector;
+                                    selectedPlayer.SetSelected(true, ControlKeyPressed());
+                                    return true;
+                                }
                                 selectedPlayer = PlayerSelector.GetFirstSelectedPlayer().GetComponent<PlayerSelector>();
                                 raycastable.HandleActivation(selectedPlayer);
                             }
@@ -287,21 +309,7 @@ namespace RPG.Control
 
 
 
-        private bool InteractWithPlayerSelection(bool controlKeyPressed)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue))
-            {
-                if (raycastHit.transform.TryGetComponent<PlayerSelector>(out PlayerSelector playerSelector))
-                {
-                    selectedPlayer = playerSelector;
-                    selectedPlayer.SetSelected(true, controlKeyPressed);
-                    return true;
-                }
-            }
 
-            return false;
-        }
 
         private bool ControlKeyPressed()
         {

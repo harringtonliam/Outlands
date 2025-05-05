@@ -91,7 +91,7 @@ namespace RPG.Control
             isSelected = selected;
             if (selectedVisual != null)
             {
-                selectedVisual.GetComponent<MeshRenderer>().enabled = selected;
+                selectedVisual.gameObject.SetActive(selected);
             }
             if (selectedUpdated != null)
             {

@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 5593241218936147833}
   - component: {fileID: 1283002838491102640}
   m_Layer: 0
-  m_Name: SelectedVisual
+  m_Name: SelectedVisualOld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1990751387811923262
 Transform:
   m_ObjectHideFlags: 0
@@ -109,6 +109,62 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &3248135631627466524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4660532795939553503}
+  - component: {fileID: 1637916778635362365}
+  m_Layer: 0
+  m_Name: SelectVisualDecalProjector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4660532795939553503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248135631627466524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4343573665051652465}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1637916778635362365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248135631627466524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 24d696bad3f71a446b678215af418852, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_DecalLayerMask: 1
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 4}
+  m_Size: {x: 1, y: 1, z: 8}
+  m_FadeFactor: 1
 --- !u!1001 &1228236291626311021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184,6 +240,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1990751387811923262}
+    - targetCorrespondingSourceObject: {fileID: 3264242603453066268, guid: eedd23ba60ea2734997be47a6b5657b8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4660532795939553503}
     - targetCorrespondingSourceObject: {fileID: 3264242603453066268, guid: eedd23ba60ea2734997be47a6b5657b8,
         type: 3}
       insertIndex: -1
@@ -400,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc307de03afe7242b2bb6da5031f4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedVisual: {fileID: 1990751387811923262}
+  selectedVisual: {fileID: 4660532795939553503}
   startSelected: 0
   index: 0
   destinationIndicator: {fileID: 2512387241914420515}
