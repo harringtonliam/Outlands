@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using RPG.Movement;
 using RPG.Core;
+using RPG.UI.InGame;
 
 namespace RPG.Control
 {
@@ -19,12 +20,18 @@ namespace RPG.Control
             public Vector2 hotspot;
         }
 
+        [SerializeField] private RectTransform selectionBox;
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float raycastRadius = 0.25f;
         [SerializeField] Formation defaultFormation;
+        [SerializeField] private Camera camera;
 
 
         private PlayerSelector selectedPlayer;
+        private bool isMouseBeingDragged = false;
+        private Vector2 startingMousePosition;
+        HashSet<PlayerSelector> playersToSelect = new(5);
+
 
         // Start is called before the first frame update
         void Start()
@@ -35,7 +42,7 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
-            if (InteractWithUI()) return;
+            if (InteractWithUI()&& !isMouseBeingDragged) return;
 
             bool playerSelection = false;
 
@@ -44,13 +51,11 @@ namespace RPG.Control
                  playerSelection = InteractWithPlayerSelection(ControlKeyPressed());
             }
             if (InteractWithComponent()) return;
-            if (playerSelection)
-            {
-                return;
-            }
+            if (playerSelection) return;
+            
             if (InteractWithMovement()) return;
 
-            SetCursorType(CursorType.None);
+            //SetCursorType(CursorType.None);
         }
 
         private bool InteractWithUI()
@@ -95,11 +100,9 @@ namespace RPG.Control
                                     raycastable.HandleActivation(playerSelector);
                                 }
                             }
-
                         }
                         return true;
                     }
-
                 }
             }
             return false;
@@ -117,30 +120,84 @@ namespace RPG.Control
                 if (!mover.CanMoveTo(target)) return false;
                 if (InputManager.Instance.IsMouseButtonUp())
                 {
-                    int playerIndex = 0;
-                    foreach (var player in PlayerSelector.GetAllSelectedPlayers())
+                    //Disable the selection box 
+                    selectionBox.gameObject.SetActive(false);
+                    if (isMouseBeingDragged)
                     {
-                        MovementDestinationIndicator destinationIndicator = player.GetComponent<PlayerSelector>().MovementDestinationIndicator;
-                        
-                        destinationIndicator.transform.position = player.transform.position;
-                        destinationIndicator.gameObject.SetActive(false);
-                        var destinationTarget = CalculateFormationTarget(target, playerIndex);
-                        Mover playerMover = player.GetComponent<Mover>();
-                        if (playerMover != null && playerMover.CanMoveTo(destinationTarget))
+
+                        //Record which players are in the selection box
+                        var selectectBoxBounds = new Bounds(selectionBox.anchoredPosition, selectionBox.sizeDelta);
+                        playersToSelect.Clear();
+                        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
                         {
-                             playerMover.StartMovementAction(destinationTarget, 1f);
+                            Vector2 playerPosition = camera.WorldToScreenPoint(player.transform.position);
+                            if (selectectBoxBounds.Contains(playerPosition) && player.TryGetComponent<PlayerSelector>(out PlayerSelector selector))
+                            {
+                                playersToSelect.Add(selector);
+                            }
                         }
-                        playerIndex++;
+                        if (playersToSelect.Count > 0)
+                        {
+                            PlayerSelector.DeselectAllPlayerCharacters();
+                            foreach (PlayerSelector player in playersToSelect)
+                            {
+                                player.SetSelected(true, true);
+                            }
+                        }
+                        isMouseBeingDragged = false;
+                    }
+                    else
+                    {
+                        int playerIndex = 0;
+                        foreach (var player in PlayerSelector.GetAllSelectedPlayers())
+                        {
+                            MovementDestinationIndicator destinationIndicator = player.GetComponent<PlayerSelector>().MovementDestinationIndicator;
+                            var newDestinaton = destinationIndicator.transform.position;
+                            destinationIndicator.transform.position = player.transform.position;
+                            destinationIndicator.gameObject.SetActive(false);
+                            Mover playerMover = player.GetComponent<Mover>();
+                            if (playerMover != null && playerMover.CanMoveTo(newDestinaton))
+                            {
+                                playerMover.StartMovementAction(newDestinaton, 1f);
+                            }
+                            playerIndex++;
+                        }
                     }
                 }
                 if (InputManager.Instance.IsMouseButtonDown())
                 {
+                    isMouseBeingDragged = false;
+                    startingMousePosition = InputManager.Instance.GetMouseScreenPosition();
                     offsetTargets = CalculateMovementTargets(target);
+                }
+                if (InputManager.Instance.IsMouseButtonPressed() && !InputManager.Instance.IsMouseButtonDown() && HasMouseBeenDraggedFarEnough())
+                {
+                    if (!isMouseBeingDragged)
+                    {
+                        //Enable the selection box 
+                        selectionBox.gameObject.SetActive(true);
+                        //Disable the movement destination Indicators
+                        foreach (var player in PlayerSelector.GetAllSelectedPlayers())
+                        {
+                            MovementDestinationIndicator destinationIndicator = player.GetComponent<PlayerSelector>().MovementDestinationIndicator;
+                            destinationIndicator.gameObject.SetActive(false);
+                        }
+                        //Dragging the mouse
+                        isMouseBeingDragged = true;
+                    }
+                    //Resize the selection box
+                    Bounds selectectBoxBounds = ResizeSelectionBox();
                 }
                 SetCursorType(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private bool HasMouseBeenDraggedFarEnough()
+        {
+            if (isMouseBeingDragged) return true;
+            return Vector2.Distance(startingMousePosition, InputManager.Instance.GetMouseScreenPosition()) > MinMouseDragDistance();
         }
 
         private Vector3[] CalculateMovementTargets(Vector3 target)
@@ -246,19 +303,28 @@ namespace RPG.Control
             return false;
         }
 
-        //Todo remove his after testing
-        //private void DeSelectOtherPlayerControllers()
-        //{
-        //    GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-        //    foreach (var player in allPlayers)
-        //    {
-        //        player.GetComponent<PlayerSelector>().SetSelected(false);
-        //    }
-        //}
-
         private bool ControlKeyPressed()
         {
             return InputManager.Instance.IsKey(KeyCode.LeftControl) || InputManager.Instance.IsKey(KeyCode.RightControl);
+        }
+
+        private float MinMouseDragDistance()
+        {
+            float minDimension = Mathf.Min(Screen.width, Screen.height);
+            return 0.05f * minDimension;
+        }
+
+        private Bounds ResizeSelectionBox()
+        {
+            Vector2 mousePosition = InputManager.Instance.GetMouseScreenPosition();
+
+            float width = mousePosition.x - startingMousePosition.x;
+            float height = mousePosition.y - startingMousePosition.y;
+
+            selectionBox.anchoredPosition = startingMousePosition + new Vector2(width / 2, height / 2);
+            selectionBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
+
+            return new Bounds(selectionBox.anchoredPosition, selectionBox.sizeDelta);
         }
     }
 

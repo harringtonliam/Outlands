@@ -1375,8 +1375,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1394200908}
   - {fileID: 1109689420}
+  - {fileID: 1394200908}
   - {fileID: 976183473}
   - {fileID: 3703459436192556326}
   - {fileID: 1203959204630950131}
@@ -1780,6 +1780,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274943801481002614, guid: da47791af7b213c4ca272a3add5eb622,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2454879054375527252, guid: da47791af7b213c4ca272a3add5eb622,
         type: 3}
@@ -3005,6 +3010,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4662608918470022, guid: afb6476d289a3154cbc7f6ae34888c73,
     type: 3}
   m_PrefabInstance: {fileID: 582387304}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &583378297 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1147450198016954287, guid: da47791af7b213c4ca272a3add5eb622,
+    type: 3}
+  m_PrefabInstance: {fileID: 461942521}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &585165817 stripped
 Transform:
@@ -5864,12 +5875,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
+  m_CollectObjects: 1
+  m_Size: {x: 200, y: 10, z: 200}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 23
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -6334,6 +6345,16 @@ PrefabInstance:
       propertyPath: moon
       value: 
       objectReference: {fileID: 1675334402}
+    - target: {fileID: 4945805289961902156, guid: 1cc60faba51d4744ea26522def8f2345,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1806124456}
+    - target: {fileID: 4945805289961902156, guid: 1cc60faba51d4744ea26522def8f2345,
+        type: 3}
+      propertyPath: selectionBox
+      value: 
+      objectReference: {fileID: 583378297}
     - target: {fileID: 5378929856659259948, guid: 1cc60faba51d4744ea26522def8f2345,
         type: 3}
       propertyPath: startHour
