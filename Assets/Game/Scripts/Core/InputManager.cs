@@ -100,7 +100,7 @@ namespace RPG.Core
                 inputMoveDir.x = +1f;
             }
 
-            //inputMoveDir = inputMoveDir + GetCameraMouseMoveVector(edgePanSize);
+            inputMoveDir = inputMoveDir + GetCameraMouseMoveVector(edgePanSize);
 
             return inputMoveDir;
 #endif
