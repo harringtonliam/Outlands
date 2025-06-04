@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using RPG.Saving;
+using RPG.EventBus;
+using RPG.Events;
 
 namespace RPG.GameTime
 {
@@ -98,9 +100,10 @@ namespace RPG.GameTime
 
         private void CheckForTimeUpdate()
         {
-            if (((timeSinceTimeUpdate/60) > timeUpdateIntervalInMinutes)  && (timeUpdate!= null))
+            if (((timeSinceTimeUpdate/60) > timeUpdateIntervalInMinutes))
             {
-                timeUpdate();
+                //timeUpdate();
+                Bus<GameTimeTimeUpdateEvent>.Raise(new GameTimeTimeUpdateEvent(this));
                 timeSinceTimeUpdate = 0f;
             }
         }
@@ -118,6 +121,7 @@ namespace RPG.GameTime
                 {
                     hourHasPassed();
                 }
+                Bus<GameTimeHourHasPassedEvent>.Raise(new GameTimeHourHasPassedEvent(this));
                 CheckForNewSystemTimeDay();
 
             }
@@ -227,6 +231,7 @@ namespace RPG.GameTime
             {
                 timeUpdate();
             }
+            Bus<GameTimeTimeUpdateEvent>.Raise(new GameTimeTimeUpdateEvent(this));
 
         }
 

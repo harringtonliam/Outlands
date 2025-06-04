@@ -1,3 +1,5 @@
+using RPG.EventBus;
+using RPG.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,28 +16,42 @@ namespace RPG.GameTime
         
         [SerializeField] float maxRotation = 359f;
 
-        GameTimeContoller gameTimeContoller;
+        //GameTimeContoller gameTimeContoller;
 
-        // Start is called before the first frame update
-        void Start()
+
+        private void Awake()
         {
-            gameTimeContoller = GetComponent<GameTimeContoller>();
-            gameTimeContoller.timeUpdate += CalculateSunDirection;
+            Bus<GameTimeTimeUpdateEvent>.OnEvent += CalculateSunDirection;        
         }
 
+        private void OnDestroy()
+        {
+            Bus<GameTimeTimeUpdateEvent>.OnEvent -= CalculateSunDirection;
+        }
+
+
+        void Start()
+        {
+            //gameTimeContoller = GetComponent<GameTimeContoller>();
+            //gameTimeContoller.timeUpdate += CalculateSunDirection;
+        }
+
+
+        //TODO  Redo this in a different class
         public bool IsDayTime()
         {
-            if (gameTimeContoller == null) return false;
-            if (gameTimeContoller.CurrentLocalHour < sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunRiseHour) return false;
-            if (gameTimeContoller.CurrentLocalHour > sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunSetHour) return false;
+            //if (gameTimeContoller == null) return false;
+            //if (gameTimeContoller.CurrentLocalHour < sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunRiseHour) return false;
+            //if (gameTimeContoller.CurrentLocalHour > sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunSetHour) return false;
             return true;
         }
 
+        //TODO  Redo this in a different class
         public bool IsDawnOrDusk()
         {
-            if (gameTimeContoller == null) return false;
-            if (Mathf.Abs(gameTimeContoller.CurrentLocalHour - sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunRiseHour) <= 1) return true;
-            if (Mathf.Abs(gameTimeContoller.CurrentLocalHour - sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunSetHour) <= 1) return true;
+            //if (gameTimeContoller == null) return false;
+            //if (Mathf.Abs(gameTimeContoller.CurrentLocalHour - sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunRiseHour) <= 1) return true;
+            //if (Mathf.Abs(gameTimeContoller.CurrentLocalHour - sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunSetHour) <= 1) return true;
             return false;
         }
 
@@ -43,20 +59,20 @@ namespace RPG.GameTime
         public Light SunDirectionalLight { get {  return sunDirectionalLight; } }
 
 
-        private void CalculateSunDirection()
+        private void CalculateSunDirection(GameTimeTimeUpdateEvent evt)
         {
             if (sunDirectionalLight == null) return;
-            int currentHour = gameTimeContoller.CurrentLocalHour;
+            int currentHour = evt.GameTimeContoller.CurrentLocalHour;
 
-            float sunRiseHour = sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunRiseHour;
+            float sunRiseHour = sunDirectionConfig.GetDataForMonth(evt.GameTimeContoller.CurrentLocalMonth).sunRiseHour;
             float maxHoursFromNoon = 12f - sunRiseHour;
             float currentHoursFromNoon = Mathf.Abs(12f - currentHour);
             float sunRotationMultiplier = (maxHoursFromNoon - currentHoursFromNoon) / maxHoursFromNoon;
 
-            float noonSunAngle = sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).noonSunAngle;
+            float noonSunAngle = sunDirectionConfig.GetDataForMonth(evt.GameTimeContoller.CurrentLocalMonth).noonSunAngle;
             float newXRotation = (sunRotationMultiplier * noonSunAngle);
 
-            float sunriseAzimuth = sunDirectionConfig.GetDataForMonth(gameTimeContoller.CurrentLocalMonth).sunriseAzimuth;
+            float sunriseAzimuth = sunDirectionConfig.GetDataForMonth(evt.GameTimeContoller.CurrentLocalMonth).sunriseAzimuth;
 
             float azimuthFraction = (180f - sunriseAzimuth) / maxHoursFromNoon;
 
