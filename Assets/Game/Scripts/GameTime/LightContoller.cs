@@ -1,3 +1,5 @@
+using RPG.EventBus;
+using RPG.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,15 +18,31 @@ namespace RPG.GameTime
             [SerializeField] public int inligtOnEndHour;
         }
 
-        GameTimeContoller gameTimeContoller;
         float[] startLightIntenties;
+
+        private void Awake()
+        {
+            Bus<GameTimeHourHasPassedEvent>.OnEvent += LightsOnCheck;
+        }
 
         // Start is called before the first frame update
         void Start()
         {
-            gameTimeContoller = FindFirstObjectByType<GameTimeContoller>();
-            gameTimeContoller.hourHasPassed += LightsOnCheck;
             StoreInitialLightIntensities();
+        }
+
+        private void OnDisable()
+        {
+            try
+            {
+                Bus<GameTimeHourHasPassedEvent>.OnEvent -= LightsOnCheck;
+            }
+            catch (Exception ex)
+            {
+
+                Debug.Log("GameTimeUI " + ex.Message);
+            }
+
         }
 
         private void StoreInitialLightIntensities()
@@ -36,12 +54,12 @@ namespace RPG.GameTime
             }
         }
 
-        private void LightsOnCheck()
+        private void LightsOnCheck(GameTimeHourHasPassedEvent evt)
         {
             TurnOffLights();
             foreach (var lightOnTimeRange in lightOnTimeRanges)
             {
-                if (IsInLightOnRange(gameTimeContoller.CurrentLocalHour, lightOnTimeRange))
+                if (IsInLightOnRange(evt.GameTimeContoller.CurrentLocalHour, lightOnTimeRange))
                 {
                     TurnOnLights();
                 }

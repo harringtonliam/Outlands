@@ -1,10 +1,12 @@
+using RPG.EventBus;
+using RPG.Events;
+using RPG.WeatherControl;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using RPG.WeatherControl;
-using System.IO;
 
 namespace  RPG.GameTime
 {
@@ -18,17 +20,17 @@ namespace  RPG.GameTime
         [SerializeField] float duskFraction = 0.5f;
 
 
-        GameTimeContoller gameTimeController;
         SunDirectionController sunDirectionController;
         Light sun;
-
+        void Awake()
+        {
+            Bus<GameTimeHourHasPassedEvent>.OnEvent += SetSunProperties;
+        }
 
         // Start is called before the first frame update
         void Start()
         {
-            gameTimeController = GetComponent<GameTimeContoller>();
             sunDirectionController = GetComponent<SunDirectionController>();
-            gameTimeController.hourHasPassed += SetSunProperties;
             weatherContoller.weatherHasChanged += ApplyWeatherEffects;
             sun = sunDirectionController.SunDirectionalLight;
         }
@@ -37,7 +39,7 @@ namespace  RPG.GameTime
         {
             try
             {
-                gameTimeController.hourHasPassed -= SetSunProperties;
+                Bus<GameTimeHourHasPassedEvent>.OnEvent -= SetSunProperties;
                 weatherContoller.weatherHasChanged -= ApplyWeatherEffects;
 
             } catch(Exception e)
@@ -47,9 +49,14 @@ namespace  RPG.GameTime
 
         }
 
+        private void SetSunProperties(GameTimeHourHasPassedEvent evt)
+        {
+            SetSunProperties();
+        }
+
         private void SetSunProperties()
         {
-            if(sunDirectionController.IsDawnOrDusk())
+            if (sunDirectionController.IsDawnOrDusk())
             {
                 SetDawnOrDuskProperties();
             }
@@ -61,8 +68,6 @@ namespace  RPG.GameTime
             {
                 SetNightTimeProperties();
             }
-
-
         }
 
         private void SetDawnOrDuskProperties()

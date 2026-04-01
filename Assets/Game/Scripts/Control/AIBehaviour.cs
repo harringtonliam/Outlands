@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using RPG.EventBus;
+using RPG.Events;
 using RPG.GameTime;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace RPG.Control
 {
@@ -36,18 +38,33 @@ namespace RPG.Control
         }
 
         AIControler aIControler;
-        GameTimeContoller gameTimeContoller;
+
+        private void Awake()
+        {
+            Bus<GameTimeHourHasPassedEvent>.OnEvent += CheckBehaviour;
+        }
 
         // Start is called before the first frame update
         void Start()
         {
             aIControler = GetComponent<AIControler>();
-            gameTimeContoller = FindFirstObjectByType<GameTimeContoller>();
-            gameTimeContoller.hourHasPassed += CheckBehaviour;
         }
 
 
-        private void CheckBehaviour()
+        private void OnDisable()
+        {
+            try
+            {
+                Bus<GameTimeHourHasPassedEvent>.OnEvent -= CheckBehaviour;
+            }
+            catch (Exception ex)
+            {
+
+                Debug.Log("GameTimeUI " + ex.Message);
+            }
+        }
+
+        private void CheckBehaviour(GameTimeHourHasPassedEvent evt)
         {
             if (behaviourDescriptions.Length <= 0) return;
 
@@ -55,7 +72,7 @@ namespace RPG.Control
             for (int i = 0; i < sortedBehaviours.Length; i++)
             {
                 //Debug.Log("Checking Behaviour sorted array " + i + " " + sortedBehaviours[i].Print()); 
-                if (BehaviourApplies(sortedBehaviours[i]))
+                if (BehaviourApplies(sortedBehaviours[i], evt.GameTimeContoller))
                 {
                     ApplyBehaviour(sortedBehaviours[i]);
                     return;
@@ -76,7 +93,7 @@ namespace RPG.Control
             aIControler.SetDesitination(null);
         }
 
-        private bool BehaviourApplies(BehaviourDescription behaviourDescription)
+        private bool BehaviourApplies(BehaviourDescription behaviourDescription, GameTimeContoller gameTimeContoller)
         {
             bool useThisBehavior = true;
 

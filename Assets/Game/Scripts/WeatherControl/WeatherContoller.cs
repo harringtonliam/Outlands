@@ -1,16 +1,17 @@
+using RPG.Core;
+using RPG.EventBus;
+using RPG.Events;
+using RPG.GameTime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.GameTime;
-using RPG.Core;
-using System;
 
 namespace RPG.WeatherControl
 {
     public class WeatherContoller : MonoBehaviour
     {
 
-        [SerializeField] GameTimeContoller gameTimeContoller;
         [SerializeField] WeatherTable weatherTable;
         [SerializeField] WeatherDescriptions weatherDescriptions;
 
@@ -23,11 +24,31 @@ namespace RPG.WeatherControl
 
         public Weathers CurrentWeather {  get { return currentWeather; } }
 
+        void Awake()
+        {
+            Bus<GameTimeHourHasPassedEvent>.OnEvent += GenerateWeather;
+        }
+
+
+
         // Start is called before the first frame update
         void Start()
         {
-            gameTimeContoller.hourHasPassed += GenerateWeather;
-            GenerateWeather();
+ 
+        }
+
+        private void OnDisable()
+        {
+            try
+            {
+                Bus<GameTimeHourHasPassedEvent>.OnEvent -= GenerateWeather;
+            }
+            catch (Exception ex)
+            {
+
+                Debug.Log("GameTimeUI " + ex.Message);
+            }
+
         }
 
         public WeatherEffect GetCurrentWeatherEffect()
@@ -35,15 +56,15 @@ namespace RPG.WeatherControl
             return weatherDescriptions.GetWeatherEffect(currentWeather);
         }
 
-        private void GenerateWeather()
+        private void GenerateWeather(GameTimeHourHasPassedEvent evt)
         {
             currentWeatherHourSoFar++;
             if (NewWeatherNeeded())
             {
                 int randomWeatherDiceRoll = Dice.RollDice(100, 1);
-                Weathers newWeather = weatherTable.GetWeather(gameTimeContoller.GetCurrentMonth(), randomWeatherDiceRoll);
+                Weathers newWeather = weatherTable.GetWeather(evt.GameTimeContoller.GetCurrentMonth(), randomWeatherDiceRoll);
                 currentWeatherDurationHours = Mathf.Clamp(Dice.RollDice(4, 1), 1, weatherDescriptions.GetWeatherEffect(newWeather).MaxDuration);
-                Debug.Log("Generate Weather " + newWeather + " for hours: " + currentWeatherDurationHours + " dice rolle was " + randomWeatherDiceRoll + " month " + gameTimeContoller.GetCurrentMonth());
+                Debug.Log("Generate Weather " + newWeather + " for hours: " + currentWeatherDurationHours + " dice rolle was " + randomWeatherDiceRoll + " month " + evt.GameTimeContoller.GetCurrentMonth());
                 currentWeatherHourSoFar = 0;
                 currentWeather = newWeather;
                  if (weatherHasChanged!= null)

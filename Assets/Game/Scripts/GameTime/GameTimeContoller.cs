@@ -17,10 +17,6 @@ namespace RPG.GameTime
         [SerializeField] LocalTimeConfiguration localTimeConfiguration;
         [SerializeField] SystemTimeConfiguration systemTimeConfiguration;
         
-
-
-        public event Action timeUpdate;
-        public event Action hourHasPassed;
         public event Action dayHasPassed;
         public event Action weekHasPassed;
         public event Action monthHasPassed;
@@ -117,10 +113,6 @@ namespace RPG.GameTime
                 CheckForNewDay();
                 timeSinceStartOfHour = 0f;
                 Debug.Log("GameTimeContoller New Hour Started " + CurrentLocalYear + " " + GetCurrentMonth() + " " + CurrentLocalDayOfMonth + " " + GetCurrentDayOfWeek() + " " + CurrentLocalHour) ;
-                if (hourHasPassed != null)
-                {
-                    hourHasPassed();
-                }
                 Bus<GameTimeHourHasPassedEvent>.Raise(new GameTimeHourHasPassedEvent(this));
                 CheckForNewSystemTimeDay();
 
@@ -223,14 +215,7 @@ namespace RPG.GameTime
             {
                 dayHasPassed();
             }
-            if (hourHasPassed != null)
-            {
-                hourHasPassed();
-            }
-            if (timeUpdate != null)
-            {
-                timeUpdate();
-            }
+            Bus<GameTimeHourHasPassedEvent>.Raise(new GameTimeHourHasPassedEvent(this));
             Bus<GameTimeTimeUpdateEvent>.Raise(new GameTimeTimeUpdateEvent(this));
 
         }
