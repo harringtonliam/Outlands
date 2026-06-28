@@ -42,7 +42,8 @@ namespace RPG.DialogueControl.Editor
         [OnOpenAsset(1)]
         public static bool OnOpenAsset(int instanceId, int line)
         {
-            Dialogue dialogue= EditorUtility.InstanceIDToObject(instanceId) as Dialogue;
+            //TODO: 26/06/2026 is this correct was InstanceId to obect but that is obsolite
+            Dialogue dialogue= EditorUtility.EntityIdToObject(instanceId) as Dialogue;
             
             if(dialogue != null)
             {
