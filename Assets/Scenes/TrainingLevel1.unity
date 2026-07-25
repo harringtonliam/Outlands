@@ -416,6 +416,52 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 5712b07fdd1dd8748808190a2dc13438, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &997644133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 997644134}
+  - component: {fileID: 997644135}
+  m_Layer: 0
+  m_Name: GridSystemTesting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &997644134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997644133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1603616560}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &997644135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997644133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cffb5684a6712064c879e9fb4703b41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSystemTesting
+  gridDebugObjectPrefab: {fileID: 2768347597222638673, guid: be2e38b073a7d6e4995dd03c25f98ae5,
+    type: 3}
 --- !u!1001 &1073269081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -742,7 +788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1265536837
 Transform:
   m_ObjectHideFlags: 0
@@ -1196,6 +1242,7 @@ Transform:
   - {fileID: 662191869}
   - {fileID: 377931339}
   - {fileID: 1241782103}
+  - {fileID: 997644134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1637057773
@@ -1660,6 +1707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706482711683747219, guid: 54ef1adef87438746b71cce1035d603b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2159422314660925026, guid: 54ef1adef87438746b71cce1035d603b,
         type: 3}
