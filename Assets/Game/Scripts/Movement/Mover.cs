@@ -7,6 +7,7 @@ using RPG.Core;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Stats;
+using RPG.MovementGrid;
 
 namespace RPG.Movement
 {
@@ -18,6 +19,7 @@ namespace RPG.Movement
 
         NavMeshAgent navMeshAgent;
         Health health;
+        GridPosition currentGridPosition;
 
         // Start is called before the first frame update
         void Start()
@@ -26,6 +28,8 @@ namespace RPG.Movement
             health = GetComponent<Health>();
             health.deathUpdated += SetNavMeshAgent;
             SetNavMeshAgent();
+            currentGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+            LevelGrid.Instance.SetUnitAtGridPosition(currentGridPosition, this);
         }
 
         private void OnDisable()
@@ -43,8 +47,14 @@ namespace RPG.Movement
         // Update is called once per frame
         void Update()
         {
-
             UpdateAnimator();
+            GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+            if(newGridPosition != currentGridPosition)
+            {
+                LevelGrid.Instance.ClearUnitAtGridPosition(currentGridPosition, this);
+                LevelGrid.Instance.SetUnitAtGridPosition(newGridPosition, this);
+                currentGridPosition = newGridPosition;
+            }
         }
 
         private void SetNavMeshAgent()
