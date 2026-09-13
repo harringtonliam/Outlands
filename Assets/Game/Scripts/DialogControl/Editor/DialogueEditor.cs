@@ -40,10 +40,11 @@ namespace RPG.DialogueControl.Editor
         }
 
         [OnOpenAsset(1)]
-        public static bool OnOpenAsset(int instanceId, int line)
+        public static bool OnOpenAsset(EntityId instanceId, int line)
         {
             //TODO: 26/06/2026 is this correct was InstanceId to obect but that is obsolite
-            Dialogue dialogue= EditorUtility.EntityIdToObject(instanceId) as Dialogue;
+            //https://docs.unity3d.com/6000.6/Documentation/ScriptReference/Callbacks.OnOpenAssetAttribute.html
+            Dialogue dialogue = EditorUtility.EntityIdToObject(instanceId) as Dialogue;
             
             if(dialogue != null)
             {
